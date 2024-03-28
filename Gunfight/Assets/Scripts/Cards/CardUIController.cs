@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
+using TMPro;
 
 public class CardUIController : NetworkBehaviour
 {
     public GameObject CardPanel;
+    public TMP_Text title;
     public Button card1;
     public Button card2;
     public Button card3;
@@ -31,6 +33,17 @@ public class CardUIController : NetworkBehaviour
     {
         firstCard.gameObject.SetActive(false);
         secondCard.gameObject.SetActive(false);
+    }
+
+    public void ChangeTitle(string name)
+    {
+        title.text = name;
+    }
+
+    [ClientRpc]
+    public void RpcChangeTitle(string name)
+    {
+        ChangeTitle(name);
     }
 
     [ClientRpc]

@@ -156,6 +156,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     if (useCards)
                     {
                         cardUIController.RpcShowCardPanel(true);
+                        cardUIController.RpcChangeTitle("Choose a card");
                     }
                     
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
@@ -185,6 +186,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
 
                         // find the card voted the most
                         winningCard = cardManager.FindMaxVote();
+                        cardUIController.RpcChangeTitle("Winning Card");
                         Debug.Log("Winning card: " + winningCard);
 
                         cardUIController.RpcShowWinningCard(winningCard); // only displaying the winning card
