@@ -144,7 +144,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         if(aliveNum <= 0)
         {
-            //game over logic
+            StartCoroutine(QuitCountdown());
         }
     }
 
@@ -187,14 +187,12 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         if (!isServer) { return; }
         DeleteWeaponsInGame();
-
-        //these were in end round
         SpawnWeaponsInGame();
+
         enemiesSpawnedThisRound = Mathf.RoundToInt(enemiesSpawnedThisRound * enemyMultiplier);
         currentNumberOfEnemies = enemiesSpawnedThisRound;
         spawnEnemies();
 
-        //checked if server here? doesn't seem needed but check here if bugged
         StartRound();
         
     }
@@ -205,8 +203,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public IEnumerator QuitCountdown()
     {
-        // 10s countdown 
-        int count = 10;
+        int count = 3;
         while (count > 0)
         {
             if (quitClicked)
