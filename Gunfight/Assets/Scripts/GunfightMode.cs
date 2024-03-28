@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameModeManager;
+using Mirror;
 
 public class GunfightMode : CompetitiveGameMode
 {
@@ -188,7 +189,8 @@ public class GunfightMode : CompetitiveGameMode
         }
     }
 
-    public override void StatsList()
+    [ClientRpc]
+    public override void RpcStatsList()
     {
         if (PlayerStatsItems.Count != 2)
         {

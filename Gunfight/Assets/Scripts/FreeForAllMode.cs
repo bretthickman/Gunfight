@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Mirror;
 
 public class FreeForAllMode : CompetitiveGameMode
 {
@@ -119,7 +120,8 @@ public class FreeForAllMode : CompetitiveGameMode
         }
     }
 
-    public override void StatsList()
+    [ClientRpc]
+    public override void RpcStatsList()
     {
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
