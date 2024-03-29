@@ -4140,8 +4140,8 @@ TextureImporter:
       name: ruins_192
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 416
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -4161,8 +4161,8 @@ TextureImporter:
       name: ruins_193
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 448
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -4182,8 +4182,8 @@ TextureImporter:
       name: ruins_194
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
+        x: 480
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -4203,7 +4203,7 @@ TextureImporter:
       name: ruins_195
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 32
         width: 32
         height: 32
@@ -4224,7 +4224,7 @@ TextureImporter:
       name: ruins_196
       rect:
         serializedVersion: 2
-        x: 128
+        x: 32
         y: 32
         width: 32
         height: 32
@@ -4245,7 +4245,7 @@ TextureImporter:
       name: ruins_197
       rect:
         serializedVersion: 2
-        x: 160
+        x: 64
         y: 32
         width: 32
         height: 32
@@ -4266,7 +4266,7 @@ TextureImporter:
       name: ruins_198
       rect:
         serializedVersion: 2
-        x: 192
+        x: 96
         y: 32
         width: 32
         height: 32
@@ -4287,7 +4287,7 @@ TextureImporter:
       name: ruins_199
       rect:
         serializedVersion: 2
-        x: 224
+        x: 128
         y: 32
         width: 32
         height: 32
@@ -4308,7 +4308,7 @@ TextureImporter:
       name: ruins_200
       rect:
         serializedVersion: 2
-        x: 256
+        x: 160
         y: 32
         width: 32
         height: 32
@@ -4329,7 +4329,7 @@ TextureImporter:
       name: ruins_201
       rect:
         serializedVersion: 2
-        x: 288
+        x: 192
         y: 32
         width: 32
         height: 32
@@ -4350,7 +4350,7 @@ TextureImporter:
       name: ruins_202
       rect:
         serializedVersion: 2
-        x: 320
+        x: 224
         y: 32
         width: 32
         height: 32
@@ -4371,8 +4371,8 @@ TextureImporter:
       name: ruins_203
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 256
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4392,8 +4392,8 @@ TextureImporter:
       name: ruins_204
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 288
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4413,8 +4413,8 @@ TextureImporter:
       name: ruins_205
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
+        x: 320
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4434,8 +4434,8 @@ TextureImporter:
       name: ruins_206
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
+        x: 416
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4455,8 +4455,8 @@ TextureImporter:
       name: ruins_207
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
+        x: 448
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4476,8 +4476,8 @@ TextureImporter:
       name: ruins_208
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
+        x: 480
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -4497,7 +4497,7 @@ TextureImporter:
       name: ruins_209
       rect:
         serializedVersion: 2
-        x: 192
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -4518,7 +4518,7 @@ TextureImporter:
       name: ruins_210
       rect:
         serializedVersion: 2
-        x: 256
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -4539,7 +4539,7 @@ TextureImporter:
       name: ruins_211
       rect:
         serializedVersion: 2
-        x: 288
+        x: 64
         y: 0
         width: 32
         height: 32
@@ -4560,7 +4560,7 @@ TextureImporter:
       name: ruins_212
       rect:
         serializedVersion: 2
-        x: 320
+        x: 96
         y: 0
         width: 32
         height: 32
@@ -4573,6 +4573,195 @@ TextureImporter:
       bones: []
       spriteID: 92d0972a021a34e3c8e2327aede4e587
       internalID: -448058553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_213
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd4f009eae3b45d99b622e97641b76a
+      internalID: 1351719427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_214
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d197cea428b5d4f4196cf8fa06081b29
+      internalID: -1873472202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_215
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dde473596054b4027b55e0dff38a9226
+      internalID: -40444789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_216
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0786557ae433b4086ab2e3cdd61d0a81
+      internalID: -859947475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_217
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b78ac8ce619347ce978eb2af6b5cbc7
+      internalID: 1184321487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_218
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19120609a54744a23b6eeb7c6de06e55
+      internalID: 1548531998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_219
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b6dce1f3a7542b08c56569ced46e7c
+      internalID: -1816563510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_220
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dac8a3227ec1c4a4f9e6d00b60387986
+      internalID: 168937267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins_221
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2147466854ef84a30bc954c1f601561b
+      internalID: 535058264
       vertices: []
       indices: 
       edges: []
@@ -4716,7 +4905,16 @@ TextureImporter:
       ruins_210: 1152445565
       ruins_211: 15287992
       ruins_212: -448058553
+      ruins_213: 1351719427
+      ruins_214: -1873472202
+      ruins_215: -40444789
+      ruins_216: -859947475
+      ruins_217: 1184321487
+      ruins_218: 1548531998
+      ruins_219: -1816563510
       ruins_22: -1196178687
+      ruins_220: 168937267
+      ruins_221: 535058264
       ruins_23: -1752682299
       ruins_24: 359667078
       ruins_25: -1134029873
