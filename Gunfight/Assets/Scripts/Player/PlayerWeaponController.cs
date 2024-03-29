@@ -133,7 +133,7 @@ public class PlayerWeaponController : NetworkBehaviour
     [ClientRpc]
     void RpcDestroyWeapon(WeaponInfo weaponInfo)
     {
-        if (playerColliders.OtherCollider != null)
+        if (playerColliders.OtherCollider != null && playerColliders.OtherCollider.gameObject.CompareTag("Weapon"))
         {
             // picks up a weapon on the ground, changes sprite, updates changes player stats, and destroys the weapon
             ChangeSprite(weaponInfo.id);
