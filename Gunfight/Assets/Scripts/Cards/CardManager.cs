@@ -45,6 +45,7 @@ public class CardManager : NetworkBehaviour
         if (!isClient) return;
         // when user clicks card 1
         cardUIController.InteractableCards(false);
+        cardUIController.StopDisplayCards(card1, card2, card3);
         Debug.Log("Card 1 pressed");
     
         CmdCard1Vote();
@@ -55,6 +56,7 @@ public class CardManager : NetworkBehaviour
         if (!isClient) return;
         // when user clicks card 2
         cardUIController.InteractableCards(false);
+        cardUIController.StopDisplayCards(card2, card1, card3);
         Debug.Log("Card 2 pressed");
         
         CmdCard2Vote();
@@ -65,6 +67,7 @@ public class CardManager : NetworkBehaviour
         if (!isClient) return;
         // when user clicks card 3
         cardUIController.InteractableCards(false);
+        cardUIController.StopDisplayCards(card3, card1, card2);
         Debug.Log("Card 3 pressed");
         
         CmdCard3Vote();

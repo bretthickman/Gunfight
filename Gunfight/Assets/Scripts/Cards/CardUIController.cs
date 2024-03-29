@@ -29,10 +29,11 @@ public class CardUIController : NetworkBehaviour
         card3.interactable = tOrF;
     }
 
-    public void StopDisplayCards(Button firstCard, Button secondCard)
+    public void StopDisplayCards(Button firstCard, Button secondCard, Button thirdCard)
     {
-        firstCard.gameObject.SetActive(false);
+        firstCard.gameObject.SetActive(true);
         secondCard.gameObject.SetActive(false);
+        thirdCard.gameObject.SetActive(false);
     }
 
     public void ChangeTitle(string name)
@@ -58,13 +59,13 @@ public class CardUIController : NetworkBehaviour
         switch(winningCard)
         {
             case 0:
-                StopDisplayCards(card2, card3);
+                StopDisplayCards(card1, card2, card3);
                 break;
             case 1:
-                StopDisplayCards(card1, card3);
+                StopDisplayCards(card2, card1, card3);
                 break;
             case 2:
-                StopDisplayCards(card1, card2);
+                StopDisplayCards(card3, card1, card2);
                 break;
             default:
                 break;
