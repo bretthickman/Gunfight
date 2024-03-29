@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Mirror;
 
 public interface IGameMode
 {
@@ -19,6 +16,7 @@ public interface IGameMode
     bool CheckIfGameNeedsStart();
     void InitializeGameMode();
     void DecrementCurrentNumberOfEnemies();
+    void RankingList();
 
 
     bool GetUseCards();

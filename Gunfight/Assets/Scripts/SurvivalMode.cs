@@ -1,7 +1,11 @@
-using Mirror;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using static GameModeManager;
 using UnityEngine.SceneManagement;
+using System.Linq;
+//using System;
 
 [System.Serializable]
 public class SurvivalMode : NetworkBehaviour, IGameMode
@@ -144,8 +148,28 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         if(aliveNum <= 0)
         {
-            StartCoroutine(QuitCountdown());
+            EndGame();
         }
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("End of game!");
+        // gameModeUIController.DisplayQuitButton();
+        //string overallString = "Overall Winner: " + FindOverallWinner();
+
+        //string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
+        //gameModeUIController.RpcShowRoundPanel(true, "", roundString);
+        if(gameModeUIController == null)
+        {
+            Debug.Log("Ui controller null");
+        }
+        gameModeUIController.DisplayRoundPanel(true);
+        RankingList();
+        //reset player stats
+        ResetOverallGame();
+
+        StartCoroutine(QuitCountdown());
     }
 
     //------------------Game Mode Interface Methods------------------------------
@@ -158,6 +182,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public void InitializeGameMode()
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+        gameModeUIController = FindObjectOfType<GameModeUIController>();
 
         // for wave mode only
         totalRounds = 9999;
@@ -198,7 +223,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     }
     public void ToLobby()
     {
-        manager.StartGame("Lobby");
+        Manager.StartGame("Lobby");
     }
 
     public IEnumerator QuitCountdown()
@@ -241,14 +266,13 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             cardManager = FindObjectOfType<CardManager>();
             if (cardManager == null)
             {
-                Debug.Log("Couldnt find game object");
+                Debug.Log("Couldnt find card manager on delayed end round");
             }
         }
 
         cardUIController = FindObjectOfType<CardUIController>();
         gameModeUIController = FindObjectOfType<GameModeUIController>();
 
-        // If no enemy, end round (bug source??)
         cardUIController.RpcShowCardPanel(true);
         gameModeUIController.RpcShowWinner("Round: " + currentRound);
         yield return new WaitForSeconds(10.0f);
@@ -289,6 +313,62 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         }
     }
 
+    public void RankingList()
+    {
+        string rankingString = "";
+        string killsString = "";
+
+        List<PlayerObjectController> players = new List<PlayerObjectController>();
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            players.Add(player);
+        }
+
+        players = players.OrderByDescending(player => player.kills).ToList();
+
+        // creates strings with the values from the list
+        for (int i = 0; i < playerCount; i++)
+        {
+            rankingString += players[i].PlayerName + "\n";
+            killsString += players[i].kills + "\n";
+        }
+
+        Debug.Log("Ranking names: " + rankingString);
+        Debug.Log("Ranking kills: " + killsString);
+
+        gameModeUIController.RpcShowRanking(rankingString, killsString);
+    }
+
+    public void ResetOverallGame()
+    {
+        currentRound = 0;
+        RpcResetPlayerStats();
+        RpcResetGame();
+    }
+
+    [ClientRpc]
+    public void RpcResetPlayerStats()
+    {
+        // reset kills for all players
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            player.kills = 0;
+        }
+    }
+
+
+    [ClientRpc]
+    public void RpcResetGame()
+    {
+        // Call the reset function for all players
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<PlayerController>().Respawn();
+            player.isAlive = true;
+        }
+    }
+
     public void SpawnWeaponsInGame()
     {
         // Find the WeaponSpawning script in the "game" scene
@@ -316,18 +396,6 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         else
         {
             Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
-        }
-    }
-
-    [ClientRpc]
-    public void RpcResetGame()
-    {
-        // Call the reset function for all players
-        foreach (PlayerObjectController player in Manager.GamePlayers)
-        {
-            player.GetComponent<PlayerController>().enabled = true;
-            player.GetComponent<PlayerController>().Respawn();
-            player.isAlive = true;
         }
     }
 

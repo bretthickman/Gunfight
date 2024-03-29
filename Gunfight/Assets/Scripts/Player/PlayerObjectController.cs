@@ -16,6 +16,7 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerTeamUpdate))] public int Team = 1;
     public bool isAlive = true;
     public int wins = 0;
+    public int kills = 0;
 
     //Cosmestics / Team
     [SyncVar(hook = nameof(SendPlayerBody))] public int BodyIndex;
