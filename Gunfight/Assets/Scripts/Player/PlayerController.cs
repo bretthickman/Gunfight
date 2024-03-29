@@ -376,7 +376,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         if (health <= 0)
         {
             RpcDie();
-            playerAnimator.SetBool("isDead", true);
             SendPlayerDeath();
         }
         else
@@ -433,6 +432,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         weaponInfo.speedOfPlayer = 0;
         weaponSpriteRenderer.enabled = false;
         //spriteRenderer.enabled = false;
+        playerAnimator.SetBool("isDead", true);
         GetComponent<PlayerWeaponController>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
     }
