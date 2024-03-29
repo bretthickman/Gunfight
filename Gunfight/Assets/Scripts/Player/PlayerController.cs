@@ -237,8 +237,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
         if(cam != null)
             mousePosition = cam.ScreenToWorldPoint(mousePosition);
 
-        if ((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
-            (mousePosition.x < transform.position.x && !spriteRendererBody.flipX))
+        if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
+            (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
         {
             CmdFlipPlayer(spriteRendererBody.flipX);
         }
