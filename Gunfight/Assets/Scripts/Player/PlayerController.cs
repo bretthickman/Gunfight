@@ -47,6 +47,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
 
+    private bool isSurvivalMode;
+
     //Shooting
     public Transform shootPoint;
 
@@ -118,6 +120,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         poc = GetComponent<PlayerObjectController>();
         audioSource = GetComponent<AudioSource>();
+        isSurvivalMode = FindObjectOfType<SurvivalMode>() != null ? true : false;
+        Debug.Log("isSurvivalMode = " + isSurvivalMode);
     }
 
     private void FixedUpdate()
@@ -338,17 +342,9 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
 
                 //no friendly fire in survival mode
-                IGameMode gameMode =  FindObjectOfType<SurvivalMode>();
-                if (gameMode == null)
-                {
-                    Debug.Log("gameMode is null");
-                }
-                else
-                {
-                    Debug.Log("game mode is " + gameMode);
-                }
+                if (isSurvivalMode && hit.collider.gameObject.CompareTag("Player")) return;
 
-                if (damageable != null && (gameMode != null && !hit.collider.gameObject.CompareTag("Player")))
+                if (damageable != null)
                 {
                     damageable.TakeDamage(weaponInfo.damage, hit.point);
                 }
