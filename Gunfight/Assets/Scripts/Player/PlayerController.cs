@@ -341,17 +341,19 @@ public class PlayerController : NetworkBehaviour, IDamageable
             {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
 
-                //no friendly fire in survival mode
-                if (isSurvivalMode && hit.collider.gameObject.CompareTag("Player")) return;
-
                 if (damageable != null)
                 {
-                    // returns true if damageable dies and is a killable entity
-                    if(damageable.TakeDamage(weaponInfo.damage, hit.point))
+                    //no friendly fire in survival mode
+                    if (isSurvivalMode && hit.collider.gameObject.CompareTag("Player"))
                     {
-                        poc.kills++;
-                        Debug.Log("Kills = " + poc.kills);
+                        // returns true if damageable dies and is a killable entity
+                        if (damageable.TakeDamage(weaponInfo.damage, hit.point))
+                        {
+                            poc.kills++;
+                            Debug.Log("Kills = " + poc.kills);
+                        }
                     }
+                   
                 }
             }
             else

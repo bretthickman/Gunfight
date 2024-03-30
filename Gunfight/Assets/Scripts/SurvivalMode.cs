@@ -155,11 +155,12 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public void EndGame()
     {
         Debug.Log("End of game!");
-
-        if(gameModeUIController == null)
+        
+        if (gameModeUIController == null)
         {
-            Debug.Log("Ui controller null");
+            gameModeUIController = FindObjectOfType<GameModeUIController>();
         }
+
         gameModeUIController.DisplayRoundPanel(true);
         RankingList();
         //reset player stats
@@ -178,13 +179,10 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public void InitializeGameMode()
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        gameModeUIController = FindObjectOfType<GameModeUIController>();
 
-        // for wave mode only
         totalRounds = 9999;
         initEnemy();
 
-        //for all game modes (checked isServer here, removed b/c redundant, if bugged check here)
         playerCount = aliveNum;
         hasGameStarted = true;
         StartRound();
