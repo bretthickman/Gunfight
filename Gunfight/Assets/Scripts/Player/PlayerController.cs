@@ -336,7 +336,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
             if (hit.collider != null && !hit.collider.CompareTag("Uncolliable"))
             {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-                if (damageable != null)
+
+                //no friendly fire in survival mode
+                IGameMode gameMode =  FindObjectOfType<SurvivalMode>();
+                if (gameMode == null)
+                {
+                    Debug.Log("gameMode is null");
+                }
+
+                if (damageable != null && (gameMode != null && hit.collider.gameObject.CompareTag("Player")))
                 {
                     damageable.TakeDamage(weaponInfo.damage, hit.point);
                 }
