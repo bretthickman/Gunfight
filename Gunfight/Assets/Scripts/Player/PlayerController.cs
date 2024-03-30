@@ -344,7 +344,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 if (damageable != null)
                 {
                     //no friendly fire in survival mode
-                    if (isSurvivalMode && hit.collider.gameObject.CompareTag("Player"))
+                    if (!(isSurvivalMode && hit.collider.gameObject.CompareTag("Player")))
                     {
                         // returns true if damageable dies and is a killable entity
                         if (damageable.TakeDamage(weaponInfo.damage, hit.point))
