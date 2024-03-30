@@ -346,7 +346,12 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
                 if (damageable != null)
                 {
-                    damageable.TakeDamage(weaponInfo.damage, hit.point);
+                    // returns true if damageable dies and is a killable entity
+                    if(damageable.TakeDamage(weaponInfo.damage, hit.point))
+                    {
+                        poc.kills++;
+                        Debug.Log("Kills = " + poc.kills);
+                    }
                 }
             }
             else
@@ -372,9 +377,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
         GameModeManager.Instance.currentGameMode.PlayerDied(this);
     }
 
-    public void TakeDamage(int damage, Vector2 hitPoint)
+    // returns true if killed by a player in a competitive game mode
+    public bool TakeDamage(int damage, Vector2 hitPoint)
     {
-        if (!isServer) return;
+        if (!isServer) return false;
 
         health -= damage;
         Debug.Log("Player took " + damage + " Damage");
@@ -382,14 +388,24 @@ public class PlayerController : NetworkBehaviour, IDamageable
         RpcHurtCameraShake();
 
         if (health <= 0)
-        {
+        {            
             RpcDie();
             playerAnimator.SetBool("isDead", true);
             SendPlayerDeath();
+
+            if (!isSurvivalMode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             RpcHitColor();
+            return false;
         }
     }
 

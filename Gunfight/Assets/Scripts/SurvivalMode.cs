@@ -155,11 +155,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public void EndGame()
     {
         Debug.Log("End of game!");
-        // gameModeUIController.DisplayQuitButton();
-        //string overallString = "Overall Winner: " + FindOverallWinner();
 
-        //string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
-        //gameModeUIController.RpcShowRoundPanel(true, "", roundString);
         if(gameModeUIController == null)
         {
             Debug.Log("Ui controller null");

@@ -88,7 +88,7 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(int damage, Vector2 hitPoint)
+    public bool TakeDamage(int damage, Vector2 hitPoint)
     {
 
         health -= damage;
@@ -97,10 +97,12 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
         if (health <= 0)
         {
             RpcDie();
+            return true;
         }
         else
         {
             RpcHitColor();
+            return false;
         }
     }
 

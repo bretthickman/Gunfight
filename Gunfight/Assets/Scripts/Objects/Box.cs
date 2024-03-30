@@ -15,13 +15,15 @@ public class Box : NetworkBehaviour, IDamageable
     [SerializeField] private GameObject objectInsideBox; //could be turned into List for random object drops
 
 
-    public void TakeDamage(int damageAmount, Vector2 hitPoint)
+    public bool TakeDamage(int damageAmount, Vector2 hitPoint)
     {
         RpcTakeDamage(hitPoint);
 
         GameObject ammoInstance = Instantiate(objectInsideBox, hitPoint, Quaternion.identity);
 
         NetworkServer.Spawn(ammoInstance);
+
+        return false;
     }
 
     [ClientRpc]

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeDamage(int damageAmount, Vector2 hitPoint);
+    bool TakeDamage(int damageAmount, Vector2 hitPoint);
 }
