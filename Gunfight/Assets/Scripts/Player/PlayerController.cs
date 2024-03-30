@@ -38,6 +38,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteRenderer weaponSpriteRenderer;
 
     public Animator playerAnimator;
+    public Animator weaponAnimator;
 
     public SpriteLibraryAsset[] bodySpriteLibraryArray;
     public SpriteLibraryAsset[] hairSpriteLibraryArray;
@@ -314,6 +315,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
             startPos,
             Quaternion.FromToRotation(Vector2.up, endPos-startPos));
             weaponInfo.nAmmo--;
+        }
+
+        if(weaponInfo.isMelee)
+        {
+            weaponAnimator.SetTrigger("swingBat");
         }
 
         Vector2 newPoint = endPos + ((endPos - startPos).normalized * -0.2f);
