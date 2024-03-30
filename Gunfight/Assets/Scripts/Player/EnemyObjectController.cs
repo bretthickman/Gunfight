@@ -115,7 +115,8 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
             {
                 attackCooldownRemaining = attackInterval;
                 PlayerController p = collision.collider.gameObject.GetComponent<PlayerController>();
-                hitPlayer(p);
+
+                if(isLocalPlayer) CmdHitPlayer(p);
             }
             else
             {
@@ -137,11 +138,9 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
         }
     }
 
-    [ClientRpc]
-    public void hitPlayer(PlayerController player)
+    [Command]
+    public void CmdHitPlayer(PlayerController player)
     {
-        //Vector2 collisionLocation = new Vector2(collision.GetContact(0).point.x, collision.GetContact(0).point.y);
-
         // player.takeDamage doesn't use collision location, give it a dummy var
         Vector2 collisionLocation = new Vector2(0, 0);
         player.TakeDamage(Mathf.FloorToInt(damage), collisionLocation);
