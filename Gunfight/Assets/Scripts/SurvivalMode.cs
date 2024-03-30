@@ -156,6 +156,11 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         Debug.Log("End of game!");
 
+        if(gameModeUIController == null)
+        {
+            gameModeUIController = FindObjectOfType<GameModeUIController>();
+        }
+
         gameModeUIController.DisplayRoundPanel(true);
 
         if (isServer) {
@@ -164,6 +169,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             ResetOverallGame();
         }
         
+
         StartCoroutine(QuitCountdown());
     }
 
