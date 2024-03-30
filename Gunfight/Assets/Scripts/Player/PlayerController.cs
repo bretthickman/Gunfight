@@ -343,8 +343,12 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 {
                     Debug.Log("gameMode is null");
                 }
+                else
+                {
+                    Debug.Log("game mode is " + gameMode);
+                }
 
-                if (damageable != null && (gameMode != null && hit.collider.gameObject.CompareTag("Player")))
+                if (damageable != null && (gameMode != null && !hit.collider.gameObject.CompareTag("Player")))
                 {
                     damageable.TakeDamage(weaponInfo.damage, hit.point);
                 }
