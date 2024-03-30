@@ -116,7 +116,7 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
                 attackCooldownRemaining = attackInterval;
                 PlayerController p = collision.collider.gameObject.GetComponent<PlayerController>();
 
-                if(isLocalPlayer) CmdHitPlayer(p);
+                if(!isServer) CmdHitPlayer(p);
             }
             else
             {
