@@ -316,6 +316,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
             Quaternion.FromToRotation(Vector2.up, endPos-startPos));
             weaponInfo.nAmmo--;
         }
+        playerAnimator.SetTrigger("Shoot");
 
         if(weaponInfo.isMelee)
         {

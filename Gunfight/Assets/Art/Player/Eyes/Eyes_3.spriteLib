@@ -82,4 +82,20 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: -443873230, guid: 8a2f8d71189a7f64892abb706e1f704a, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 1
+  - m_Name: run_shoot
+    m_Hash: 215737904
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: 10
+      m_Hash: 559752673
+      m_Sprite: {fileID: 1028984554, guid: f8819826b7401a842ab95f03e1735d6d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1028984554, guid: f8819826b7401a842ab95f03e1735d6d, type: 3}
+    - m_Name: 11
+      m_Hash: 375002487
+      m_Sprite: {fileID: 1180673970, guid: f8819826b7401a842ab95f03e1735d6d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1180673970, guid: f8819826b7401a842ab95f03e1735d6d, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
