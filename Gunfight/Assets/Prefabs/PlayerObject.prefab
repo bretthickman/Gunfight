@@ -540,7 +540,7 @@ MonoBehaviour:
   PistolShotSound: {fileID: 8300000, guid: 4e022ae902b32eb4588e274baead6ab2, type: 3}
   UziShotSound: {fileID: 8300000, guid: 0520fa86716ff49e69e4db800e6b1ff6, type: 3}
   SniperShotSound: {fileID: 8300000, guid: cdca17854aa6745dab6eae9ef903ac0d, type: 3}
-  AK47ShotSound: {fileID: 8300000, guid: 741c322a8b5ae4f69824e4ed736d36cd, type: 3}
+  AK47ShotSound: {fileID: 8300000, guid: 23573fbe057b31141b0780dad7864abf, type: 3}
   KnifeSound: {fileID: 8300000, guid: 75058c01873d74297bb76319e6803c5a, type: 3}
   Walk_1: {fileID: 8300000, guid: 1fecaf8ae3f5849df9d3fa07a06db97a, type: 3}
   Walk_2: {fileID: 8300000, guid: b7786aee941134bd9833cacf8f93fc20, type: 3}

@@ -107,11 +107,11 @@ MonoBehaviour:
   syncInterval: 0.1
   id: 0
   nAmmo: 30
-  damage: 2
-  range: 15
+  damage: 6
+  range: 3
   speedOfPlayer: 6
-  cooldown: 0.2
-  isAuto: 1
+  cooldown: 1
+  isAuto: 0
   isMelee: 0
 --- !u!61 &-998639533774560843
 BoxCollider2D:
