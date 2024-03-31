@@ -1677,10 +1677,12 @@ MonoBehaviour:
   syncInterval: 0.1
   mapManager: {fileID: 0}
   cardManager: {fileID: 0}
+  gameModeUIController: {fileID: 0}
+  cardUIController: {fileID: 0}
   enemyPrefab: {fileID: 5128584884438735198, guid: 608ae7d5761017c469596d6818938927, type: 3}
   startingNumberOfEnemies: 4
   enemyMultiplier: 1.15
-  currentRoundNumberOfEnemies: 0
+  enemiesSpawnedThisRound: 0
   playerCount: 0
   hasGameStarted: 0
   useCards: 0
@@ -4388,6 +4390,8 @@ MonoBehaviour:
   syncInterval: 0.1
   mapManager: {fileID: 0}
   cardManager: {fileID: 0}
+  gameModeUIController: {fileID: 0}
+  cardUIController: {fileID: 0}
   currentRound: 0
   totalRounds: 3
   aliveNum: 0
@@ -6822,7 +6826,7 @@ MonoBehaviour:
       m_Image: {fileID: 370028325, guid: ed1297ad7c9744ae588737ab36753c10, type: 3}
     - m_Text: Gunfight
       m_Image: {fileID: 2068521624, guid: ed1297ad7c9744ae588737ab36753c10, type: 3}
-    - m_Text: Single Player
+    - m_Text: Survival
       m_Image: {fileID: 2068521624, guid: ed1297ad7c9744ae588737ab36753c10, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9335,6 +9339,8 @@ MonoBehaviour:
   syncInterval: 0.1
   mapManager: {fileID: 0}
   cardManager: {fileID: 0}
+  gameModeUIController: {fileID: 0}
+  cardUIController: {fileID: 0}
   currentRound: 0
   totalRounds: 3
   aliveNum: 0

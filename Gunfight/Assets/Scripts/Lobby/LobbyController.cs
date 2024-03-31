@@ -418,6 +418,7 @@ public class LobbyController : MonoBehaviour
             GameModeManager.Instance.freeForAllMode.gameObject.SetActive(false);
             GameModeManager.Instance.survivalMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.gunfightMode;
+            GameModeManager.Instance.gameMode = "gunfight";
         }
         else if (GameModeChooser.value == 2)
         {
@@ -427,6 +428,7 @@ public class LobbyController : MonoBehaviour
             GameModeManager.Instance.freeForAllMode.gameObject.SetActive(false);
             GameModeManager.Instance.gunfightMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.survivalMode;
+            GameModeManager.Instance.gameMode = "survival";
         }
 
     }

@@ -34,7 +34,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     [SyncVar]
     public int currentRound = 0; // keeps track of the current round
-    public int totalRounds = 3; // keeps track of total amount of rounds
+    public int totalRounds = 9999; // keeps track of total amount of rounds
 
     public bool quitClicked = false;
 
@@ -156,20 +156,15 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         Debug.Log("End of game!");
 
-        if(gameModeUIController == null)
-        {
-            gameModeUIController = FindObjectOfType<GameModeUIController>();
-        }
+        if(gameModeUIController == null) { gameModeUIController = FindObjectOfType<GameModeUIController>(); }
 
         gameModeUIController.DisplayRoundPanel(true);
-
         if (isServer) {
             RankingList();
             //reset player stats
-            ResetOverallGame();
+            RpcResetOverallGame();
         }
         
-
         StartCoroutine(QuitCountdown());
     }
 
@@ -177,6 +172,8 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public bool CheckIfGameNeedsStart()
     {
+        bool result = !hasGameStarted && (SceneManager.GetActiveScene().name != "Lobby") && aliveNum != 0;
+        Debug.Log("Checking if game needs start: " + result);
         return !hasGameStarted && (SceneManager.GetActiveScene().name != "Lobby") && aliveNum != 0;
     }
 
@@ -337,11 +334,12 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         gameModeUIController.RpcShowRanking(rankingString, killsString);
     }
 
-    public void ResetOverallGame()
+    [ClientRpc]
+    public void RpcResetOverallGame()
     {
-        currentRound = 0;
         RpcResetPlayerStats();
         RpcResetGame();
+        hasGameStarted = false;
     }
 
     [ClientRpc]
