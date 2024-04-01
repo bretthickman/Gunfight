@@ -123,7 +123,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         gameModeManager = FindObjectOfType<GameModeManager>();
         if( gameModeManager != null )
         {
-            Debug.Log("GameModeManager found. Friendly fire on? " +  gameModeManager.friendlyFireEnabled);
+            Debug.Log("GameModeManager found.");
         }
     }
 

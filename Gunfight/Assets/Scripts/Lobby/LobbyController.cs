@@ -101,6 +101,7 @@ public class LobbyController : MonoBehaviour
             //able to choose number of rounds
             RoundNumChooser.interactable = true;
             // able to change map, this is handled in mapController
+            friendlyFireToggle.interactable = true;
             
         }
         else 
@@ -110,6 +111,7 @@ public class LobbyController : MonoBehaviour
             GameModeChooser.interactable = false;
             RoundNumChooser.interactable = false;
             LobbyNameInput.interactable = false;
+            friendlyFireToggle.interactable = false;
         }
 
 
