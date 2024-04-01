@@ -153,4 +153,9 @@ public class GunfightMode : CompetitiveGameMode
 
         gameModeUIController.RpcShowRanking(rankingString, winsString);
     }
+
+    public override bool CheckIfFriendlyFire(RaycastHit2D hit)
+    {
+        return false;
+    }
 }

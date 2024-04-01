@@ -22,12 +22,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [SyncVar(hook = nameof(CheckWinCondition))]
     public int aliveNum; // get this from lobby
 
-    // had to make protected so child classes can use it
     protected CustomNetworkManager manager;
 
-    // also changed to protected during refactor
     public int playerCount;
     public bool hasGameStarted = false;
+    public bool friendlyFireEnabled = false;
 
     // keeps track of the rankings
     public List<string> ranking = new List<string>();
@@ -46,6 +45,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract void ResetOverallGame();
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
+    public abstract bool CheckIfFriendlyFire(RaycastHit2D hit);
 
     private CustomNetworkManager Manager
     {
@@ -283,6 +283,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
         }
+    }
+
+    public void ToggleFriendlyFire()
+    {
+        this.friendlyFireEnabled = !this.friendlyFireEnabled;
     }
 
     public int GetAliveNum()

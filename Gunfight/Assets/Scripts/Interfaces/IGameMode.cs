@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 
 public interface IGameMode
 {
@@ -17,8 +18,10 @@ public interface IGameMode
     void InitializeGameMode();
     void DecrementCurrentNumberOfEnemies();
     void RankingList();
+    bool CheckIfFriendlyFire(RaycastHit2D hit); // returns true if friendly fire is being commited
 
 
+    void ToggleFriendlyFire();
     bool GetUseCards();
     void SetUseCards(bool usingCards);
     int GetAliveNum();

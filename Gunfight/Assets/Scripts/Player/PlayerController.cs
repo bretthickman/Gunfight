@@ -47,7 +47,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
 
-    private bool isSurvivalMode;
+    private GameModeManager gameModeManager;
 
     //Shooting
     public Transform shootPoint;
@@ -120,8 +120,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         poc = GetComponent<PlayerObjectController>();
         audioSource = GetComponent<AudioSource>();
-        isSurvivalMode = FindObjectOfType<SurvivalMode>() != null ? true : false;
-        Debug.Log("isSurvivalMode = " + isSurvivalMode);
+        gameModeManager = FindObjectOfType<GameModeManager>();
+        if( gameModeManager != null )
+        {
+            Debug.Log("GameModeManager found. Friendly fire on? " +  gameModeManager.friendlyFireEnabled);
+        }
     }
 
     private void FixedUpdate()
@@ -343,8 +346,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
                 if (damageable != null)
                 {
-                    //no friendly fire in survival mode
-                    if (!(isSurvivalMode && hit.collider.gameObject.CompareTag("Player")))
+                    if (!gameModeManager.currentGameMode.CheckIfFriendlyFire(hit))
                     {
                         // returns true if damageable dies and is a killable entity
                         if (damageable.TakeDamage(weaponInfo.damage, hit.point))
@@ -352,8 +354,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
                             poc.kills++;
                             Debug.Log("Kills = " + poc.kills);
                         }
-                    }
-                   
+                    }                                     
                 }
             }
             else
@@ -394,15 +395,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
             RpcDie();
             playerAnimator.SetBool("isDead", true);
             SendPlayerDeath();
-
-            if (!isSurvivalMode)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
         else
         {

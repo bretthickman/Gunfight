@@ -26,6 +26,11 @@ public class FreeForAllMode : CompetitiveGameMode
         StartRound();
     }
 
+    public override bool CheckIfFriendlyFire(RaycastHit2D objectHit)
+    {
+        return false;
+    }
+
     public override void ResetOverallGame()
     {
         RpcResetPlayerStats();

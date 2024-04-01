@@ -31,6 +31,7 @@ public class LobbyController : MonoBehaviour
     public Button ReadyButton;
     public Toggle publicToggle;
     public Toggle cardToggle;
+    public Toggle friendlyFireToggle;
     public TMP_Text ReadyButtonText;
     public Dropdown GameModeChooser;
     public Dropdown RoundNumChooser;
@@ -386,6 +387,11 @@ public class LobbyController : MonoBehaviour
     public void ToggleCards()
     {
         GameModeManager.Instance.currentGameMode.SetUseCards(!GameModeManager.Instance.currentGameMode.GetUseCards());
+    }
+
+    public void ToggleFriendlyFire()
+    {
+        GameModeManager.Instance.currentGameMode.ToggleFriendlyFire();
     }
 
     public void SwitchGameModes()

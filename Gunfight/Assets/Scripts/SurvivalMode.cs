@@ -26,6 +26,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public int playerCount;
     public bool hasGameStarted = false;
     public bool useCards = true;
+    public bool friendlyFireEnabled = false;
 
     [SyncVar(hook = nameof(CheckWinCondition))]
     public int currentNumberOfEnemies;
@@ -187,6 +188,21 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         playerCount = aliveNum;
         hasGameStarted = true;
         StartRound();
+    }
+
+    public void ToggleFriendlyFire()
+    {
+        friendlyFireEnabled = !friendlyFireEnabled;
+    }
+
+    // returns true if friendly fire is being committed
+    public bool CheckIfFriendlyFire(RaycastHit2D hit)
+    {
+        if(!friendlyFireEnabled) { return false; }
+
+        if(hit.collider.gameObject.CompareTag("Player")) { return true; }
+
+        return false;
     }
 
     public void StartRound()
