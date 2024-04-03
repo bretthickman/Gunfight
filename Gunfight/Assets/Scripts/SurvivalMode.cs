@@ -198,9 +198,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     // returns true if friendly fire is being committed
     public bool CheckIfFriendlyFire(RaycastHit2D hit)
     {
-        if(!friendlyFireEnabled) { return false; }
-
-        if(hit.collider.gameObject.CompareTag("Player")) { return true; }
+        if(friendlyFireEnabled && hit.collider.gameObject.CompareTag("Player")) { return true; }
 
         return false;
     }
