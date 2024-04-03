@@ -550,7 +550,7 @@ MonoBehaviour:
   syncInterval: 0.1
   publicToggle: {fileID: 360413125}
   cardToggle: {fileID: 827399137}
-  ffireToggle: {fileID: 0}
+  ffireToggle: {fileID: 753998170}
 --- !u!1 &46754091
 GameObject:
   m_ObjectHideFlags: 0
