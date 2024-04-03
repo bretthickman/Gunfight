@@ -346,7 +346,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
                 if (damageable != null)
                 {
-                    if (!gameModeManager.currentGameMode.CheckIfFriendlyFire(hit))
+                    if (gameModeManager.currentGameMode.CheckIfFriendlyFire(hit))
                     {
                         // returns true if damageable dies and is a killable entity
                         if (damageable.TakeDamage(weaponInfo.damage, hit.point))

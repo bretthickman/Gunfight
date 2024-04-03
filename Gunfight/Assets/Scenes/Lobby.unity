@@ -550,6 +550,7 @@ MonoBehaviour:
   syncInterval: 0.1
   publicToggle: {fileID: 360413125}
   cardToggle: {fileID: 827399137}
+  ffireToggle: {fileID: 0}
 --- !u!1 &46754091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1765,7 @@ MonoBehaviour:
   playerCount: 0
   hasGameStarted: 0
   useCards: 0
+  friendlyFireEnabled: 0
   currentNumberOfEnemies: 0
   aliveNum: 0
   currentRound: 0
@@ -4651,7 +4653,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 41049960}
         m_TargetAssemblyTypeName: ToggleController, Assembly-CSharp
-        m_MethodName: OnCardToggleValueChanged
+        m_MethodName: OnFFireToggleValueChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4741,6 +4743,7 @@ MonoBehaviour:
   aliveNum: 0
   playerCount: 0
   hasGameStarted: 0
+  friendlyFireEnabled: 0
   ranking: []
   quitClicked: 0
   useCards: 1
@@ -9728,6 +9731,7 @@ MonoBehaviour:
   aliveNum: 0
   playerCount: 0
   hasGameStarted: 0
+  friendlyFireEnabled: 0
   ranking: []
   quitClicked: 0
   useCards: 1
