@@ -12,7 +12,7 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
     public float health;
 
     public float speed;
-    public float speedOffset = 0.1f;
+    public float speedOffset = 0.23f;
     public float speedMultipiler = 0.25f;
     public float damage;
     public float damageMultipiler = 0.5f;
@@ -58,16 +58,16 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
 
     }
 
-    public void updateSpeed(int currentRound)
+    public void updateSpeed(int currentLevel)
     {
-        float newSpeed = speed + (currentRound - 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
+        float newSpeed = speed + (currentLevel - 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
         path.maxSpeed = newSpeed;
         speed = path.maxSpeed;
     }
 
-    public void updateDamage(int currentRound)
+    public void updateDamage(int currentLevel)
     {
-        damage = damage + (currentRound - 1) * damageMultipiler;
+        damage = damage + (currentLevel - 1) * damageMultipiler;
     }
 
     void updateFlip()

@@ -20,7 +20,9 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public GameObject enemyPrefab;
     public int startingNumberOfEnemies;
-    public float enemyMultiplier = 1.15f;
+    [SerializeField] private float enemyMultiplier = 1.0f;
+    public int levelInterval; // waves get harder on a step function. this is the size of each step
+    [SerializeField] private int difficultyLevel;
     public int enemiesSpawnedThisRound;
 
     public int playerCount;
@@ -116,7 +118,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             if (controller != null)
             {
                 // Call the updateSpeed function
-                controller.updateSpeed(currentRound);
+                controller.updateSpeed(difficultyLevel);
             }
             else
             {
@@ -136,7 +138,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             if (controller != null)
             {
                 // Call the updateSpeed function
-                controller.updateDamage(currentRound);
+                controller.updateDamage(difficultyLevel);
             }
             else
             {
@@ -167,6 +169,24 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         }
         
         StartCoroutine(QuitCountdown());
+    }
+
+    public void UpdateDifficultyLevel()
+    {
+        difficultyLevel = (currentRound + 1) / levelInterval;
+    }
+
+    public void IncreaseDifficultyStepFunction()
+    {
+        enemyMultiplier = difficultyLevel switch
+        {
+            0 => 1.15f,
+            1 => 1.18f,
+            2 => 1.22f,
+            3 => 1.27f,
+            4 => 1.33f,
+            _ => 1.52f,
+        };
     }
 
     //------------------Game Mode Interface Methods------------------------------
@@ -223,6 +243,8 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         DeleteWeaponsInGame();
         SpawnWeaponsInGame();
 
+        UpdateDifficultyLevel();
+        IncreaseDifficultyStepFunction();
         enemiesSpawnedThisRound = Mathf.RoundToInt(enemiesSpawnedThisRound * enemyMultiplier);
         currentNumberOfEnemies = enemiesSpawnedThisRound;
         spawnEnemies();

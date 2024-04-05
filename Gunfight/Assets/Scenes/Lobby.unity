@@ -1760,7 +1760,7 @@ MonoBehaviour:
   cardUIController: {fileID: 0}
   enemyPrefab: {fileID: 5128584884438735198, guid: 608ae7d5761017c469596d6818938927, type: 3}
   startingNumberOfEnemies: 4
-  enemyMultiplier: 1.15
+  levelInterval: 4
   enemiesSpawnedThisRound: 0
   playerCount: 0
   hasGameStarted: 0
