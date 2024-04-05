@@ -28,7 +28,7 @@ public class FreeForAllMode : CompetitiveGameMode
 
     public override bool CheckIfFriendlyFire(RaycastHit2D objectHit)
     {
-        return false;
+        return true;
     }
 
     public override void ResetOverallGame()

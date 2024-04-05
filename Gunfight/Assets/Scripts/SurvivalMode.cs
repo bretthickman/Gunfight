@@ -20,7 +20,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public GameObject enemyPrefab;
     public int startingNumberOfEnemies;
-    [SerializeField] private float enemyMultiplier = 1.0f;
+    //[SerializeField] private float enemyMultiplier = 1.0f;
     public int levelInterval; // waves get harder on a step function. this is the size of each step
     [SerializeField] private int difficultyLevel;
     public int enemiesSpawnedThisRound;
@@ -151,50 +151,64 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         if(aliveNum <= 0)
         {
-            EndGame();
+            Debug.Log("End of game!");
+
+            if (gameModeUIController == null) { gameModeUIController = FindObjectOfType<GameModeUIController>(); }
+
+            gameModeUIController.DisplayRoundPanel(true);
+            if (isServer)
+            {
+                RankingList();
+                //reset player stats
+                RpcResetOverallGame();
+            }
+
+            StartCoroutine(QuitCountdown());
         }
     }
 
-    public void EndGame()
-    {
-        Debug.Log("End of game!");
 
-        if(gameModeUIController == null) { gameModeUIController = FindObjectOfType<GameModeUIController>(); }
-
-        gameModeUIController.DisplayRoundPanel(true);
-        if (isServer) {
-            RankingList();
-            //reset player stats
-            RpcResetOverallGame();
-        }
-        
-        StartCoroutine(QuitCountdown());
-    }
-
-    public void UpdateDifficultyLevel()
+    public void IncreaseDifficulty()
     {
         difficultyLevel = (currentRound + 1) / levelInterval;
+
+        int adjustment = StepFunctionHelper();
+
+        // set the baseline spawn rate for each difficulty level
+        int spawnAtLevel = difficultyLevel switch
+        {
+            0 => 4,
+            1 => 8,
+            2 => 13,
+            3 => 19,
+            4 => 26,
+            _ => 37,
+        };
+
+        // update num enemies to be spawned based on step function
+        enemiesSpawnedThisRound = spawnAtLevel + adjustment;
+        currentNumberOfEnemies = enemiesSpawnedThisRound;
     }
 
-    public void IncreaseDifficultyStepFunction()
+    // this helps simulate the exponential curve of difficulty between steps (currently assumes levelInterval is 4)
+    public int StepFunctionHelper()
     {
-        enemyMultiplier = difficultyLevel switch
+        int subLevel = currentRound % 4;
+        switch (subLevel)
         {
-            0 => 1.15f,
-            1 => 1.18f,
-            2 => 1.22f,
-            3 => 1.27f,
-            4 => 1.33f,
-            _ => 1.52f,
-        };
+            case 0: return 0;
+            case 1: return 1;
+            case 2: return 2;
+            case 3: return 5;
+            default: return 0;
+        }
     }
+
 
     //------------------Game Mode Interface Methods------------------------------
 
     public bool CheckIfGameNeedsStart()
     {
-        bool result = !hasGameStarted && (SceneManager.GetActiveScene().name != "Lobby") && aliveNum != 0;
-        Debug.Log("Checking if game needs start: " + result);
         return !hasGameStarted && (SceneManager.GetActiveScene().name != "Lobby") && aliveNum != 0;
     }
 
@@ -243,10 +257,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         DeleteWeaponsInGame();
         SpawnWeaponsInGame();
 
-        UpdateDifficultyLevel();
-        IncreaseDifficultyStepFunction();
-        enemiesSpawnedThisRound = Mathf.RoundToInt(enemiesSpawnedThisRound * enemyMultiplier);
-        currentNumberOfEnemies = enemiesSpawnedThisRound;
+        IncreaseDifficulty();
         spawnEnemies();
 
         StartRound();
@@ -337,8 +348,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public void CheckWinCondition(int oldCurrentNumberOfEnemies, int newCurrentNumberOfEnemies)
     {
-        if (isServer && SceneManager.GetActiveScene().name != "Lobby" &&
-                currentNumberOfEnemies <= 0) // changed from curNumNME != startingNum 
+        if (isServer && SceneManager.GetActiveScene().name != "Lobby" && currentNumberOfEnemies <= 0)  
         {
             StartCoroutine(DelayedEndRound());
         }
@@ -376,6 +386,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         RpcResetPlayerStats();
         RpcResetGame();
         hasGameStarted = false;
+        currentRound = 0;
     }
 
     [ClientRpc]

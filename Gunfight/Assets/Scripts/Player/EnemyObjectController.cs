@@ -13,7 +13,7 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
 
     public float speed;
     public float speedOffset = 0.23f;
-    public float speedMultipiler = 0.25f;
+    public float speedMultipiler = 0.35f;
     public float damage;
     public float damageMultipiler = 0.5f;
     public float attackInterval;
@@ -60,14 +60,14 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
 
     public void updateSpeed(int currentLevel)
     {
-        float newSpeed = speed + (currentLevel - 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
+        float newSpeed = speed + (currentLevel + 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
         path.maxSpeed = newSpeed;
         speed = path.maxSpeed;
     }
 
     public void updateDamage(int currentLevel)
     {
-        damage = damage + (currentLevel - 1) * damageMultipiler;
+        damage = damage + (currentLevel + 1) * damageMultipiler;
     }
 
     void updateFlip()
@@ -116,7 +116,6 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
                 attackCooldownRemaining = attackInterval;
                 PlayerController p = collision.collider.gameObject.GetComponent<PlayerController>();
                 HitPlayer(p);
-
             }
             else
             {
