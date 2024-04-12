@@ -323,7 +323,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         cardUIController.RpcShowCardPanel(false);
 
         StartCoroutine(PreroundCountdown());
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         EndRound();
     }
 

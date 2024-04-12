@@ -8,6 +8,7 @@ public class GunfightMode : CompetitiveGameMode
     public int[] teamAlive = { 0, 0 }; // keeps track of how many players on each team is alive
     public int[] teamWins = { 0, 0 }; // keeps track of how many wins each team has
     private int teamWinNum;
+    private GameObject[] weaponSpawnOrder;
 
     // not sure if having this in subclass will break it
     private CustomNetworkManager Manager
@@ -157,5 +158,28 @@ public class GunfightMode : CompetitiveGameMode
     public override bool CheckIfFriendlyFire(RaycastHit2D hit)
     {
         return false;
+    }
+
+    public override void SpawnWeaponsInGame()
+    {
+        // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
+    }
+
+    public void GenerateWeaponSpawnOrder()
+    {
+        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
+        if(weaponSpawning == null )
+        {
+            Debug.Log("GunfightMode failed to find WeaponSpawning object.");
+        }
+        else
+        {
+            GameObject[] weapons = weaponSpawning.GetWeapons();
+            for(int i = 0; i < totalRounds; i++)
+            {
+                int choice = Random.Range(0, weapons.Length);
+                weaponSpawnOrder[i] = weapons[choice];
+            }
+        }
     }
 }

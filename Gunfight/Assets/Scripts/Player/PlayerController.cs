@@ -470,5 +470,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         GetComponent<Collider2D>().enabled = true;
         weaponSpriteRenderer.enabled = true;
         spriteRendererBody.enabled = true;
+        isFiring = false; // prevents bug where you spawn in shooting if you were shooting at round end
     }
 }

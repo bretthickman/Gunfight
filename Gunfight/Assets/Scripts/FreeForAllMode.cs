@@ -106,4 +106,18 @@ public class FreeForAllMode : CompetitiveGameMode
         gameModeUIController.RpcShowRanking(rankingString, winsString);
     }
 
+    public override void SpawnWeaponsInGame()
+    {
+        // Find the WeaponSpawning script in the "game" scene
+        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
+
+        if (weaponSpawning != null)
+        {
+            weaponSpawning.SpawnWeapons();
+        }
+        else
+        {
+            Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
+        }
+    }
 }

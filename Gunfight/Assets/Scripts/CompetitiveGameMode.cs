@@ -46,6 +46,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
     public abstract bool CheckIfFriendlyFire(RaycastHit2D hit);
+    public abstract void SpawnWeaponsInGame();
 
     private CustomNetworkManager Manager
     {
@@ -253,21 +254,6 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public void CheckWinCondition(int oldAliveNum, int newAliveNum)
     {
         StartCoroutine(DelayedEndRound());
-    }
-
-    public void SpawnWeaponsInGame()
-    {
-        // Find the WeaponSpawning script in the "game" scene
-        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
-
-        if (weaponSpawning != null)
-        {
-            weaponSpawning.SpawnWeapons();
-        }
-        else
-        {
-            Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
-        }
     }
 
     public void DeleteWeaponsInGame()
