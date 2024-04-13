@@ -1,0 +1,7 @@
+This sample is enhanced in Tessera Pro (http://u3d.as/1Jqi).
+
+A second scene is provided with additional constraints to make the dungeon more realistic.
+
+A quick preview can be seen here:
+
+https://twitter.com/boris_brave/status/1217577035981381633

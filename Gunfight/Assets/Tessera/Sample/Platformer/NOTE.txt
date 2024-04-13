@@ -1,0 +1,6 @@
+This sample is enhanced in Tessera Pro (http://u3d.as/1Jqi).
+
+In Tessera Pro, the Generator has an additional component on it that
+instructs the generator to write directly to the tilemap instead of instantiating objects.
+
+See Controlling Output for more details.

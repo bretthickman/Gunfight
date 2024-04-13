@@ -1,0 +1,3 @@
+This sample is enhanced in Tessera Pro (http://u3d.as/1Jqi).
+
+It includes more more scenes, see a full list in the documentation page "Samples".

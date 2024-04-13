@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -96226770, guid: 5ec9deea42ffdf94eae3261973878f98, type: 3}
+  m_Name: GrassPalette
+  m_EditorClassIdentifier: 
+  entries:
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    name: Empty
+  - color: {r: 0, g: 0, b: 0, a: 1}
+    name: Black
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    name: White
+  - color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    name: Grey
+  - color: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 1}
+    name: Light Grey
+  - color: {r: 0.53333336, g: 0, b: 0.08235294, a: 1}
+    name: Brown
+  - color: {r: 0.7254902, g: 0.47843137, b: 0.34117648, a: 1}
+    name: Path
+  - color: {r: 0.92941177, g: 0.10980392, b: 0.14117648, a: 1}
+    name: Red
+  - color: {r: 1, g: 0.68235296, b: 0.7882353, a: 1}
+    name: Pink
+  - color: {r: 1, g: 0.49803922, b: 0.15294118, a: 1}
+    name: Orange
+  - color: {r: 1, g: 0.7882353, b: 0.05490196, a: 1}
+    name: Light Orange
+  - color: {r: 1, g: 0.9490196, b: 0, a: 1}
+    name: Yellow
+  - color: {r: 0.9372549, g: 0.89411765, b: 0.6901961, a: 1}
+    name: Beige
+  - color: {r: 0.13333334, g: 0.69411767, b: 0.29803923, a: 1}
+    name: Grass
+  - color: {r: 0.70980394, g: 0.9019608, b: 0.11372549, a: 1}
+    name: Light Green
+  - color: {r: 0, g: 0.63529414, b: 0.9098039, a: 1}
+    name: Blue
+  - color: {r: 0.6, g: 0.8509804, b: 0.91764706, a: 1}
+    name: Light Blue
+  - color: {r: 0.6392157, g: 0.28627452, b: 0.6431373, a: 1}
+    name: Purple
+  - color: {r: 0.78431374, g: 0.6313726, b: 0.90588236, a: 1}
+    name: Skybox
+  matchOverridesList:
+  - color1: 18
+    color2: 18
+    isMatch: 0
+  - color1: 18
+    color2: 13
+    isMatch: 1
+  - color1: 13
+    color2: 18
+    isMatch: 1
+  - color1: 18
+    color2: 2
+    isMatch: 1
+  - color1: 2
+    color2: 18
+    isMatch: 1
+  - color1: 18
+    color2: 1
+    isMatch: 1
+  - color1: 1
+    color2: 18
+    isMatch: 1

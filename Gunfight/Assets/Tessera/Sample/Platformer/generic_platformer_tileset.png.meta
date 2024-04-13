@@ -1,0 +1,1951 @@
+fileFormatVersion: 2
+guid: a3fd00b1a710f7d4fa64af86439bb411
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -606114822446154066
+    second: generic_platformer_tileset_0
+  - first:
+      213: -20278896364745366
+    second: generic_platformer_tileset_1
+  - first:
+      213: 6209700256506299452
+    second: generic_platformer_tileset_2
+  - first:
+      213: 1685288785891803393
+    second: generic_platformer_tileset_3
+  - first:
+      213: -1189542094718119976
+    second: generic_platformer_tileset_4
+  - first:
+      213: 3593786537477219447
+    second: generic_platformer_tileset_5
+  - first:
+      213: -1447753913302362367
+    second: generic_platformer_tileset_6
+  - first:
+      213: 7483420267257625767
+    second: generic_platformer_tileset_7
+  - first:
+      213: -2361749142665533657
+    second: generic_platformer_tileset_8
+  - first:
+      213: 8998075747166502083
+    second: generic_platformer_tileset_9
+  - first:
+      213: -811878428545543914
+    second: generic_platformer_tileset_10
+  - first:
+      213: 4287478621214585205
+    second: generic_platformer_tileset_11
+  - first:
+      213: -7088428623068047841
+    second: generic_platformer_tileset_12
+  - first:
+      213: -407258075953476430
+    second: generic_platformer_tileset_13
+  - first:
+      213: 137648287814268811
+    second: generic_platformer_tileset_14
+  - first:
+      213: -3528818793812899616
+    second: generic_platformer_tileset_15
+  - first:
+      213: 8703608717175620503
+    second: generic_platformer_tileset_16
+  - first:
+      213: 7413152721504404811
+    second: generic_platformer_tileset_17
+  - first:
+      213: -6750885461254344791
+    second: generic_platformer_tileset_18
+  - first:
+      213: -8939453986730833013
+    second: generic_platformer_tileset_19
+  - first:
+      213: -4532874996233924368
+    second: generic_platformer_tileset_20
+  - first:
+      213: -3980558668656424494
+    second: generic_platformer_tileset_21
+  - first:
+      213: -3193761860020009264
+    second: generic_platformer_tileset_22
+  - first:
+      213: -1734057488633528650
+    second: generic_platformer_tileset_23
+  - first:
+      213: -9143290054332665177
+    second: generic_platformer_tileset_24
+  - first:
+      213: -4369034556011615706
+    second: generic_platformer_tileset_25
+  - first:
+      213: 1068799660629915425
+    second: generic_platformer_tileset_26
+  - first:
+      213: 5356888721963170289
+    second: generic_platformer_tileset_27
+  - first:
+      213: 4200964814576733590
+    second: generic_platformer_tileset_28
+  - first:
+      213: 7353072695030978301
+    second: generic_platformer_tileset_29
+  - first:
+      213: 440236460753421574
+    second: generic_platformer_tileset_30
+  - first:
+      213: -999507726750798651
+    second: generic_platformer_tileset_31
+  - first:
+      213: 6186674954573916229
+    second: generic_platformer_tileset_32
+  - first:
+      213: 4520575186889059300
+    second: generic_platformer_tileset_33
+  - first:
+      213: -3969083369802924080
+    second: generic_platformer_tileset_34
+  - first:
+      213: -4236649089779188676
+    second: generic_platformer_tileset_35
+  - first:
+      213: -4733266164707602012
+    second: generic_platformer_tileset_36
+  - first:
+      213: -9205519814611633876
+    second: generic_platformer_tileset_37
+  - first:
+      213: 2629069841297391419
+    second: generic_platformer_tileset_38
+  - first:
+      213: 8706518079657300305
+    second: generic_platformer_tileset_39
+  - first:
+      213: -6153230053419560440
+    second: generic_platformer_tileset_40
+  - first:
+      213: 5522995649259551204
+    second: bridge
+  - first:
+      213: -7186616254733290282
+    second: generic_platformer_tileset_42
+  - first:
+      213: 2177021960297516813
+    second: generic_platformer_tileset_43
+  - first:
+      213: 4528511785590322017
+    second: generic_platformer_tileset_44
+  - first:
+      213: -2131782728349205053
+    second: generic_platformer_tileset_45
+  - first:
+      213: 1612080509923559096
+    second: generic_platformer_tileset_46
+  - first:
+      213: -5156462558211966823
+    second: generic_platformer_tileset_47
+  - first:
+      213: -8953074799699646140
+    second: generic_platformer_tileset_48
+  - first:
+      213: 5338701399553187540
+    second: generic_platformer_tileset_49
+  - first:
+      213: 5287302057239282861
+    second: generic_platformer_tileset_50
+  - first:
+      213: 2968944340720551372
+    second: generic_platformer_tileset_51
+  - first:
+      213: -1750171998710046037
+    second: generic_platformer_tileset_52
+  - first:
+      213: 5436894756956985931
+    second: generic_platformer_tileset_53
+  - first:
+      213: -2768413123471750585
+    second: generic_platformer_tileset_54
+  - first:
+      213: 464786418603814136
+    second: generic_platformer_tileset_55
+  - first:
+      213: 1539633642633193811
+    second: generic_platformer_tileset_56
+  - first:
+      213: -6464362988168131634
+    second: generic_platformer_tileset_57
+  - first:
+      213: -7670974372134158917
+    second: generic_platformer_tileset_58
+  - first:
+      213: -5188242541606429849
+    second: generic_platformer_tileset_59
+  - first:
+      213: 1543701499846946904
+    second: generic_platformer_tileset_60
+  - first:
+      213: 8645013303767147240
+    second: generic_platformer_tileset_61
+  - first:
+      213: 2867100684972059692
+    second: generic_platformer_tileset_62
+  - first:
+      213: -686500714082492549
+    second: generic_platformer_tileset_63
+  - first:
+      213: 4388543988221259122
+    second: generic_platformer_tileset_64
+  - first:
+      213: 3075571211604047983
+    second: generic_platformer_tileset_65
+  - first:
+      213: 8476879596378549861
+    second: generic_platformer_tileset_66
+  - first:
+      213: 4951619925954843779
+    second: generic_platformer_tileset_67
+  - first:
+      213: 8938458764185565248
+    second: generic_platformer_tileset_68
+  - first:
+      213: 4734896318873586568
+    second: generic_platformer_tileset_69
+  - first:
+      213: 5026706102953965217
+    second: generic_platformer_tileset_70
+  - first:
+      213: -7116288502760965687
+    second: generic_platformer_tileset_71
+  - first:
+      213: 4929700722770016586
+    second: generic_platformer_tileset_72
+  - first:
+      213: 71132737071796336
+    second: generic_platformer_tileset_73
+  - first:
+      213: -7475969838936239044
+    second: generic_platformer_tileset_74
+  - first:
+      213: -2387295349614000733
+    second: generic_platformer_tileset_75
+  - first:
+      213: 4009376653324138249
+    second: generic_platformer_tileset_76
+  - first:
+      213: -8664503854818276892
+    second: generic_platformer_tileset_77
+  - first:
+      213: 2339133727754046735
+    second: generic_platformer_tileset_78
+  - first:
+      213: -1422974278298054082
+    second: generic_platformer_tileset_79
+  - first:
+      213: -314240543383624507
+    second: generic_platformer_tileset_80
+  - first:
+      213: 2019849714230674646
+    second: generic_platformer_tileset_81
+  - first:
+      213: -1259682483459018553
+    second: generic_platformer_tileset_82
+  - first:
+      213: -948148574400892966
+    second: generic_platformer_tileset_83
+  - first:
+      213: -1210563077479529798
+    second: generic_platformer_tileset_84
+  - first:
+      213: -6294140127082578792
+    second: generic_platformer_tileset_85
+  - first:
+      213: -2387845420124922968
+    second: generic_platformer_tileset_86
+  - first:
+      213: 5368851677495335606
+    second: generic_platformer_tileset_87
+  - first:
+      213: -6374605237737764425
+    second: generic_platformer_tileset_88
+  - first:
+      213: 2091505690755852670
+    second: generic_platformer_tileset_89
+  - first:
+      213: -5608022575167507126
+    second: generic_platformer_tileset_90
+  - first:
+      213: 3340429942894166595
+    second: generic_platformer_tileset_91
+  - first:
+      213: -7875822882383339647
+    second: generic_platformer_tileset_92
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: generic_platformer_tileset_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 356d629b2c97ee24c91f633429ec4f78
+      internalID: -606114822446154066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ae326fc123f49498240121a6e9c27b
+      internalID: -20278896364745366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a115ecac10c613a4385cfac069da178c
+      internalID: 6209700256506299452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fef67b1bf6af3e418a11f47356be5f4
+      internalID: 1685288785891803393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e023203b1fe09c4f9499b70e38c1094
+      internalID: -1189542094718119976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e1dd8bb04f5a484c89310e946f43268
+      internalID: 3593786537477219447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b08f20a4b386d4408e4087946bc018b
+      internalID: -1447753913302362367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 576
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469cbfdac6351594caf4812117bf533c
+      internalID: 7483420267257625767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 544
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a71b1d2cab884a4d824b341a333769e
+      internalID: -2361749142665533657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 544
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f3d959da8eefb4881fde2613f4bbb8
+      internalID: 8998075747166502083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_10
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 544
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ebcc6d02ebfb8e48bb1e5df692a0665
+      internalID: -811878428545543914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 544
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0a124f09f5a5a640b3d804a820447ec
+      internalID: 4287478621214585205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afae3ec3df098dc44b0e13f02e0b1921
+      internalID: -7088428623068047841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef497f0141458d148b62504e13a8a1ff
+      internalID: -407258075953476430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c281b8564ad12f34facb7713f015064e
+      internalID: 137648287814268811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_15
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc2c6a7909fe7a74c86a857cd25bbd9d
+      internalID: -3528818793812899616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 512
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b162f815c036f43aa8fc12af44c7ec
+      internalID: 8703608717175620503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7fe607df57bb6b49be83f9dc488c951
+      internalID: 7413152721504404811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eab0c6693d5167b44a576b305a29336a
+      internalID: -6750885461254344791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 480
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da48905dbf47bc4198e947dc96fcc00
+      internalID: -8939453986730833013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a84c62298512b5f49a57da13a4eaa71c
+      internalID: -4532874996233924368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3097abbc198cf4b4690e1d956f41c811
+      internalID: -3980558668656424494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5df53531d1d9c44eb8c4a8109baecb9
+      internalID: -3193761860020009264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9c7156272065c1479b6f6f87e22e1b8
+      internalID: -1734057488633528650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af9b6e0206b74254685ac86c181da12c
+      internalID: -9143290054332665177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8a19a7a3323b74688d6db1bc5703c8
+      internalID: -4369034556011615706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df4121ea498cb274f8d9f165d1c4c24b
+      internalID: 1068799660629915425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 448
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ad4b025e66da3c47a9d327d9a49498b
+      internalID: 5356888721963170289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_28
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 416
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 432571d258bb156419c627cf458df817
+      internalID: 4200964814576733590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 416
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edd116c126dc4024faf6a5b1ca88f943
+      internalID: 7353072695030978301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 416
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53c5c1442b41d6f4dbd9284ec0a4279d
+      internalID: 440236460753421574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_31
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 416
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a641beaaf809543a501c5e13bebd06
+      internalID: -999507726750798651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e767a409cf33bfb41a49020ba12683eb
+      internalID: 6186674954573916229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_33
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7088ce0744784b144b99cf57cfe58fff
+      internalID: 4520575186889059300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_34
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32f043abc39632b41a3483d9f4bb731e
+      internalID: -3969083369802924080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_35
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc60c18ec3c2d949a15433bbda27244
+      internalID: -4236649089779188676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_36
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 384
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3657f58dd3824b4498d96e7050eb274b
+      internalID: -4733266164707602012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_37
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9618521ebaceba04fbdde44aa9858e77
+      internalID: -9205519814611633876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_38
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e039e45eb6ddd14f879eea91b0e7536
+      internalID: 2629069841297391419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_39
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600c8187cefb547408afa77ee068b2e6
+      internalID: 8706518079657300305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_40
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 352
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c9bd0356fb1064f9b4311fcc932a61
+      internalID: -6153230053419560440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bridge
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 224
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e1854a7a7fe004fb624eb42d54d1ad
+      internalID: 5522995649259551204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_42
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddecdab1774b9d644b2f370c2e4c4438
+      internalID: -7186616254733290282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_43
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d5be4e176273c4c9a7de7598c207bc
+      internalID: 2177021960297516813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f89538dd6af874883910417ee52338
+      internalID: 464786418603814136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_56
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f3a39c97255af458bc9dfeb5272829
+      internalID: 1539633642633193811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_57
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1009b1b19ea677f43a1e821c92057c52
+      internalID: -6464362988168131634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_58
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 405d2fcb46c5ad54cb41685aa48c8761
+      internalID: -7670974372134158917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_59
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c1d6008e4e1214ea7acec26959c0a1
+      internalID: -5188242541606429849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a4ceb94feae7f649876142c72caa9e0
+      internalID: 1543701499846946904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_61
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77c0ee80fb8e2a84d866caee6415c38f
+      internalID: 8645013303767147240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_62
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 780992b76c9bf2b49a7796f4f480134b
+      internalID: 2867100684972059692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_63
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f462ebe5e6f8f4eb76dfdfdcbb28f1
+      internalID: -686500714082492549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_64
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 873649187049e6a4488e5b7b5dfbcabc
+      internalID: 4388543988221259122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_68
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39cd167c256e3d48b491f7467598d79
+      internalID: 8938458764185565248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_73
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 426c32707546df94ab12c10cf57393cb
+      internalID: 71132737071796336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_74
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3c58810d8dc1dc46986deac8222c741
+      internalID: -7475969838936239044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_77
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4c89333044bf6245adf69eea4dac3cd
+      internalID: -8664503854818276892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f4b121f9d04ed74da502195ef01d4db
+      internalID: -314240543383624507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_81
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3baf9d71e8f93a6478d512aacf85ddd3
+      internalID: 2019849714230674646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_82
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f50eb24fd417d488e76e86f35c1beb
+      internalID: -1259682483459018553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_83
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24ba601a4754f454899245771aa384c2
+      internalID: -948148574400892966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_84
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfa86fb179ed18248b085ec799e85ce3
+      internalID: -1210563077479529798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_85
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f258ff7465ff546b70f9b20ac2a20b
+      internalID: -6294140127082578792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_86
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98320374ea7786f418e0e1d88f7e73e4
+      internalID: -2387845420124922968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_87
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c561bd8e4c36a4b88d07bf896c25f9
+      internalID: 5368851677495335606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_88
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0f531af1fafa94aaf6fc1041cc1af5
+      internalID: -6374605237737764425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_89
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24044847c938d9d4d81cedbabe07a898
+      internalID: 2091505690755852670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_90
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db85a9d35d0a79d4cbd5e8b465995a60
+      internalID: -5608022575167507126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_91
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2975dca0df805f4c96d9a8546514152
+      internalID: 3340429942894166595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generic_platformer_tileset_92
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8b77fead411214b81a7262a0b28e43
+      internalID: -7875822882383339647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 646e4dd621210004e9eb36675063220f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      generic_platformer_tileset_4: -1189542094718119976
+      generic_platformer_tileset_1: -20278896364745366
+      generic_platformer_tileset_12: -7088428623068047841
+      generic_platformer_tileset_81: 2019849714230674646
+      generic_platformer_tileset_8: -2361749142665533657
+      generic_platformer_tileset_59: -5188242541606429849
+      generic_platformer_tileset_64: 4388543988221259122
+      generic_platformer_tileset_40: -6153230053419560440
+      generic_platformer_tileset_23: -1734057488633528650
+      generic_platformer_tileset_14: 137648287814268811
+      generic_platformer_tileset_55: 464786418603814136
+      generic_platformer_tileset_58: -7670974372134158917
+      generic_platformer_tileset_31: -999507726750798651
+      generic_platformer_tileset_86: -2387845420124922968
+      generic_platformer_tileset_83: -948148574400892966
+      generic_platformer_tileset_22: -3193761860020009264
+      generic_platformer_tileset_38: 2629069841297391419
+      generic_platformer_tileset_37: -9205519814611633876
+      generic_platformer_tileset_57: -6464362988168131634
+      generic_platformer_tileset_25: -4369034556011615706
+      generic_platformer_tileset_68: 8938458764185565248
+      generic_platformer_tileset_2: 6209700256506299452
+      generic_platformer_tileset_30: 440236460753421574
+      generic_platformer_tileset_43: 2177021960297516813
+      generic_platformer_tileset_10: -811878428545543914
+      generic_platformer_tileset_33: 4520575186889059300
+      generic_platformer_tileset_87: 5368851677495335606
+      generic_platformer_tileset_63: -686500714082492549
+      generic_platformer_tileset_90: -5608022575167507126
+      generic_platformer_tileset_3: 1685288785891803393
+      generic_platformer_tileset_11: 4287478621214585205
+      generic_platformer_tileset_20: -4532874996233924368
+      generic_platformer_tileset_27: 5356888721963170289
+      generic_platformer_tileset_77: -8664503854818276892
+      generic_platformer_tileset_24: -9143290054332665177
+      generic_platformer_tileset_9: 8998075747166502083
+      generic_platformer_tileset_56: 1539633642633193811
+      generic_platformer_tileset_88: -6374605237737764425
+      generic_platformer_tileset_17: 7413152721504404811
+      generic_platformer_tileset_35: -4236649089779188676
+      generic_platformer_tileset_60: 1543701499846946904
+      generic_platformer_tileset_73: 71132737071796336
+      generic_platformer_tileset_74: -7475969838936239044
+      generic_platformer_tileset_28: 4200964814576733590
+      generic_platformer_tileset_7: 7483420267257625767
+      generic_platformer_tileset_21: -3980558668656424494
+      generic_platformer_tileset_84: -1210563077479529798
+      generic_platformer_tileset_5: 3593786537477219447
+      generic_platformer_tileset_32: 6186674954573916229
+      generic_platformer_tileset_61: 8645013303767147240
+      generic_platformer_tileset_26: 1068799660629915425
+      generic_platformer_tileset_89: 2091505690755852670
+      generic_platformer_tileset_91: 3340429942894166595
+      generic_platformer_tileset_13: -407258075953476430
+      generic_platformer_tileset_15: -3528818793812899616
+      generic_platformer_tileset_62: 2867100684972059692
+      generic_platformer_tileset_19: -8939453986730833013
+      generic_platformer_tileset_29: 7353072695030978301
+      generic_platformer_tileset_6: -1447753913302362367
+      generic_platformer_tileset_34: -3969083369802924080
+      generic_platformer_tileset_18: -6750885461254344791
+      generic_platformer_tileset_82: -1259682483459018553
+      generic_platformer_tileset_85: -6294140127082578792
+      generic_platformer_tileset_36: -4733266164707602012
+      generic_platformer_tileset_0: -606114822446154066
+      generic_platformer_tileset_16: 8703608717175620503
+      generic_platformer_tileset_92: -7875822882383339647
+      bridge: 5522995649259551204
+      generic_platformer_tileset_39: 8706518079657300305
+      generic_platformer_tileset_42: -7186616254733290282
+      generic_platformer_tileset_80: -314240543383624507
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
