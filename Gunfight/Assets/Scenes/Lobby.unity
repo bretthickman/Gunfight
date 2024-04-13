@@ -434,6 +434,7 @@ MonoBehaviour:
   mapNames:
   - Map1
   - Map2
+  - Ruins
   currentMapIndex: 0
   currentMapText: {fileID: 1777977275}
 --- !u!114 &41049955
