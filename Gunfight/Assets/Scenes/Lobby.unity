@@ -1761,6 +1761,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5128584884438735198, guid: 608ae7d5761017c469596d6818938927, type: 3}
   startingNumberOfEnemies: 4
   levelInterval: 4
+  difficultyLevel: 0
   enemiesSpawnedThisRound: 0
   playerCount: 0
   hasGameStarted: 0
@@ -9737,6 +9738,13 @@ MonoBehaviour:
   useCards: 1
   teamAlive: 0000000000000000
   teamWins: 0000000000000000
+  weaponList:
+  - {fileID: 4434992512352626665, guid: 14bd63210f2db4523b027bf496721467, type: 3}
+  - {fileID: 222421779905360649, guid: 0bfa630724c5f46b69b36048d06b930c, type: 3}
+  - {fileID: 4748079201462716690, guid: a55a7443c3aeb44dd893095318db3f34, type: 3}
+  - {fileID: 4542724738798047833, guid: efc55c34014bb429f9bc3e7f34407cb8, type: 3}
+  - {fileID: 732958966662152150, guid: 89f3ccac7a4604a169bfc4d1c554d16d, type: 3}
+  weaponSpawnOrder: []
 --- !u!114 &1721334446
 MonoBehaviour:
   m_ObjectHideFlags: 0

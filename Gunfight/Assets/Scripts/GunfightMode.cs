@@ -8,7 +8,8 @@ public class GunfightMode : CompetitiveGameMode
     public int[] teamAlive = { 0, 0 }; // keeps track of how many players on each team is alive
     public int[] teamWins = { 0, 0 }; // keeps track of how many wins each team has
     private int teamWinNum;
-    private GameObject[] weaponSpawnOrder;
+    public GameObject[] weaponList;
+    [SerializeField] private GameObject[] weaponSpawnOrder;
 
     // not sure if having this in subclass will break it
     private CustomNetworkManager Manager
@@ -30,6 +31,7 @@ public class GunfightMode : CompetitiveGameMode
         playerCount = aliveNum;
         hasGameStarted = true;
         GetTeamPlayers();
+        GenerateWeaponSpawnOrder();
         StartRound(); // starts the first round after Awake
     }
 
@@ -160,26 +162,36 @@ public class GunfightMode : CompetitiveGameMode
         return false;
     }
 
+    // Assigns each player the next weapon in the weapon spawn order
     public override void SpawnWeaponsInGame()
     {
+        GameObject newWeapon = weaponSpawnOrder[currentRound];
+        WeaponInfo newWeaponInfo = newWeapon.GetComponent<WeaponInfo>();
+
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            PlayerController controller = player.GetComponent<PlayerController>();
+
+            player.GetComponent<PlayerWeaponController>().ChangeSprite(newWeaponInfo.id);
+            controller.weaponInfo.setWeaponInfo(newWeaponInfo);           
+            controller.cooldownTimer = 0f;
+            controller.isFiring = false;
+            //controller.weapon = newWeapon;
+
+            Debug.Log("Assigned player " + player + " weapon " + newWeapon);
+        }
     }
 
+    // generates the weapon spawn order for the entire match at random, with repitition
     public void GenerateWeaponSpawnOrder()
     {
-        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
-        if(weaponSpawning == null )
+        weaponSpawnOrder = new GameObject[totalRounds * 2 - 1];
+        for(int i = 0; i < weaponSpawnOrder.Length; i++)
         {
-            Debug.Log("GunfightMode failed to find WeaponSpawning object.");
-        }
-        else
-        {
-            GameObject[] weapons = weaponSpawning.GetWeapons();
-            for(int i = 0; i < totalRounds; i++)
-            {
-                int choice = Random.Range(0, weapons.Length);
-                weaponSpawnOrder[i] = weapons[choice];
-            }
+            int choice = Random.Range(0, weaponList.Length);
+            Debug.Log("Generating weapon spawn order, adding " + choice + " to the list.");
+            weaponSpawnOrder[i] = weaponList[choice];
         }
     }
 }

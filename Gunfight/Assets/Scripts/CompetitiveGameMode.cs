@@ -73,6 +73,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         }
         // setup for round
         RpcResetGame();
+        SpawnWeaponsInGame();
         currentRound++; // increase round count
         Debug.Log("Round started: " + currentRound);
     }
@@ -88,7 +89,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
             DeleteWeaponsInGame();
             if (isServer)
                 RpcResetGame();
-            SpawnWeaponsInGame();
+            //SpawnWeaponsInGame();
             aliveNum = playerCount;
             StartRound();
             // TODO: Reset Map (pots / boxes)
