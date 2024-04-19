@@ -18,7 +18,7 @@ public interface IGameMode
     void InitializeGameMode();
     void DecrementCurrentNumberOfEnemies();
     void RankingList();
-    bool CheckIfFriendlyFire(RaycastHit2D hit); // returns true if friendly fire is being commited
+    bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum); // returns true if friendly fire is being commited
 
 
     void ToggleFriendlyFire();

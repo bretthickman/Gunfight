@@ -157,9 +157,24 @@ public class GunfightMode : CompetitiveGameMode
         gameModeUIController.RpcShowRanking(rankingString, winsString);
     }
 
-    public override bool CheckIfFriendlyFire(RaycastHit2D hit)
+    public override bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum)
     {
-        return false;
+        GameObject otherPlayer = hit.collider.gameObject;
+        PlayerObjectController otherPoc = otherPlayer.GetComponent<PlayerObjectController>();
+
+        bool sameTeam;
+        if (otherPoc == null)
+        {
+            sameTeam = false;
+        }
+        else
+        {
+            sameTeam = otherPoc.Team == teamNum;
+        }
+
+        if (otherPlayer.CompareTag("Player") && !friendlyFireEnabled && sameTeam) { return false; }
+
+        return true;
     }
 
     // Assigns each player the next weapon in the weapon spawn order
@@ -171,15 +186,7 @@ public class GunfightMode : CompetitiveGameMode
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
-            PlayerController controller = player.GetComponent<PlayerController>();
-
-            player.GetComponent<PlayerWeaponController>().ChangeSprite(newWeaponInfo.id);
-            controller.weaponInfo.setWeaponInfo(newWeaponInfo);           
-            controller.cooldownTimer = 0f;
-            controller.isFiring = false;
-            //controller.weapon = newWeapon;
-
-            Debug.Log("Assigned player " + player + " weapon " + newWeapon);
+            RpcAssignWeapon(player, newWeaponInfo);
         }
     }
 

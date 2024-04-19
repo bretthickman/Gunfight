@@ -45,7 +45,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract void ResetOverallGame();
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
-    public abstract bool CheckIfFriendlyFire(RaycastHit2D hit);
+    public abstract bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum);
     public abstract void SpawnWeaponsInGame();
 
     private CustomNetworkManager Manager
@@ -342,5 +342,18 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             player.wins = 0;
         }
+    }
+
+    [ClientRpc]
+    public void RpcAssignWeapon(PlayerObjectController player, WeaponInfo weapon)
+    {
+        PlayerController controller = player.GetComponent<PlayerController>();
+
+        player.GetComponent<PlayerWeaponController>().ChangeSprite(weapon.id);
+        controller.weaponInfo.setWeaponInfo(weapon);
+        controller.cooldownTimer = 0f;
+        controller.isFiring = false;
+
+        Debug.Log("Assigned player " + player + " weapon " + weapon);
     }
 }

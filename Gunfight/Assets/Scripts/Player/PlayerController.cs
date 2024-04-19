@@ -347,7 +347,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 if (damageable != null)
                 {
                     // returns false when attacking allies when friendly fire is enabled
-                    if (gameModeManager.currentGameMode.CheckIfFriendlyFire(hit))
+                    if (gameModeManager.currentGameMode.CheckIfFriendlyFire(hit, poc.Team))
                     {
                         // returns true if damageable dies and is a killable entity
                         if (damageable.TakeDamage(weaponInfo.damage, hit.point))

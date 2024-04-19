@@ -26,7 +26,7 @@ public class FreeForAllMode : CompetitiveGameMode
         StartRound();
     }
 
-    public override bool CheckIfFriendlyFire(RaycastHit2D objectHit)
+    public override bool CheckIfFriendlyFire(RaycastHit2D objectHit, int otherTeam)
     {
         return true;
     }
