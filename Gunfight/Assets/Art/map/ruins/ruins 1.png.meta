@@ -5272,13 +5272,186 @@ TextureImporter:
         height: 160
       alignment: 7
       pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 17, z: 0, w: 0}
+      border: {x: 0, y: 38, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 53149826dc58a47edad02bcbd6491432
       internalID: 261092096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_243
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 160
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 18, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f3a108eec4d4767a73f315b909734e
+      internalID: -513061170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_244
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 96
+        width: 32
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 9, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a7d4a96479b455a837fd12a315ca69
+      internalID: 1945857260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_245
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 96
+        width: 32
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 9, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a92a1fcd68e340b1be7d636df8dd806
+      internalID: -2126498961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_246
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 160
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 18, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 20, y: 7}
+        - {x: 19, y: -14}
+        - {x: 17, y: -43}
+        - {x: 18, y: -51}
+        - {x: 32, y: -36}
+        - {x: 34, y: -17}
+        - {x: 31, y: 7}
+        - {x: 28, y: 16}
+        - {x: 21, y: 21}
+        - {x: 9, y: 24}
+        - {x: -7, y: 23}
+        - {x: -22, y: 14}
+        - {x: -36, y: -5}
+        - {x: -39, y: -11}
+        - {x: -39, y: -14}
+        - {x: -37, y: -15}
+        - {x: -37, y: -17}
+        - {x: -37, y: -20}
+        - {x: -37, y: -25}
+        - {x: -25, y: -32}
+        - {x: -16, y: -43}
+        - {x: -9, y: -47}
+        - {x: -10, y: -34}
+        - {x: -16, y: -15}
+        - {x: -17, y: 3}
+        - {x: -1, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b9976e5e076043b8a1d4c0d1f35169e
+      internalID: -308054519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_247
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 109
+        width: 64
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c879243c3816c40d29f38cfb0fa588d6
+      internalID: 1444860797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_248
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 416
+        width: 96
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 22, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef793101ddea4e33bf512e336fa398c
+      internalID: -1101232200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ruins 1_249
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 96
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 9, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96a91f52f69a42b6af47fbcfc30b2dd
+      internalID: -1851855249
       vertices: []
       indices: 
       edges: []
@@ -5455,6 +5628,13 @@ TextureImporter:
       ruins 1_240: -773155978
       ruins 1_241: 912926150
       ruins 1_242: 261092096
+      ruins 1_243: -513061170
+      ruins 1_244: 1945857260
+      ruins 1_245: -2126498961
+      ruins 1_246: -308054519
+      ruins 1_247: 1444860797
+      ruins 1_248: -1101232200
+      ruins 1_249: -1851855249
       ruins 1_25: -534393569
       ruins 1_26: -1825521573
       ruins 1_27: -844455219
