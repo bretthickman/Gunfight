@@ -39,6 +39,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public bool useCards = true;
 
     public GameObject boxes; // parent game object of boxes in map
+    public GameObject doors; // parent game object of doors in map
 
     public GameObject PlayerStatsItemPrefab; 
     public List<PlayerStatsItem> PlayerStatsItems = new List<PlayerStatsItem>();
@@ -103,6 +104,13 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                 child.RpcResetBox();
             }
 
+            // reset doors
+            doors = GameObject.Find("doors");
+            foreach (Door child in doors.GetComponentsInChildren<Door>())
+            {
+                child.RpcResetDoor();
+            }
+            
             aliveNum = playerCount;
             StartRound();
         }

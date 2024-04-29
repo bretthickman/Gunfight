@@ -26,6 +26,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public Camera cam;
 
     public PlayerObjectController poc;
+    public PlayerColliders playerColliders;
 
     [SerializeField] 
     public int team;
@@ -118,6 +119,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     private void Start()
     {
         poc = GetComponent<PlayerObjectController>();
+        playerColliders = GetComponent<PlayerColliders>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -186,6 +188,12 @@ public class PlayerController : NetworkBehaviour, IDamageable
                     RpcDie();
                     playerAnimator.SetBool("isDead", true);
                     SendPlayerDeath();
+                }
+
+                // to be able to interact with the doors by pressing e
+                if (playerColliders.canActivateDoor && Input.GetKeyDown(KeyCode.E))
+                {
+                    playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
                 }
 
                 // updates weapon cooldown timer

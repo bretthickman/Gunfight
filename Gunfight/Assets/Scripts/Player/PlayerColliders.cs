@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerColliders : MonoBehaviour
 {
-
     public bool canPickup = false;
+    public bool canActivateDoor = false;
     public Collider2D OtherCollider;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -13,6 +13,11 @@ public class PlayerColliders : MonoBehaviour
         if (other.CompareTag("Weapon"))
         {
             canPickup = true;
+            OtherCollider = other;
+        }
+        else if (other.CompareTag("Door"))
+        {
+            canActivateDoor = true;
             OtherCollider = other;
         }
     }
@@ -23,6 +28,10 @@ public class PlayerColliders : MonoBehaviour
         {
             canPickup = false;
         }
+        else if (other.CompareTag("Door"))
+        {
+            canActivateDoor = false;
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -32,6 +41,11 @@ public class PlayerColliders : MonoBehaviour
         {
             OtherCollider = other;
             canPickup = true;
+        }
+        else if (other.CompareTag("Door"))
+        {
+            OtherCollider = other;
+            canActivateDoor = true;
         }
     }
 }
