@@ -58,11 +58,6 @@ public class PlayerWeaponController : NetworkBehaviour
                 player.grenades -= 1;
                 CmdThrowGrenade();
             }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                CmdSetPlayerWeapon(player.weaponInfo.id);
-            }
         }
 
     }
