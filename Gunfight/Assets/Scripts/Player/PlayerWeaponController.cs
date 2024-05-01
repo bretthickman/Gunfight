@@ -32,6 +32,9 @@ public class PlayerWeaponController : NetworkBehaviour
     [SerializeField]
     private GameObject Grenade;
 
+    public bool shouldChange = false;
+    public WeaponInfo weaponInfoChange = null;
+
     private void Update()
     {
         if (!isLocalPlayer) return;
@@ -54,6 +57,11 @@ public class PlayerWeaponController : NetworkBehaviour
             {
                 player.grenades -= 1;
                 CmdThrowGrenade();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                CmdSetPlayerWeapon(player.weaponInfo.id);
             }
         }
 
@@ -131,7 +139,7 @@ public class PlayerWeaponController : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcDestroyWeapon(WeaponInfo weaponInfo)
+    public void RpcDestroyWeapon(WeaponInfo weaponInfo)
     {
         if (playerColliders.OtherCollider != null)
         {

@@ -347,6 +347,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [ClientRpc]
     public void RpcAssignWeapon(PlayerObjectController player, WeaponInfo weapon)
     {
+        Debug.Log("Running INside func");
         PlayerController controller = player.GetComponent<PlayerController>();
 
         player.GetComponent<PlayerWeaponController>().ChangeSprite(weapon.id);

@@ -1,5 +1,7 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using static GameModeManager;
 
@@ -10,6 +12,8 @@ public class GunfightMode : CompetitiveGameMode
     private int teamWinNum;
     public GameObject[] weaponList;
     [SerializeField] private GameObject[] weaponSpawnOrder;
+    [SerializeField] private int weaponSpawnOffest = 2;
+
 
     // not sure if having this in subclass will break it
     private CustomNetworkManager Manager
@@ -178,6 +182,7 @@ public class GunfightMode : CompetitiveGameMode
     }
 
     // Assigns each player the next weapon in the weapon spawn order
+    [Server]
     public override void SpawnWeaponsInGame()
     {
         GameObject newWeapon = weaponSpawnOrder[currentRound];
@@ -186,7 +191,10 @@ public class GunfightMode : CompetitiveGameMode
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
-            RpcAssignWeapon(player, newWeaponInfo);
+            Vector3 spawnPosition = new Vector3(player.transform.position.x, player.transform.position.y + weaponSpawnOffest, player.transform.position.z);
+            Quaternion spawnRotation = Quaternion.Euler(0, 0, 0);
+            GameObject weaponInstance = Instantiate(newWeapon, spawnPosition, spawnRotation);
+            NetworkServer.Spawn(weaponInstance);        
         }
     }
 
