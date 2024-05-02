@@ -195,7 +195,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
                 {
                     if (playerColliders.canActivateDoor)
                     {
-                        playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
+                        playerColliders.OtherCollider.GetComponent<Door>().ActivateDoor();
                     }
                     else if (playerColliders.canHeal)
                     {

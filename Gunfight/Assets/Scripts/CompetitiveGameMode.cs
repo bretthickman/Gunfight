@@ -40,6 +40,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
 
     public GameObject boxes; // parent game object of boxes in map
     public GameObject doors; // parent game object of doors in map
+    public GameObject walls; // parent game bobject of destroyable walls in map
 
     public GameObject PlayerStatsItemPrefab; 
     public List<PlayerStatsItem> PlayerStatsItems = new List<PlayerStatsItem>();
@@ -109,6 +110,13 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
             foreach (Door child in doors.GetComponentsInChildren<Door>())
             {
                 child.RpcResetDoor();
+            }
+
+            // resets brken walls
+            walls = GameObject.Find("Interactables");
+            foreach (Wall child in walls.GetComponentsInChildren<Wall>())
+            {
+                child.RpcResetWall();
             }
             
             aliveNum = playerCount;

@@ -12,8 +12,21 @@ public class Door : NetworkBehaviour
     [SerializeField] private Collider2D doorCollider;
 
     // [SerializeField] private AudioClip hitSound;
-
     public bool isOpen = false;
+
+    public void ActivateDoor()
+    {
+        if (!isClient) return;
+        Debug.Log("Activating door");
+        CmdActivateDoor();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdActivateDoor()
+    {
+        Debug.Log("server activate door");
+        RpcActivateDoor();
+    }
 
     [ClientRpc]
     public void RpcActivateDoor()
