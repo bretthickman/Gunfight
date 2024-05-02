@@ -179,6 +179,7 @@ public class FreeForAllMode : CompetitiveGameMode
         {
             if (PlayerStatsItemScript.ConnectionID == cID)
             {
+                Debug.Log("wins set: " + wins);
                 PlayerStatsItemScript.SetPlayerStats(wins);
                 break;
             }
