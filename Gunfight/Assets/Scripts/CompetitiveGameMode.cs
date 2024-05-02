@@ -53,7 +53,8 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract void ResetOverallGame();
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
-    public abstract void StatsList(); //RpcStatsList();
+    public abstract void RpcInitStatsList();
+    public abstract void SetStatsList();
     public abstract void PlayerQuit();
 
     private CustomNetworkManager Manager
@@ -177,7 +178,13 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
                     gameModeUIController.RpcShowRoundStats(true, roundString);
-                    StatsList(); // displays the player stats
+                    if (currentRound == 1)
+                    {
+                        RpcInitStatsList(); // initialize player stats
+                        SetStatsList();
+                    }
+                    else
+                        SetStatsList();
 
                     if (useCards)
                     {

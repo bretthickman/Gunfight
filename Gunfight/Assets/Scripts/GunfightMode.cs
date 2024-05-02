@@ -189,8 +189,8 @@ public class GunfightMode : CompetitiveGameMode
         }
     }
 
-    // [ClientRpc]
-    public override void StatsList()
+    [ClientRpc]
+    public override void RpcInitStatsList()
     {
         if (PlayerStatsItems.Count != 2)
         {
@@ -218,22 +218,51 @@ public class GunfightMode : CompetitiveGameMode
                 NewTeamStatsItem.transform.SetParent(statsList.transform);
 
                 PlayerStatsItems.Add(NewStatsItemScript);
-
-                NetworkServer.Spawn(NewTeamStatsItem);
             }
         }
-        else
+        // else
+        // {
+        //     foreach(PlayerStatsItem TeamStatsScript in PlayerStatsItems)
+        //     {
+        //         if (TeamStatsScript.Team == 1)
+        //         {
+        //             TeamStatsScript.SetTeamStats(teamWins[0], Color.red);
+        //         }
+        //         else
+        //         {
+        //             TeamStatsScript.SetTeamStats(teamWins[1], Color.blue);
+        //         }
+        //     }
+        // }
+    }
+
+    public override void SetStatsList()
+    {
+        // sets for the server
+        foreach(PlayerStatsItem TeamStatsScript in PlayerStatsItems)
         {
-            foreach(PlayerStatsItem TeamStatsScript in PlayerStatsItems)
+            if (TeamStatsScript.Team == 1)
             {
-                if (TeamStatsScript.Team == 1)
-                {
-                    TeamStatsScript.SetTeamStats(teamWins[0], Color.red);
-                }
-                else
-                {
-                    TeamStatsScript.SetTeamStats(teamWins[1], Color.blue);
-                }
+                TeamStatsScript.SetTeamStats(teamWins[0], Color.red);
+                RpcSetStatsList(1, teamWins[0]);
+            }
+            else
+            {
+                TeamStatsScript.SetTeamStats(teamWins[1], Color.blue);
+                RpcSetStatsList(2, teamWins[1]);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSetStatsList(int team, int wins)
+    {
+        // sets stats for the client
+        foreach(PlayerStatsItem TeamStatsScript in PlayerStatsItems)
+        {
+            if (TeamStatsScript.Team == team)
+            {
+                TeamStatsScript.SetTeamStats(wins, TeamStatsScript.PlayerIcon.color);
             }
         }
     }
