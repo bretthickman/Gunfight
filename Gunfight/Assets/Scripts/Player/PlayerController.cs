@@ -190,10 +190,17 @@ public class PlayerController : NetworkBehaviour, IDamageable
                     SendPlayerDeath();
                 }
 
-                // to be able to interact with the doors by pressing e
-                if (playerColliders.canActivateDoor && Input.GetKeyDown(KeyCode.E))
+                // to be able to interact with objects by pressing e
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
+                    if (playerColliders.canActivateDoor)
+                    {
+                        playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
+                    }
+                    else if (playerColliders.canHeal)
+                    {
+                        Heal();
+                    }
                 }
 
                 // updates weapon cooldown timer
@@ -465,5 +472,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
         GetComponent<Collider2D>().enabled = true;
         weaponSpriteRenderer.enabled = true;
         spriteRendererBody.enabled = true;
+    }
+
+    public void Heal()
+    {
+        Debug.Log("Player healed");
+        health = 10f;
     }
 }

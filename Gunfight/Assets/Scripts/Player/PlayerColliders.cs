@@ -6,6 +6,7 @@ public class PlayerColliders : MonoBehaviour
 {
     public bool canPickup = false;
     public bool canActivateDoor = false;
+    public bool canHeal = false;
     public Collider2D OtherCollider;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -20,6 +21,11 @@ public class PlayerColliders : MonoBehaviour
             canActivateDoor = true;
             OtherCollider = other;
         }
+        else if (other.CompareTag("Health"))
+        {
+            canHeal = true;
+            OtherCollider = other;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -31,6 +37,10 @@ public class PlayerColliders : MonoBehaviour
         else if (other.CompareTag("Door"))
         {
             canActivateDoor = false;
+        }
+        else if (other.CompareTag("Health"))
+        {
+            canHeal = false;
         }
     }
 
@@ -46,6 +56,11 @@ public class PlayerColliders : MonoBehaviour
         {
             OtherCollider = other;
             canActivateDoor = true;
+        }
+        else if (other.CompareTag("Health"))
+        {
+            OtherCollider = other;
+            canHeal = true;
         }
     }
 }
