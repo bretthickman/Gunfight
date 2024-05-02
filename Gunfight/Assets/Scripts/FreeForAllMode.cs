@@ -127,13 +127,6 @@ public class FreeForAllMode : CompetitiveGameMode
         {
             if (!PlayerStatsItems.Any(b=>b.ConnectionID == player.ConnectionID))
             {
-                GameObject NewPlayerStatsItem = Instantiate(PlayerStatsItemPrefab) as GameObject;
-                PlayerStatsItem NewStatsItemScript = NewPlayerStatsItem.GetComponent<PlayerStatsItem>();
-                NewStatsItemScript.ConnectionID = player.ConnectionID;
-                NewStatsItemScript.PlayerSteamID = player.PlayerSteamID;
-                
-                NewStatsItemScript.SetPlayerStats(player.wins);
-
                 GameObject canvas = GameObject.Find("Canvas");
                 // gets the Teams object in the RoundStats object
                 GameObject statsList = canvas.transform.GetChild(6).GetChild(0).GetChild(1).gameObject;
@@ -147,9 +140,21 @@ public class FreeForAllMode : CompetitiveGameMode
                     Debug.Log("teams object found");
                 }
 
-                NewPlayerStatsItem.transform.SetParent(statsList.transform);
+                GameObject NewPlayerStatsItem = Instantiate(PlayerStatsItemPrefab, statsList.transform) as GameObject;
+                PlayerStatsItem NewStatsItemScript = NewPlayerStatsItem.GetComponent<PlayerStatsItem>();
+                NewStatsItemScript.ConnectionID = player.ConnectionID;
+                NewStatsItemScript.PlayerSteamID = player.PlayerSteamID;
+                
+                NewStatsItemScript.SetPlayerStats(player.wins);
+
+                // NewPlayerStatsItem.transform.SetParent(statsList.transform);
 
                 PlayerStatsItems.Add(NewStatsItemScript);
+
+                if (NewPlayerStatsItem == null)
+                {
+                    Debug.Log("stats item is null");
+                }
 
                 NetworkServer.Spawn(NewPlayerStatsItem);
             }
