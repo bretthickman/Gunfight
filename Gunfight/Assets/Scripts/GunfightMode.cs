@@ -189,8 +189,8 @@ public class GunfightMode : CompetitiveGameMode
         }
     }
 
-    [ClientRpc]
-    public override void RpcStatsList()
+    // [ClientRpc]
+    public override void StatsList()
     {
         if (PlayerStatsItems.Count != 2)
         {
@@ -218,6 +218,8 @@ public class GunfightMode : CompetitiveGameMode
                 NewTeamStatsItem.transform.SetParent(statsList.transform);
 
                 PlayerStatsItems.Add(NewStatsItemScript);
+
+                NetworkServer.Spawn(NewTeamStatsItem);
             }
         }
         else

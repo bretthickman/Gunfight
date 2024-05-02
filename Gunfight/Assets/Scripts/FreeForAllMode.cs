@@ -120,8 +120,8 @@ public class FreeForAllMode : CompetitiveGameMode
         }
     }
 
-    [ClientRpc]
-    public override void RpcStatsList()
+    // [ClientRpc]
+    public override void StatsList()
     {
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
@@ -150,6 +150,8 @@ public class FreeForAllMode : CompetitiveGameMode
                 NewPlayerStatsItem.transform.SetParent(statsList.transform);
 
                 PlayerStatsItems.Add(NewStatsItemScript);
+
+                NetworkServer.Spawn(NewPlayerStatsItem);
             }
             else
             {
