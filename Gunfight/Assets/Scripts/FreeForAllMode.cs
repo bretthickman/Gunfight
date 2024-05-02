@@ -132,7 +132,7 @@ public class FreeForAllMode : CompetitiveGameMode
                 NewStatsItemScript.ConnectionID = player.ConnectionID;
                 NewStatsItemScript.PlayerSteamID = player.PlayerSteamID;
                 
-                //NewStatsItemScript.SetPlayerStats(player.wins);
+                NewStatsItemScript.SetPlayerStats(player.wins);
 
                 GameObject canvas = GameObject.Find("Canvas");
                 // gets the Teams object in the RoundStats object
@@ -166,6 +166,7 @@ public class FreeForAllMode : CompetitiveGameMode
                     PlayerStatsItemScript.SetPlayerStats(player.wins);
                     // set for the client
                     RpcSetStatsList(player.ConnectionID, player.wins);
+                    break;
                 }
             }
         }
@@ -179,6 +180,7 @@ public class FreeForAllMode : CompetitiveGameMode
             if (PlayerStatsItemScript.ConnectionID == cID)
             {
                 PlayerStatsItemScript.SetPlayerStats(wins);
+                break;
             }
         }
     }

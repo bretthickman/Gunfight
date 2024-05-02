@@ -263,6 +263,7 @@ public class GunfightMode : CompetitiveGameMode
             if (TeamStatsScript.Team == team)
             {
                 TeamStatsScript.SetTeamStats(wins, TeamStatsScript.PlayerIcon.color);
+                break;
             }
         }
     }

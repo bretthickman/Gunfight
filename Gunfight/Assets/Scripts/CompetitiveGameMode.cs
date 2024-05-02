@@ -179,12 +179,8 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
                     gameModeUIController.RpcShowRoundStats(true, roundString);
                     if (currentRound == 1)
-                    {
                         RpcInitStatsList(); // initialize player stats
-                        SetStatsList();
-                    }
-                    else
-                        SetStatsList();
+                    SetStatsList();
 
                     if (useCards)
                     {
