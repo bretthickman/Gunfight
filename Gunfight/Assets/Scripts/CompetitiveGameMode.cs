@@ -83,6 +83,10 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         // setup for round
         RpcResetGame();
         currentRound++; // increase round count
+        if (currentRound == 1)
+        {
+            RpcInitStatsList(); // initialize player stats
+        }
         Debug.Log("Round started: " + currentRound);
     }
 
@@ -178,8 +182,8 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
                     gameModeUIController.RpcShowRoundStats(true, roundString);
-                    if (currentRound == 1)
-                        RpcInitStatsList(); // initialize player stats
+                    // if (currentRound == 1)
+                    //     RpcInitStatsList(); // initialize player stats
                     SetStatsList();
 
                     if (useCards)
