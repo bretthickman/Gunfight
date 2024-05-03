@@ -154,7 +154,7 @@ public class FreeForAllMode : CompetitiveGameMode
         }
     }
 
-    public override void SetStatsList()
+    public override IEnumerator SetStatsList()
     {
         // sets for the server
         foreach (PlayerObjectController player in Manager.GamePlayers)
@@ -165,11 +165,15 @@ public class FreeForAllMode : CompetitiveGameMode
                 {
                     PlayerStatsItemScript.SetPlayerStats(player.wins);
                     // set for the client
+                    Debug.Log("Before rpc");
                     RpcSetStatsList(player.ConnectionID, player.wins);
+                    Debug.Log("After rpc");
                     break;
                 }
             }
         }
+
+        yield return null;
     }
 
     [ClientRpc]

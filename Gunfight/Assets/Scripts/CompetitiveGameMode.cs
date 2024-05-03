@@ -54,7 +54,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
     public abstract void RpcInitStatsList();
-    public abstract void SetStatsList();
+    public abstract IEnumerator SetStatsList();
     public abstract void PlayerQuit();
 
     private CustomNetworkManager Manager
@@ -83,10 +83,6 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         // setup for round
         RpcResetGame();
         currentRound++; // increase round count
-        if (currentRound == 1)
-        {
-            RpcInitStatsList(); // initialize player stats
-        }
         Debug.Log("Round started: " + currentRound);
     }
 
@@ -112,16 +108,22 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
 
             // reset doors
             doors = GameObject.Find("doors");
-            foreach (Door child in doors.GetComponentsInChildren<Door>())
+            if (doors != null)
             {
-                child.RpcResetDoor();
+                foreach (Door child in doors.GetComponentsInChildren<Door>())
+                {
+                    child.RpcResetDoor();
+                }
             }
 
-            // resets brken walls
+            // resets broken walls
             walls = GameObject.Find("Interactables");
-            foreach (Wall child in walls.GetComponentsInChildren<Wall>())
+            if (walls != null)
             {
-                child.RpcResetWall();
+                foreach (Wall child in walls.GetComponentsInChildren<Wall>())
+                {
+                    child.RpcResetWall();
+                }
             }
             
             aliveNum = playerCount;
@@ -182,9 +184,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
                     gameModeUIController.RpcShowRoundStats(true, roundString);
-                    // if (currentRound == 1)
-                    //     RpcInitStatsList(); // initialize player stats
-                    SetStatsList();
+                    if (currentRound == 1)
+                    {
+                        RpcInitStatsList(); // initialize player stats
+                    }
+                    yield return StartCoroutine(SetStatsList());
 
                     if (useCards)
                     {

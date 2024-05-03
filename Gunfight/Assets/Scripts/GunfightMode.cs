@@ -236,7 +236,7 @@ public class GunfightMode : CompetitiveGameMode
         // }
     }
 
-    public override void SetStatsList()
+    public override IEnumerator SetStatsList()
     {
         // sets for the server
         foreach(PlayerStatsItem TeamStatsScript in PlayerStatsItems)
@@ -252,6 +252,7 @@ public class GunfightMode : CompetitiveGameMode
                 RpcSetStatsList(2, teamWins[1]);
             }
         }
+        yield return null;
     }
 
     [ClientRpc]
