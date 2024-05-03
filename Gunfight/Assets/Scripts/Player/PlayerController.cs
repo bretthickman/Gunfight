@@ -7,6 +7,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -96,6 +97,9 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] private GameObject ammo;
     public string skinCategory;
 
+    [SerializeField] private float xMovement = 0;
+    [SerializeField] private float yMovement = 0;
+
     public void SwitchBodySprite(int index)
     {
        bodySpriteLibrary.spriteLibraryAsset = bodySpriteLibraryArray[index];
@@ -129,9 +133,46 @@ public class PlayerController : NetworkBehaviour, IDamageable
         {
             if (isLocalPlayer)
             {
-                Movement();
+                Vector3 mousePosition = Input.mousePosition;
+                if (cam != null)
+                    mousePosition = cam.ScreenToWorldPoint(mousePosition);
+
+                if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
+                    (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
+                {
+                    CmdFlipPlayer(spriteRendererBody.flipX);
+                }
+
+                Vector2 direction = (mousePosition - weapon.transform.position).normalized;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                weapon.transform.eulerAngles = new Vector3(0, 0, angle);
+
+                Vector3 moveDirection = new Vector3(xMovement, yMovement, 0.0f);
+                //animate player running if they are moving
+                if (moveDirection != new Vector3(0, 0, 0))
+                {
+                    playerAnimator.SetBool("isRunning", true);
+                }
+                else
+                {
+                    playerAnimator.SetBool("isRunning", false);
+                }
+                //apply the movement
+                rb.MovePosition(transform.position + moveDirection *
+                                weaponInfo.speedOfPlayer *
+                                Time.deltaTime);
+                Physics2D.SyncTransforms();
             }
         }
+    }
+
+    void OnMove(InputValue value)
+    {
+        Vector2 movementVector = value.Get<Vector2>();
+
+        xMovement = movementVector.x;
+        yMovement = movementVector.y;
+ 
     }
 
     private void Update()
@@ -152,54 +193,58 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
             if (isLocalPlayer)
             {
-                // Check if you are firing your weapon and if the cooldown is 0
-                if (Input.GetButtonDown("Fire1") && cooldownTimer <= 0f)
-                {
-                    // Camera Shake
-                    if (weaponInfo.nAmmo > 0)
-                        CameraShaker.ShootCameraShake(5.0f);
-
-                    // Start firing if the fire button is pressed down and this weapon is automatic
-                    if (weaponInfo.isAuto)
-                    {
-                        // Set the isFiring flag to true and start firing
-                        isFiring = true;
-                        StartCoroutine(ContinuousFire());
-                    }
-                    else
-                    {
-                        // Fire a single shot
-                        cooldownTimer = weaponInfo.cooldown;
-                        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-                        CmdShoot(shootPoint.position, shootPoint.rotation);
-                    }
-                }
-                else if (Input.GetButtonUp("Fire1") && weaponInfo.isAuto)
-                {
-                    // Stop firing if the fire button is released and this weapon is automatic
-                    isFiring = false;
-                    StopCoroutine(ContinuousFire());
-                }
-
-                // used for testing - kill yourself
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    health = 0;
-                    RpcDie();
-                    playerAnimator.SetBool("isDead", true);
-                    SendPlayerDeath();
-                }
-
-                // to be able to interact with the doors by pressing e
-                if (playerColliders.canActivateDoor && Input.GetKeyDown(KeyCode.E))
-                {
-                    playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
-                }
-
                 // updates weapon cooldown timer
                 cooldownTimer -= Time.deltaTime;
                 if (cooldownTimer < 0) cooldownTimer = 0;
             }
+        }
+    }
+
+    void OnShoot(InputValue value)
+    {
+        // Check if you are firing your weapon and if the cooldown is 0
+        if (value.isPressed && cooldownTimer <= 0f)
+        {
+            // Camera Shake
+            if (weaponInfo.nAmmo > 0)
+                CameraShaker.ShootCameraShake(5.0f);
+
+            // Start firing if the fire button is pressed down and this weapon is automatic
+            if (weaponInfo.isAuto)
+            {
+                // Set the isFiring flag to true and start firing
+                isFiring = true;
+                StartCoroutine(ContinuousFire());
+            }
+            else
+            {
+                // Fire a single shot
+                cooldownTimer = weaponInfo.cooldown;
+                Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                CmdShoot(shootPoint.position, shootPoint.rotation);
+            }
+        }
+        else if (!value.isPressed && weaponInfo.isAuto)
+        {
+            // Stop firing if the fire button is released and this weapon is automatic
+            isFiring = false;
+            StopCoroutine(ContinuousFire());
+        }
+    }
+
+    void OnSuicide()
+    {
+        health = 0;
+        RpcDie();
+        playerAnimator.SetBool("isDead", true);
+        SendPlayerDeath();
+    }
+
+    void OnInteract()
+    {
+        if (playerColliders.canActivateDoor)
+        {
+            playerColliders.OtherCollider.GetComponent<Door>().RpcActivateDoor();
         }
     }
 
@@ -235,42 +280,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         team = poc.PlayerIdNumber-1;
         GetComponent<PlayerWeaponController>().team = team;
-    }
-
-    public void Movement()
-    {
-        float xDirection = Input.GetAxis("Horizontal");
-        float yDirection = Input.GetAxis("Vertical");
-
-        Vector3 mousePosition = Input.mousePosition;
-        if(cam != null)
-            mousePosition = cam.ScreenToWorldPoint(mousePosition);
-
-        if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
-            (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
-        {
-            CmdFlipPlayer(spriteRendererBody.flipX);
-        }
-
-        Vector2 direction = (mousePosition - weapon.transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        weapon.transform.eulerAngles = new Vector3(0, 0, angle);
-
-        Vector3 moveDirection = new Vector3(xDirection, yDirection, 0.0f);
-        //animate player running if they are moving
-        if(moveDirection != new Vector3(0, 0, 0))
-        {
-            playerAnimator.SetBool("isRunning", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("isRunning", false);
-        }
-        //apply the movement
-        rb.MovePosition(transform.position + moveDirection *
-                        weaponInfo.speedOfPlayer *
-                        Time.deltaTime);
-        Physics2D.SyncTransforms();
     }
 
     [Command]
