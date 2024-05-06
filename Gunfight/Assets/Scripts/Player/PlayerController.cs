@@ -131,48 +131,54 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         if (SceneManager.GetActiveScene().name != "Lobby")
         {
-            if (isLocalPlayer)
-            {
-                Vector3 mousePosition = Input.mousePosition;
-                if (cam != null)
-                    mousePosition = cam.ScreenToWorldPoint(mousePosition);
-
-                if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
-                    (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
-                {
-                    CmdFlipPlayer(spriteRendererBody.flipX);
-                }
-
-                Vector2 direction = (mousePosition - weapon.transform.position).normalized;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                weapon.transform.eulerAngles = new Vector3(0, 0, angle);
-
-                Vector3 moveDirection = new Vector3(xMovement, yMovement, 0.0f);
-                //animate player running if they are moving
-                if (moveDirection != new Vector3(0, 0, 0))
-                {
-                    playerAnimator.SetBool("isRunning", true);
-                }
-                else
-                {
-                    playerAnimator.SetBool("isRunning", false);
-                }
-                //apply the movement
-                rb.MovePosition(transform.position + moveDirection *
-                                weaponInfo.speedOfPlayer *
-                                Time.deltaTime);
-                Physics2D.SyncTransforms();
-            }
+            movement();
         }
     }
 
     void OnMove(InputValue value)
     {
-        Vector2 movementVector = value.Get<Vector2>();
+        Debug.Log("Moving");
+        //Vector2 movementVector = value.Get<Vector2>();
 
-        xMovement = movementVector.x;
-        yMovement = movementVector.y;
+        xMovement = value.Get<Vector2>().x;
+        yMovement = value.Get<Vector2>().y;
  
+    }
+
+    private void movement()
+    {
+        if (isLocalPlayer)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            if (cam != null)
+                mousePosition = cam.ScreenToWorldPoint(mousePosition);
+
+            if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
+                (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
+            {
+                CmdFlipPlayer(spriteRendererBody.flipX);
+            }
+
+            Vector2 direction = (mousePosition - weapon.transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            weapon.transform.eulerAngles = new Vector3(0, 0, angle);
+
+            Vector3 moveDirection = new Vector3(xMovement, yMovement, 0.0f);
+            //animate player running if they are moving
+            if (moveDirection != new Vector3(0, 0, 0))
+            {
+                playerAnimator.SetBool("isRunning", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("isRunning", false);
+            }
+            //apply the movement
+            rb.MovePosition(transform.position + moveDirection *
+                            weaponInfo.speedOfPlayer *
+                            Time.deltaTime);
+            Physics2D.SyncTransforms();
+        }
     }
 
     private void Update()
