@@ -99,6 +99,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     [SerializeField] private float xMovement = 0;
     [SerializeField] private float yMovement = 0;
+    [SerializeField] private float xMousePos = 0;
+    [SerializeField] private float yMousePos = 0;
 
     public void SwitchBodySprite(int index)
     {
@@ -149,7 +151,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         if (isLocalPlayer)
         {
-            Vector3 mousePosition = Input.mousePosition;
+            Vector3 mousePosition = new Vector3(xMousePos, yMousePos, 0);
             if (cam != null)
                 mousePosition = cam.ScreenToWorldPoint(mousePosition);
 
@@ -236,6 +238,12 @@ public class PlayerController : NetworkBehaviour, IDamageable
             isFiring = false;
             StopCoroutine(ContinuousFire());
         }
+    }
+
+    void OnMousePos(InputValue value)
+    {
+        xMousePos = value.Get<Vector2>().x;
+        yMousePos = value.Get<Vector2>().y;
     }
 
     void OnSuicide()
