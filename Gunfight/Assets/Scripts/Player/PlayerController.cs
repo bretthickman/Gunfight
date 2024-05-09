@@ -97,6 +97,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] private GameObject ammo;
     public string skinCategory;
 
+    // data obtained from new input system
     [SerializeField] private float xMovement = 0;
     [SerializeField] private float yMovement = 0;
     [SerializeField] private float xMousePos = 0;
@@ -228,7 +229,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
             {
                 // Fire a single shot
                 cooldownTimer = weaponInfo.cooldown;
-                Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                //Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos = cam.ScreenToWorldPoint(new Vector2(xMousePos, yMousePos));
                 CmdShoot(shootPoint.position, shootPoint.rotation);
             }
         }
@@ -268,7 +270,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
         {
             // Fire a shot and wait for the cooldown timer to expire
             cooldownTimer = weaponInfo.cooldown;
-            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            //Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = cam.ScreenToWorldPoint(new Vector2(xMousePos, yMousePos));
             CmdShoot(shootPoint.position, shootPoint.rotation);
             if (weaponInfo.nAmmo > 0)
                 CameraShaker.ShootCameraShake(5.0f);
