@@ -41,6 +41,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public GameObject boxes; // parent game object of boxes in map
     public GameObject doors; // parent game object of doors in map
     public GameObject walls; // parent game bobject of destroyable walls in map
+    public GameObject fountain;
 
     public GameObject PlayerStatsItemPrefab; 
     public List<PlayerStatsItem> PlayerStatsItems = new List<PlayerStatsItem>();
@@ -124,6 +125,12 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                 {
                     child.RpcResetWall();
                 }
+            }
+
+            fountain = GameObject.Find("fountain");
+            if (fountain != null)
+            {
+                fountain.GetComponent<Fountain>().ResetHealth();
             }
             
             aliveNum = playerCount;

@@ -9,7 +9,7 @@ TagManager:
   - destroy
   - Enemy
   - Door
-  - Health
+  - Stele
   layers:
   - Default
   - TransparentFX

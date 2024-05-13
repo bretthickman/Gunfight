@@ -20,6 +20,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public int grenades;
 
     public bool hasSpawned = false;
+    
+    public bool hasTeleported = false;
 
     public Rigidbody2D rb;
 
@@ -48,6 +50,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary bodySpriteLibrary;
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
+
+    public Material healMat;
+    public Material portalMat;
+    public Material defaultMat;
 
     //Shooting
     public Transform shootPoint;
@@ -196,10 +202,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
                     if (playerColliders.canActivateDoor)
                     {
                         playerColliders.OtherCollider.GetComponent<Door>().ActivateDoor();
-                    }
-                    else if (playerColliders.canHeal)
-                    {
-                        Heal();
                     }
                 }
 
@@ -474,9 +476,48 @@ public class PlayerController : NetworkBehaviour, IDamageable
         spriteRendererBody.enabled = true;
     }
 
-    public void Heal()
+    public IEnumerator Heal(Fountain fountain)
     {
-        Debug.Log("Player healed");
-        health = 10f;
+        // heals player if there is enough hp in the fountain
+        // CmdPlayerMat(2);
+        Debug.Log("Player healing");
+        while (health < 10 && fountain.canHeal && fountain.active)
+        {
+            health += 1;
+            fountain.CmdHealPlayer();
+            yield return new WaitForSeconds(1);
+        }
+        Debug.Log("Player done healing");
+        // CmdPlayerMat(0);
+    }
+
+    [Command]
+    public void CmdPlayerMat(int num)
+    {
+        RpcPlayerMat(num);
+    }
+
+    [ClientRpc]
+    public void RpcPlayerMat(int num)
+    {
+        if (num == 0)
+        {
+            spriteRendererBody.material = defaultMat;
+            spriteRendererEyes.material = defaultMat;
+            spriteRendererHair.material = defaultMat;
+        }
+        else if (num == 1)
+        {
+            spriteRendererBody.material = portalMat;
+            spriteRendererEyes.material = portalMat;
+            spriteRendererHair.material = portalMat;
+        }
+        else if (num == 2)
+        {
+            spriteRendererBody.material = healMat;
+            spriteRendererEyes.material = healMat;
+            spriteRendererHair.material = healMat;
+        }
+        
     }
 }

@@ -504,6 +504,7 @@ MonoBehaviour:
   weapon: {fileID: 2193073436725340088}
   grenades: 0
   hasSpawned: 0
+  hasTeleported: 0
   rb: {fileID: 1413340315125450619}
   cam: {fileID: 0}
   poc: {fileID: 8544065240725089489}
@@ -530,6 +531,9 @@ MonoBehaviour:
   bodySpriteLibrary: {fileID: 3456257574426234691}
   hairSpriteLibrary: {fileID: 3939430506089779646}
   eyesSpriteLibrary: {fileID: 1733680272197160501}
+  healMat: {fileID: 2100000, guid: b2784121d7122d3448addb977b6cd349, type: 2}
+  portalMat: {fileID: 2100000, guid: fdea34907afe14e46935dba9aa632b9d, type: 2}
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   shootPoint: {fileID: 2953357421772792125}
   cooldownTimer: 0
   isFiring: 0
