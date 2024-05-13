@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Portal : MonoBehaviour
+public class Portal : NetworkBehaviour
 {
     [SerializeField] private Transform endPos;
     [SerializeField] private GameObject text;
