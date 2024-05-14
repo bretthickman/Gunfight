@@ -281,22 +281,22 @@ public class PlayerController : NetworkBehaviour, IDamageable
         {
             if(poc.PlayerIdNumber < teamPid)
             {
-                transform.position = spawnPoints[1].position;
+                transform.position = spawnPoints[0].position;
             }
             else
             {
-                transform.position = spawnPoints[2].position;
+                transform.position = spawnPoints[1].position;
             }
         }
         else
         {
             if (poc.PlayerIdNumber < teamPid)
             {
-                transform.position = spawnPoints[0].position;
+                transform.position = spawnPoints[2].position;
             }
             else
             {
-                transform.position = spawnPoints[4].position;
+                transform.position = spawnPoints[3].position;
             }
         }
     }
