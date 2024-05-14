@@ -242,6 +242,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
                     // Set the position based on the PlayerIdNumber
                     transform.position = spawnPoints[playerId - 1].position;
+                    Debug.Log("Spawning in pos " + (playerId - 1));
                     break;
                 }
             case FreeForAllMode:
@@ -253,6 +254,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
                     // Set the position based on the PlayerIdNumber
                     transform.position = spawnPoints[playerId - 1].position;
+                    Debug.Log("Spawning in pos " + (playerId - 1));
                     break;
                 }
             case GunfightMode:
@@ -279,24 +281,28 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         if(poc.Team == 1)
         {
-            if(poc.PlayerIdNumber < teamPid)
+            if(poc.PlayerIdNumber < teamPid || teamPid == -1)
             {
                 transform.position = spawnPoints[0].position;
+                Debug.Log("Spawning in pos 0");
             }
             else
             {
                 transform.position = spawnPoints[1].position;
+                Debug.Log("Spawning in pos 1");
             }
         }
         else
         {
-            if (poc.PlayerIdNumber < teamPid)
+            if (poc.PlayerIdNumber < teamPid || teamPid == -1)
             {
                 transform.position = spawnPoints[2].position;
+                Debug.Log("Spawning in pos 2");
             }
             else
             {
                 transform.position = spawnPoints[3].position;
+                Debug.Log("Spawning in pos 3");
             }
         }
     }
