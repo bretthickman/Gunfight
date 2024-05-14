@@ -96,6 +96,20 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] private GameObject ammo;
     public string skinCategory;
 
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager
+    {
+        get
+        {
+            if (manager != null)
+            {
+                return manager;
+            }
+            return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+        }
+    }
+
     public void SwitchBodySprite(int index)
     {
        bodySpriteLibrary.spriteLibraryAsset = bodySpriteLibraryArray[index];
@@ -217,16 +231,74 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public void SetPosition()
     {
-        // Determine the spawn points based on the game mode
-        Transform[] spawnPoints = GameModeManager.Instance.currentGameMode is not SurvivalMode
-            ? MapManager.Instance.FFASpawnPoints
-            : MapManager.Instance.SPSpawnPoints;
+        switch (GameModeManager.Instance.currentGameMode)
+        {
+            case SurvivalMode:
+                {
+                    Transform[] spawnPoints = MapManager.Instance.SPSpawnPoints;
 
-        // Ensure that PlayerIdNumber is within a valid range
-        int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
+                    // Ensure that PlayerIdNumber is within a valid range
+                    int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
 
-        // Set the position based on the PlayerIdNumber
-        transform.position = spawnPoints[playerId - 1].position;
+                    // Set the position based on the PlayerIdNumber
+                    transform.position = spawnPoints[playerId - 1].position;
+                    break;
+                }
+            case FreeForAllMode:
+                {
+                    Transform[] spawnPoints = MapManager.Instance.FFASpawnPoints;
+
+                    // Ensure that PlayerIdNumber is within a valid range
+                    int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
+
+                    // Set the position based on the PlayerIdNumber
+                    transform.position = spawnPoints[playerId - 1].position;
+                    break;
+                }
+            case GunfightMode:
+                {
+                    SetPositionGF();
+                    break;
+                }
+        }
+    }
+
+    public void SetPositionGF()
+    {
+        Transform[] spawnPoints = MapManager.Instance.GFSpawnPoints;
+
+        int teamPid = -1;
+        // get teammates pid
+        foreach(PlayerObjectController p in Manager.GamePlayers)
+        {
+            if(p.PlayerIdNumber != poc.PlayerIdNumber && p.Team == poc.Team)
+            {
+                teamPid = p.PlayerIdNumber;
+            }
+        }
+
+        if(poc.Team == 1)
+        {
+            if(poc.PlayerIdNumber < teamPid)
+            {
+                transform.position = spawnPoints[1].position;
+            }
+            else
+            {
+                transform.position = spawnPoints[2].position;
+            }
+        }
+        else
+        {
+            if (poc.PlayerIdNumber < teamPid)
+            {
+                transform.position = spawnPoints[0].position;
+            }
+            else
+            {
+                transform.position = spawnPoints[4].position;
+            }
+        }
     }
 
     public void SetTeam()

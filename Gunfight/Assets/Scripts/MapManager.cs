@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
 
     public Transform[] FFASpawnPoints;
     public Transform[] SPSpawnPoints;
+    public Transform[] GFSpawnPoints;
     public int mapWidth;
     public int mapHeight;
     // this is used to make up difference between 

@@ -15,7 +15,6 @@ public class GunfightMode : CompetitiveGameMode
     [SerializeField] private int weaponSpawnOffest = 2;
 
 
-    // not sure if having this in subclass will break it
     private CustomNetworkManager Manager
     {
         get
@@ -83,6 +82,8 @@ public class GunfightMode : CompetitiveGameMode
                 }
             }
         }
+
+        Debug.Log("Team 1 alive = " + teamOneAlive + "; Team 2 alive = " + teamTwoALive);
 
         if (teamOneAlive == 0 || teamTwoALive == 0)
         {
@@ -186,7 +187,7 @@ public class GunfightMode : CompetitiveGameMode
     public override void SpawnWeaponsInGame()
     {
         GameObject newWeapon = weaponSpawnOrder[currentRound];
-        WeaponInfo newWeaponInfo = newWeapon.GetComponent<WeaponInfo>();
+        //WeaponInfo newWeaponInfo = newWeapon.GetComponent<WeaponInfo>();
 
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
         foreach (PlayerObjectController player in Manager.GamePlayers)
