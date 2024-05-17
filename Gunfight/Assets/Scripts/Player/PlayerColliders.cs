@@ -20,11 +20,6 @@ public class PlayerColliders : MonoBehaviour
             canActivateDoor = true;
             OtherCollider = other;
         }
-        else if (other.CompareTag("Stele"))
-        {
-            OtherCollider = other;
-            other.gameObject.GetComponent<Stele>().TurnOnText(true);
-        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -36,10 +31,6 @@ public class PlayerColliders : MonoBehaviour
         else if (other.CompareTag("Door"))
         {
             canActivateDoor = false;
-        }
-        else if (other.CompareTag("Stele"))
-        {
-            other.gameObject.GetComponent<Stele>().TurnOnText(false);
         }
     }
 
@@ -55,11 +46,6 @@ public class PlayerColliders : MonoBehaviour
         {
             OtherCollider = other;
             canActivateDoor = true;
-        }
-        else if (other.CompareTag("Stele"))
-        {
-            OtherCollider = other;
-            //other.gameObject.GetComponent<Stele>().TurnOnText(true);
         }
     }
 }

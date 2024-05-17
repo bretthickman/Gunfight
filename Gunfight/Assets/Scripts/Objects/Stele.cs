@@ -7,14 +7,34 @@ public class Stele : NetworkBehaviour
 {
     [SerializeField] private GameObject text;
     [SerializeField] private Collider2D OtherCollider;
-    // when player gets close to stele, sound will play for nearby players
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        OtherCollider = other;
+        if (OtherCollider.CompareTag("Player"))
+        {
+            TurnOnText(true);
+        }
+    }
 
     public void TurnOnText(bool tOrF)
     {
-        Debug.Log("Changing stele text");
         text.SetActive(tOrF);
-        // it is set to active but not showing, need to debug
+        if (tOrF)
+            RpcSteleSound();
     }
 
+    [ClientRpc]
+    public void RpcSteleSound()
+    {
+        Debug.Log("Player near stele");
+    }
 
+     void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            TurnOnText(false);
+        }
+    }
 }

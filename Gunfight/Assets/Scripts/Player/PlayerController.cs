@@ -479,7 +479,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public IEnumerator Heal(Fountain fountain)
     {
         // heals player if there is enough hp in the fountain
-        // CmdPlayerMat(2);
+        CmdPlayerMat(2);
         Debug.Log("Player healing");
         while (health < 10 && fountain.canHeal && fountain.active)
         {
@@ -488,7 +488,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
             yield return new WaitForSeconds(1);
         }
         Debug.Log("Player done healing");
-        // CmdPlayerMat(0);
+        CmdPlayerMat(0);
     }
 
     [Command]

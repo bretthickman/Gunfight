@@ -11,7 +11,6 @@ public class Portal : NetworkBehaviour
     public bool leftPortal = false;
     [SerializeField] private Collider2D OtherCollider;
     // player enters outer collider, text starts to get brighter as they get closer to portal
-    // player has glitch shader while it is in the center of the portal
     
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,7 +23,7 @@ public class Portal : NetworkBehaviour
         }
         else // if the player didnt just teleport
         {
-            text.SetActive(true);
+            //text.SetActive(true);
             canPortal = true;
             StartCoroutine(TeleportPlayer());
         }
@@ -37,7 +36,7 @@ public class Portal : NetworkBehaviour
         {
             player.hasTeleported = false;
         }
-        text.SetActive(false);
+        //text.SetActive(false);
         leftPortal = true;
         canPortal = false;
     }
@@ -50,7 +49,7 @@ public class Portal : NetworkBehaviour
     public IEnumerator TeleportPlayer()
     {
         GameObject player = OtherCollider.gameObject;
-        // player.GetComponent<PlayerController>().CmdPlayerMat(1);
+        player.GetComponent<PlayerController>().CmdPlayerMat(1);
         yield return new WaitForSeconds(1f);
         if (canPortal && !player.GetComponent<PlayerController>().hasTeleported)
         {
@@ -58,7 +57,7 @@ public class Portal : NetworkBehaviour
             player.GetComponent<Transform>().position = endPos.position;
             Debug.Log("Player is teleporting");
             player.GetComponent<PlayerController>().hasTeleported = true;
-            // player.GetComponent<PlayerController>().CmdPlayerMat(0);
+            player.GetComponent<PlayerController>().CmdPlayerMat(0);
         }
     }
 }
