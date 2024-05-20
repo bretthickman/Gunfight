@@ -35,6 +35,7 @@ public class GunfightMode : CompetitiveGameMode
         hasGameStarted = true;
         GetTeamPlayers();
         GenerateWeaponSpawnOrder();
+        Debug.Log("WHERE AM I??");
         StartRound(); // starts the first round after Awake
     }
 

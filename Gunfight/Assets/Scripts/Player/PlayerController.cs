@@ -550,4 +550,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
         spriteRendererBody.enabled = true;
         isFiring = false; // prevents bug where you spawn in shooting if you were shooting at round end
     }
+
+    [Command]
+    public void CmdNotifyResetComplete()
+    {
+        GameModeManager.Instance.currentGameMode.PlayerResetComplete();
+    }
 }

@@ -39,6 +39,8 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public int currentRound = 0; // keeps track of the current round
     public int totalRounds = 9999; // keeps track of total amount of rounds
 
+    private int playersResetCount = 0;
+
     public bool quitClicked = false;
 
     private CustomNetworkManager Manager
@@ -475,5 +477,14 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     public void SetQuitClicked(bool b)
     {
         this.quitClicked = b;
+    }
+
+    public void PlayerResetComplete()
+    {
+        playersResetCount++;
+        if (playersResetCount >= Manager.GamePlayers.Count)
+        {
+            SpawnWeaponsInGame();
+        }
     }
 }

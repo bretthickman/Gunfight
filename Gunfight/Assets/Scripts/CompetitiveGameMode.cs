@@ -37,6 +37,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     private int winningCard;
     public bool useCards = true;
 
+    private int playersResetCount = 0;
 
     public abstract string FindWinner();
     public abstract string FindOverallWinner();
@@ -71,9 +72,9 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             return;
         }
+        playersResetCount = 0;
         // setup for round
         RpcResetGame();
-        SpawnWeaponsInGame();
         currentRound++; // increase round count
         Debug.Log("Round started: " + currentRound);
     }
@@ -87,8 +88,8 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         if (!CheckOverallWin()) // if there is not an overall winner
         {
             DeleteWeaponsInGame();
-            if (isServer)
-                RpcResetGame();
+            //if (isServer)
+                //RpcResetGame();
             //SpawnWeaponsInGame();
             aliveNum = playerCount;
             StartRound();
@@ -328,9 +329,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         // Call the reset function for all players
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
+            Debug.Log(player.name + "running");
             player.GetComponent<PlayerController>().enabled = true;
             player.GetComponent<PlayerController>().Respawn();
             player.isAlive = true;
+            player.GetComponent<PlayerController>().CmdNotifyResetComplete();
         }
     }
 
@@ -356,5 +359,15 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         controller.isFiring = false;
 
         Debug.Log("Assigned player " + player + " weapon " + weapon);
+    }
+
+    public void PlayerResetComplete()
+    {
+       playersResetCount++;
+       if (playersResetCount >= Manager.GamePlayers.Count)
+       {
+            Debug.Log("SPAWNING");
+            SpawnWeaponsInGame();
+       }
     }
 }

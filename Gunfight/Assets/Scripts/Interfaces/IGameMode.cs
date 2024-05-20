@@ -28,4 +28,6 @@ public interface IGameMode
     void SetAliveNum(int num);
     void SetTotalRounds(int totalRounds);
     void SetQuitClicked(bool b);
+
+    void PlayerResetComplete();
 }
