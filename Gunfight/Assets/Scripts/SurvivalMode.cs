@@ -41,7 +41,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     private int playersResetCount = 0;
 
-    public bool quitClicked = false;
+    //public bool quitClicked = false;
 
     private CustomNetworkManager Manager
     {
@@ -275,10 +275,6 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         int count = 3;
         while (count > 0)
         {
-            if (quitClicked)
-            {
-                break;
-            }
             yield return new WaitForSeconds(1f);
             count--;
         }
@@ -296,8 +292,8 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         // quits back to the lobby
         // gameModeUIController.StopDisplayQuitButton();
-        gameModeUIController.RpcShowRoundPanel(false, "", "");
-        quitClicked = false;
+        // gameModeUIController.RpcShowRoundPanel(false, "", "");
+        // quitClicked = false;
         ToLobby();
     }
 
@@ -474,10 +470,10 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         this.currentNumberOfEnemies--;
     }
 
-    public void SetQuitClicked(bool b)
-    {
-        this.quitClicked = b;
-    }
+    //public void SetQuitClicked(bool b)
+    //{
+    //    this.quitClicked = b;
+    //}
 
     public void PlayerResetComplete()
     {

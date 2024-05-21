@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525261875721305552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 0.78, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 541289f96b303d8488c203b963759090, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,8 +103,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -495451703
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -275475500, guid: 91138232d8d8bcb4c880666628bcb01b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -251,8 +251,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -495451703
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 796384359, guid: 211b3fe75b3631e488efe311bd4cf1b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -366,8 +366,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -495451703
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1149515580, guid: 34f4b4d70ce6ad147a34dbc7d4c3043b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -504,15 +504,18 @@ MonoBehaviour:
   weapon: {fileID: 2193073436725340088}
   grenades: 0
   hasSpawned: 0
+  hasTeleported: 0
   rb: {fileID: 1413340315125450619}
   cam: {fileID: 0}
   poc: {fileID: 8544065240725089489}
+  playerColliders: {fileID: 0}
   team: 0
   spriteRendererBody: {fileID: 4138070861263916406}
   spriteRendererHair: {fileID: 5193927638431786844}
   spriteRendererEyes: {fileID: 896853564567009557}
   weaponSpriteRenderer: {fileID: 2758576559856900219}
   playerAnimator: {fileID: 5901972145879640327}
+  weaponAnimator: {fileID: 2439168923185285290}
   bodySpriteLibraryArray:
   - {fileID: 7108339969198208228, guid: f9dc38415e9dbb24790b48a7d631e2f4, type: 3}
   hairSpriteLibraryArray:
@@ -528,6 +531,9 @@ MonoBehaviour:
   bodySpriteLibrary: {fileID: 3456257574426234691}
   hairSpriteLibrary: {fileID: 3939430506089779646}
   eyesSpriteLibrary: {fileID: 1733680272197160501}
+  healMat: {fileID: 2100000, guid: b2784121d7122d3448addb977b6cd349, type: 2}
+  portalMat: {fileID: 2100000, guid: fdea34907afe14e46935dba9aa632b9d, type: 2}
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   shootPoint: {fileID: 2953357421772792125}
   cooldownTimer: 0
   isFiring: 0
@@ -539,7 +545,7 @@ MonoBehaviour:
   PistolShotSound: {fileID: 8300000, guid: 4e022ae902b32eb4588e274baead6ab2, type: 3}
   UziShotSound: {fileID: 8300000, guid: 0520fa86716ff49e69e4db800e6b1ff6, type: 3}
   SniperShotSound: {fileID: 8300000, guid: cdca17854aa6745dab6eae9ef903ac0d, type: 3}
-  AK47ShotSound: {fileID: 8300000, guid: 741c322a8b5ae4f69824e4ed736d36cd, type: 3}
+  AK47ShotSound: {fileID: 8300000, guid: 23573fbe057b31141b0780dad7864abf, type: 3}
   KnifeSound: {fileID: 8300000, guid: 75058c01873d74297bb76319e6803c5a, type: 3}
   Walk_1: {fileID: 8300000, guid: 1fecaf8ae3f5849df9d3fa07a06db97a, type: 3}
   Walk_2: {fileID: 8300000, guid: b7786aee941134bd9833cacf8f93fc20, type: 3}
@@ -570,11 +576,11 @@ MonoBehaviour:
   team: 0
   player: {fileID: 9202434888575235624}
   weaponSpriteArray:
-  - {fileID: -1752105591, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
-  - {fileID: 1152662933, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
-  - {fileID: 111313637, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
-  - {fileID: 36558117, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
-  - {fileID: 342864996, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
+  - {fileID: 830858286, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
+  - {fileID: 364975699, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
+  - {fileID: -215480600, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
+  - {fileID: 1257106999, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
+  - {fileID: -531105481, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
   spriteArray: []
   playerColliders: {fileID: 1724671187577538036}
   pickupSound: {fileID: 8300000, guid: edfaddaa10fdc554a9084b9f29972f7d, type: 3}
@@ -598,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPickup: 0
+  canActivateDoor: 0
   OtherCollider: {fileID: 0}
 --- !u!114 &759817034069872918
 MonoBehaviour:
@@ -921,6 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5508788199675533766}
   - component: {fileID: 2758576559856900219}
+  - component: {fileID: 2439168923185285290}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -936,7 +944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6527552917168006703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.54, y: 0.095, z: 0}
+  m_LocalPosition: {x: 0.45, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,10 +989,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -495451703
+  m_SortingLayer: 3
   m_SortingOrder: 11
-  m_Sprite: {fileID: 1152662933, guid: a1a6e3a1c5dd069459d39e4d14613bd7, type: 3}
+  m_Sprite: {fileID: 364975699, guid: 1a556bb76324a964ab847ffd86e81992, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -995,3 +1003,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2439168923185285290
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527552917168006703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27cabb60f8f685141b31132994340061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

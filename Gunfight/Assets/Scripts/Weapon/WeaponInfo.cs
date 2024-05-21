@@ -32,7 +32,7 @@ public class WeaponInfo : NetworkBehaviour
         id = WeaponID.Knife;
         nAmmo = 1000;
         damage = 10;
-        range = 0.5f;
+        range = 2f;
         speedOfPlayer = 10;
         cooldown = 0.3f;
         isAuto = false;

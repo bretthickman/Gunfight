@@ -14,7 +14,7 @@ Shader "Hidden/Glow" {
     SubShader {
         Tags { "Queue" = "Transparent" }
         Blend SrcAlpha OneMinusSrcAlpha
-
+        Cull Off 
         Pass {
             CGPROGRAM
             #pragma vertex vert

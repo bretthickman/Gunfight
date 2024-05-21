@@ -37,7 +37,15 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     private int winningCard;
     public bool useCards = true;
 
+    public GameObject boxes; // parent game object of boxes in map
+    public GameObject doors; // parent game object of doors in map
+    public GameObject walls; // parent game bobject of destroyable walls in map
+    public GameObject fountain;
     private int playersResetCount = 0;
+
+    public GameObject PlayerStatsItemPrefab; 
+    public List<PlayerStatsItem> PlayerStatsItems = new List<PlayerStatsItem>();
+    //public GameObject RoundStatsList;
 
     public abstract string FindWinner();
     public abstract string FindOverallWinner();
@@ -46,6 +54,9 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract void ResetOverallGame();
     public abstract bool CheckRoundWinCondition();
     public abstract void InitializeGameMode();
+    public abstract void RpcInitStatsList();
+    public abstract IEnumerator SetStatsList();
+    public abstract void PlayerQuit();
     public abstract bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum);
     public abstract void SpawnWeaponsInGame();
 
@@ -118,12 +129,43 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         if (!CheckOverallWin()) // if there is not an overall winner
         {
             DeleteWeaponsInGame();
-            //if (isServer)
-                //RpcResetGame();
-            //SpawnWeaponsInGame();
+
+
+            // reset boxes
+            boxes = GameObject.Find("Objects");
+            foreach (Box child in boxes.GetComponentsInChildren<Box>())
+            {
+                child.RpcResetBox();
+            }
+
+            // reset doors
+            doors = GameObject.Find("doors");
+            if (doors != null)
+            {
+                foreach (Door child in doors.GetComponentsInChildren<Door>())
+                {
+                    child.RpcResetDoor();
+                }
+            }
+
+            // resets broken walls
+            walls = GameObject.Find("Interactables");
+            if (walls != null)
+            {
+                foreach (Wall child in walls.GetComponentsInChildren<Wall>())
+                {
+                    child.RpcResetWall();
+                }
+            }
+
+            fountain = GameObject.Find("fountain");
+            if (fountain != null)
+            {
+                fountain.GetComponent<Fountain>().ResetHealth();
+            }
+            
             aliveNum = playerCount;
             StartRound();
-            // TODO: Reset Map (pots / boxes)
         }
         else // if there is an overall winner
         {
@@ -131,7 +173,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
             // gameModeUIController.DisplayQuitButton();
             string overallString = "Overall Winner: " + FindOverallWinner();
             string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
-            gameModeUIController.RpcShowRoundPanel(true, overallString, roundString);
+            gameModeUIController.RpcShowEndOfGamePanel(true, overallString, roundString);
             RankingList();
 
             //reset player stats
@@ -175,12 +217,16 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
                     if (useCards)
                     {
                         cardUIController.RpcShowCardPanel(true);
+                        cardUIController.RpcChangeTitle("Choose a card");
                     }
                     
-                    string winnerString = "Winner: " + winner;
                     string roundString = "Round: " + Mathf.Ceil(currentRound).ToString();
-                    gameModeUIController.RpcShowRoundPanel(true, winnerString, roundString);
-                    RankingList(); // displays the rankings
+                    gameModeUIController.RpcShowRoundStats(true, roundString);
+                    if (currentRound == 1)
+                    {
+                        RpcInitStatsList(); // initialize player stats
+                    }
+                    yield return StartCoroutine(SetStatsList());
 
                     if (useCards)
                     {
@@ -205,22 +251,19 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
 
                         // find the card voted the most
                         winningCard = cardManager.FindMaxVote();
+                        cardUIController.RpcChangeTitle("Winning Card");
                         Debug.Log("Winning card: " + winningCard);
 
                         cardUIController.RpcShowWinningCard(winningCard); // only displaying the winning card
                         yield return new WaitForSeconds(5f); // pause to show winning card
+                        cardUIController.RpcShowCardPanel(false);
+                        gameModeUIController.RpcShowRoundStats(false, "");
                     }
                     else // if cards are not being used
                     {
                         yield return new WaitForSeconds(5f);
                     }
 
-                    if (useCards)
-                    {
-                        cardUIController.RpcShowCardPanel(false);
-                    }
-
-                    gameModeUIController.RpcShowRoundPanel(false, "", "");
                     StartCoroutine(PreroundCountdown());
                     yield return new WaitForSeconds(5f);
                 }
@@ -257,13 +300,16 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         int count = 10;
         while (count > 0)
         {
-            if (quitClicked)
-            {
-                break;
-            }
+            // if (quitClicked)
+            // {
+            //     break;
+            // }
+            // Update the countdown text on the UI
+            gameModeUIController.RpcShowTimer(Mathf.Ceil(count).ToString());
             yield return new WaitForSeconds(1f);
             count--;
         }
+        gameModeUIController.RpcStopShowTimer();
         Debug.Log("Quit game");
         ToLobby();
     }
@@ -278,14 +324,14 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     {
         // quits back to the lobby
         // gameModeUIController.StopDisplayQuitButton();
-        gameModeUIController.RpcShowRoundPanel(false, "", "");
-        quitClicked = false;
+        gameModeUIController.RpcShowEndOfGamePanel(false, "", "");
+        // quitClicked = false;
         ToLobby();
     }
 
     public void CheckWinCondition(int oldAliveNum, int newAliveNum)
     {
-        StartCoroutine(DelayedEndRound());
+        GameModeManager.Instance.coroutine = StartCoroutine(DelayedEndRound());
     }
 
     public void DeleteWeaponsInGame()
@@ -333,10 +379,10 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         this.totalRounds = rounds;
     }
 
-    public void SetQuitClicked(bool b)
-    {
-        this.quitClicked = b;
-    }
+    // public void SetQuitClicked(bool b)
+    // {
+    //     this.quitClicked = b;
+    // }
 
     public void DecrementCurrentNumberOfEnemies()
     {

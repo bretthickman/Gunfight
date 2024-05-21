@@ -122,6 +122,22 @@ public class SteamLobby : MonoBehaviour
         SteamMatchmaking.LeaveLobby((CSteamID)CurrentLobbyID);
     }
 
+    public void HideLobby()
+    {
+        if (CurrentLobbyID != 0)
+        {
+            SteamMatchmaking.SetLobbyData((CSteamID)CurrentLobbyID, "hidden", "1");
+        }
+    }
+
+    public void UnhideLobby()
+    {
+        if (CurrentLobbyID != 0)
+        {
+            SteamMatchmaking.SetLobbyData((CSteamID)CurrentLobbyID, "hidden", "0");
+        }
+    }
+
     public void GetLobbiesList()
     {
         if(lobbyIDs.Count > 0) { lobbyIDs.Clear(); }
@@ -145,7 +161,13 @@ public class SteamLobby : MonoBehaviour
         for (int i = 0; i < result.m_nLobbiesMatching; i++)
         {
             CSteamID lobbyID = SteamMatchmaking.GetLobbyByIndex(i);
-            lobbyIDs.Add(lobbyID);
+            string hiddenValue = SteamMatchmaking.GetLobbyData(lobbyID, "hidden");
+
+            if (hiddenValue != "1") // Check if lobby is not hidden
+            {
+                lobbyIDs.Add(lobbyID);
+            }
+
             SteamMatchmaking.RequestLobbyData(lobbyID);
         }
 
@@ -160,8 +182,7 @@ public class SteamLobby : MonoBehaviour
             {
                 SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, manager.maxConnections);
             }
-        }
-        
+        } 
     }
 
     void OnGetLobbyData(LobbyDataUpdate_t result)

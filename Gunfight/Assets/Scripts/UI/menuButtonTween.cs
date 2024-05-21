@@ -5,7 +5,6 @@ public class menuButtonTween : MonoBehaviour
 {
     public float hoverDuration;
     public float hoverScaleFactor; // Public variable for the scaling factor
-    public Color hoverColor; // Public variable for the hover color
     public GameObject uiShotPrefab; // Reference to the UIshot prefab
 
     private Transform spriteObject;
@@ -14,7 +13,7 @@ public class menuButtonTween : MonoBehaviour
     private Vector3 originalScaleSprite;
     private Vector3 originalScaleText;
 
-    private Color originalLastChildColor; // Store the original color of the last child
+    public Color originalLastChildColor; // Store the original color of the last child
 
     private int hoverTweenId; // Store the tween ID for the hover effect
     private bool clicked = false;
@@ -105,7 +104,8 @@ public class menuButtonTween : MonoBehaviour
             Image lastChildRenderer = lastChild.GetComponent<Image>();
             if (lastChildRenderer != null)
             {
-                lastChildRenderer.color = hoverColor;
+                originalLastChildColor = transform.Find("sprite").GetChild(spriteObject.childCount - 1).GetComponent<Image>().color;
+                lastChildRenderer.color = originalLastChildColor * 1.35f;
             }
         }
     }

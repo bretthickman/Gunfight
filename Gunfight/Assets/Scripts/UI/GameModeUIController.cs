@@ -6,17 +6,28 @@ using Mirror;
 
 public class GameModeUIController : NetworkBehaviour
 {
-    public Text Winner;
-    public Text Countdown;
     public Text Timer;
+
+    // for between rounds
+    public GameObject RoundStats;
+    public Text Countdown;
     public Text RoundNumber;
+
+    // for end of game
+    public GameObject EndOfGameStats;
+    public Text Winner;
+    public Text EndRoundNumber;
     public Text Ranking;
     public Text Wins;
-    public GameObject RoundStats;
 
-    public void DisplayRoundPanel(bool tOrF)
+    public void DisplayRoundStats(bool tOrF)
     {
         RoundStats.SetActive(tOrF);
+    }
+
+    public void DisplayEndOfGamePanel(bool tOrF)
+    {
+        EndOfGameStats.SetActive(tOrF);
     }
     
     public void DisplayWinner(string newText)
@@ -63,6 +74,17 @@ public class GameModeUIController : NetworkBehaviour
         RoundNumber.enabled = false;
     }
 
+    public void DisplayEndRoundNumber(string newText)
+    {
+        EndRoundNumber.enabled = true;
+        EndRoundNumber.text = newText;
+    }
+
+    public void StopDisplayEndRoundNumber()
+    {
+        EndRoundNumber.enabled = false;
+    }
+
     public void DisplayRanking(string newRanking, string newWins)
     {
         Ranking.enabled = true;
@@ -78,18 +100,25 @@ public class GameModeUIController : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcShowRoundPanel(bool tOrF, string winner, string round)
+    public void RpcShowRoundStats(bool tOrF, string round)
     {
-        DisplayRoundPanel(tOrF);
+        DisplayRoundStats(tOrF);
+        RoundNumber.text = round;
+    }
+
+    [ClientRpc]
+    public void RpcShowEndOfGamePanel(bool tOrF, string winner, string round)
+    {
+        DisplayEndOfGamePanel(tOrF);
         if (tOrF == true)
         {
             DisplayWinner(winner);
-            DisplayRoundNumber(round);
+            DisplayEndRoundNumber(round);
         }
         else
         {
             StopDisplayWinner();
-            StopDisplayRoundNumber();
+            StopDisplayEndRoundNumber();
             StopDisplayRanking();
         }
     }

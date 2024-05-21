@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - destroy
   - Enemy
+  - Door
+  - Stele
   layers:
   - Default
   - TransparentFX

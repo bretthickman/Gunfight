@@ -116,6 +116,7 @@ public class PlayerWeaponController : NetworkBehaviour
         {
             player.weaponInfo.setDefault();
             player.isFiring = false;
+            player.weaponAnimator.enabled = true;
             ChangeSprite(WeaponID.Knife);
         }
     }
@@ -136,8 +137,9 @@ public class PlayerWeaponController : NetworkBehaviour
     [ClientRpc]
     public void RpcDestroyWeapon(WeaponInfo weaponInfo)
     {
-        if (playerColliders.OtherCollider != null)
+        if (playerColliders.OtherCollider != null && playerColliders.OtherCollider.gameObject.CompareTag("Weapon"))
         {
+            player.weaponAnimator.enabled = false;
             // picks up a weapon on the ground, changes sprite, updates changes player stats, and destroys the weapon
             ChangeSprite(weaponInfo.id);
             AudioSource.PlayClipAtPoint(pickupSound, player.transform.position, AudioListener.volume);

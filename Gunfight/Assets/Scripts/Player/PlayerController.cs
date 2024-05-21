@@ -20,12 +20,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public int grenades;
 
     public bool hasSpawned = false;
+    
+    public bool hasTeleported = false;
 
     public Rigidbody2D rb;
 
     public Camera cam;
 
     public PlayerObjectController poc;
+    public PlayerColliders playerColliders;
 
     [SerializeField] 
     public int team;
@@ -38,6 +41,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteRenderer weaponSpriteRenderer;
 
     public Animator playerAnimator;
+    public Animator weaponAnimator;
 
     public SpriteLibraryAsset[] bodySpriteLibraryArray;
     public SpriteLibraryAsset[] hairSpriteLibraryArray;
@@ -46,6 +50,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary bodySpriteLibrary;
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
+
+    public Material healMat;
+    public Material portalMat;
+    public Material defaultMat;
 
     private GameModeManager gameModeManager;
 
@@ -133,6 +141,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     private void Start()
     {
         poc = GetComponent<PlayerObjectController>();
+        playerColliders = GetComponent<PlayerColliders>();
         audioSource = GetComponent<AudioSource>();
         gameModeManager = FindObjectOfType<GameModeManager>();
         if( gameModeManager != null )
@@ -206,6 +215,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
                     RpcDie();
                     playerAnimator.SetBool("isDead", true);
                     SendPlayerDeath();
+                }
+
+                // to be able to interact with objects by pressing e
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (playerColliders.canActivateDoor)
+                    {
+                        playerColliders.OtherCollider.GetComponent<Door>().ActivateDoor();
+                    }
                 }
 
                 // updates weapon cooldown timer
@@ -322,8 +340,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
         if(cam != null)
             mousePosition = cam.ScreenToWorldPoint(mousePosition);
 
-        if ((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
-            (mousePosition.x < transform.position.x && !spriteRendererBody.flipX))
+        if (((mousePosition.x > transform.position.x && spriteRendererBody.flipX) ||
+            (mousePosition.x < transform.position.x && !spriteRendererBody.flipX)) && health > 0)
         {
             CmdFlipPlayer(spriteRendererBody.flipX);
         }
@@ -400,6 +418,12 @@ public class PlayerController : NetworkBehaviour, IDamageable
             Quaternion.FromToRotation(Vector2.up, endPos-startPos));
             weaponInfo.nAmmo--;
         }
+        playerAnimator.SetTrigger("Shoot");
+
+        if(weaponInfo.isMelee)
+        {
+            weaponAnimator.SetTrigger("swingBat");
+        }
 
         Vector2 newPoint = endPos + ((endPos - startPos).normalized * -0.2f);
         var hitParticleInstance =
@@ -472,7 +496,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         if (health <= 0)
         {            
             RpcDie();
-            playerAnimator.SetBool("isDead", true);
             SendPlayerDeath();
             return true;
         }
@@ -531,6 +554,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         weaponInfo.speedOfPlayer = 0;
         weaponSpriteRenderer.enabled = false;
         //spriteRenderer.enabled = false;
+        playerAnimator.SetBool("isDead", true);
         GetComponent<PlayerWeaponController>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
     }
@@ -555,5 +579,50 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public void CmdNotifyResetComplete()
     {
         GameModeManager.Instance.currentGameMode.PlayerResetComplete();
+    }
+
+    public IEnumerator Heal(Fountain fountain)
+    {
+        // heals player if there is enough hp in the fountain
+        CmdPlayerMat(2);
+        Debug.Log("Player healing");
+        while (health < 10 && fountain.canHeal && fountain.active)
+        {
+            health += 1;
+            fountain.CmdHealPlayer();
+            yield return new WaitForSeconds(1);
+        }
+        Debug.Log("Player done healing");
+        CmdPlayerMat(0);
+    }
+
+    [Command]
+    public void CmdPlayerMat(int num)
+    {
+        RpcPlayerMat(num);
+    }
+
+    [ClientRpc]
+    public void RpcPlayerMat(int num)
+    {
+        if (num == 0)
+        {
+            spriteRendererBody.material = defaultMat;
+            spriteRendererEyes.material = defaultMat;
+            spriteRendererHair.material = defaultMat;
+        }
+        else if (num == 1)
+        {
+            spriteRendererBody.material = portalMat;
+            spriteRendererEyes.material = portalMat;
+            spriteRendererHair.material = portalMat;
+        }
+        else if (num == 2)
+        {
+            spriteRendererBody.material = healMat;
+            spriteRendererEyes.material = healMat;
+            spriteRendererHair.material = healMat;
+        }
+        
     }
 }
