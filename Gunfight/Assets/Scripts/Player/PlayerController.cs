@@ -159,10 +159,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
             if (!hasSpawned)
             {
                 // Spawns player with knife, sets position, team, and sprite
-                Debug.Log("Spawning");
+                Debug.Log("Initializing player controller");
                 weaponInfo.setDefault();
                 //SetPosition();
-                Respawn();
+                //Respawn();
                 SetTeam();
                 health = 10f;
                 hasSpawned = true;

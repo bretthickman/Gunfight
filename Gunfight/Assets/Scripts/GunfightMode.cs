@@ -35,7 +35,7 @@ public class GunfightMode : CompetitiveGameMode
         hasGameStarted = true;
         GetTeamPlayers();
         GenerateWeaponSpawnOrder();
-        Debug.Log("WHERE AM I??");
+        Debug.Log("Initializing gunfight mode");
         StartRound(); // starts the first round after Awake
     }
 
@@ -187,8 +187,8 @@ public class GunfightMode : CompetitiveGameMode
     [Server]
     public override void SpawnWeaponsInGame()
     {
+        Debug.Log("weapon spawning");
         GameObject newWeapon = weaponSpawnOrder[currentRound];
-        //WeaponInfo newWeaponInfo = newWeapon.GetComponent<WeaponInfo>();
 
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
         foreach (PlayerObjectController player in Manager.GamePlayers)

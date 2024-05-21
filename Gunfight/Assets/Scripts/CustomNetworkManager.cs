@@ -25,6 +25,22 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
+    // delay lobby -> game scene to ensure loading and syncing
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        base.OnServerSceneChanged(sceneName);
+        if (sceneName == "Map1" || sceneName == "Map2" || sceneName == "Ruins") 
+        {
+            StartCoroutine(InitializeGameScene());
+        }
+    }
+
+    private IEnumerator InitializeGameScene()
+    {
+        yield return new WaitForSeconds(1); // Give some time for all objects to initialize
+        GameModeManager.Instance.startGame();
+    }
+
     public void StartGame(string SceneName)
     {
         ServerChangeScene(SceneName);

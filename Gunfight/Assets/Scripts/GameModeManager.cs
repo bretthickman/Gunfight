@@ -61,16 +61,21 @@ public class GameModeManager : NetworkBehaviour
         {
             return;
         }
-        if (currentGameMode.CheckIfGameNeedsStart())
-        {
-            currentGameMode.InitializeGameMode();
-        }
+        
         else if (playersQuit && (SceneManager.GetActiveScene().name != "Lobby"))
         {
             StopCoroutine(coroutine);
             Debug.Log("Stop coroutine");
             playersQuit = false;
             Invoke("ToLobby", 0.2f);
+        }
+    }
+
+    public void startGame()
+    {
+        if (currentGameMode.CheckIfGameNeedsStart())
+        {
+            currentGameMode.InitializeGameMode();
         }
     }
 }

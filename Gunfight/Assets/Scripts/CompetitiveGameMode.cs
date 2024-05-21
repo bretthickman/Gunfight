@@ -72,11 +72,41 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             return;
         }
+
+        // Ensure all clients are ready before proceeding
+        if (!AreAllClientsReady())
+        {
+            Debug.Log("Not all clients are ready. Delaying start.");
+            StartCoroutine(WaitForClientsReady());
+            return;
+        }
+
         playersResetCount = 0;
         // setup for round
         RpcResetGame();
         currentRound++; // increase round count
         Debug.Log("Round started: " + currentRound);
+    }
+
+    private bool AreAllClientsReady()
+    {
+        foreach (var conn in NetworkServer.connections)
+        {
+            if (!conn.Value.isReady)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private IEnumerator WaitForClientsReady()
+    {
+        while (!AreAllClientsReady())
+        {
+            yield return new WaitForSeconds(1); // Check every second
+        }
+        StartRound();
     }
 
     public void EndRound()
@@ -326,6 +356,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [ClientRpc]
     public void RpcResetGame()
     {
+        Debug.Log("rpc resetting");
         // Call the reset function for all players
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
@@ -350,7 +381,6 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [ClientRpc]
     public void RpcAssignWeapon(PlayerObjectController player, WeaponInfo weapon)
     {
-        Debug.Log("Running INside func");
         PlayerController controller = player.GetComponent<PlayerController>();
 
         player.GetComponent<PlayerWeaponController>().ChangeSprite(weapon.id);
@@ -366,7 +396,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
        playersResetCount++;
        if (playersResetCount >= Manager.GamePlayers.Count)
        {
-            Debug.Log("SPAWNING");
+            Debug.Log("SPAWNING WEAPONS");
             SpawnWeaponsInGame();
        }
     }
