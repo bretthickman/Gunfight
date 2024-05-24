@@ -8988,6 +8988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2276689062988542421, guid: 2c633340fba85fd448fa926f795d1524, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2276689062988542422, guid: 2c633340fba85fd448fa926f795d1524, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
