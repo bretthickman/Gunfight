@@ -38,18 +38,22 @@ public class CustomNetworkManager : NetworkManager
 
     private IEnumerator InitializeGameScene()
     {
-        if (loadScreen == null)
-        {
-            loadScreen = GameObject.Find("LoadScreen"); 
-            if (loadScreen == null)
-            {
-                Debug.LogError("Load Screen GameObject not found.");
-            }
-        }
+        //if (loadScreen == null)
+        //{
+        //    loadScreen = GameObject.Find("LoadScreen"); 
+        //    if (loadScreen == null)
+        //    {
+        //        Debug.LogError("Load Screen GameObject not found.");
+        //    }
+        //}
 
         if(loadScreen != null)
         {
             Instantiate(loadScreen, gameObject.transform);
+        }
+        else
+        {
+            Debug.Log("Load screen not found");
         }
 
         yield return new WaitForSeconds(1); // Give some time for all objects to initialize
