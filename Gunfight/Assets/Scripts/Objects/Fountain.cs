@@ -7,6 +7,9 @@ public class Fountain : NetworkBehaviour
 {
     [SyncVar]
     public float hp = 15f;
+    [SyncVar] public float red = 1.0f;
+    [SyncVar] public float green = 1.0f;
+    [SyncVar] public float blue = 1.0f;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D otherCollider;
     [SerializeField] public bool canHeal = false;
@@ -17,8 +20,11 @@ public class Fountain : NetworkBehaviour
         // reset hp for each round
         hp = 15f;
         active = true;
+        red = 1.0f;
+        green = 1.0f;
+        blue = 1.0f;
         // changes water back to normal
-        RpcChangeFountainColor(1f, 1f, 1f);
+        RpcChangeFountainColor(red, green, blue);
         Debug.Log("Reset fountain hp");
     }
 
@@ -59,12 +65,14 @@ public class Fountain : NetworkBehaviour
     public void CmdHealPlayer()
     {
         hp -= 1;
+        red -= 0.05f;
+        green -= 0.05f;
+        blue -= 0.03f;
         Debug.Log("Healing a player");
+        RpcChangeFountainColor(red, green, blue);
         if (hp == 0)
         {
             Debug.Log("Fountain can no longer heal");
-            // changes water to a dark blue
-            RpcChangeFountainColor(0.3474991f, 0.3477602f, 0.5377358f);
             active = false;
         }
     }

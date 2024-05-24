@@ -51,6 +51,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
 
+    public Material hueMat;
     public Material healMat;
     public Material portalMat;
     public Material defaultMat;
@@ -518,6 +519,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
             spriteRendererEyes.material = healMat;
             spriteRendererHair.material = healMat;
         }
-        
+    }
+
+    [ClientRpc]
+    public void RpcSteleCameraShake()
+    {
+        if (isLocalPlayer)
+        {
+            CameraShaker.SteleCameraShake(5.0f);
+        }
     }
 }

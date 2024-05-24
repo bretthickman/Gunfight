@@ -531,7 +531,8 @@ MonoBehaviour:
   bodySpriteLibrary: {fileID: 3456257574426234691}
   hairSpriteLibrary: {fileID: 3939430506089779646}
   eyesSpriteLibrary: {fileID: 1733680272197160501}
-  healMat: {fileID: 2100000, guid: b2784121d7122d3448addb977b6cd349, type: 2}
+  hueMat: {fileID: 2100000, guid: 541289f96b303d8488c203b963759090, type: 2}
+  healMat: {fileID: 2100000, guid: 704942f46cad34a5aaf349016f1826d4, type: 2}
   portalMat: {fileID: 2100000, guid: fdea34907afe14e46935dba9aa632b9d, type: 2}
   defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   shootPoint: {fileID: 2953357421772792125}
