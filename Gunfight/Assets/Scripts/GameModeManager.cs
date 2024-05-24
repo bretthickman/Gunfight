@@ -41,7 +41,7 @@ public class GameModeManager : NetworkBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
         currentGameMode = freeForAllMode;
         if (Instance == null)
