@@ -26,7 +26,7 @@ public class GameModeManager : NetworkBehaviour
 
     public string gameMode;
 
-    private bool playersQuit = false;
+    public bool playersQuit = false;
     public GameObject boxes; // parent game object of boxes in map
 
     private CustomNetworkManager Manager

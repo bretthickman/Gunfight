@@ -9,6 +9,7 @@ public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
     public List<PlayerObjectController> GamePlayers { get; } = new List<PlayerObjectController>();
+    public GameObject loadScreen;
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
@@ -25,20 +26,40 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
-    // delay lobby -> game scene to ensure loading and syncing
+    // enable load screen to ensure syncronization
     public override void OnServerSceneChanged(string sceneName)
     {
-        base.OnServerSceneChanged(sceneName);
-        if (sceneName == "Map1" || sceneName == "Map2" || sceneName == "Ruins") 
+        if (sceneName == "Map1" || sceneName == "Map2" || sceneName == "Map3" || sceneName == "Ruins") 
         {
             StartCoroutine(InitializeGameScene());
         }
+        base.OnServerSceneChanged(sceneName);
     }
 
     private IEnumerator InitializeGameScene()
     {
+        if (loadScreen == null)
+        {
+            loadScreen = GameObject.Find("LoadScreen"); 
+            if (loadScreen == null)
+            {
+                Debug.LogError("Load Screen GameObject not found.");
+            }
+        }
+
+        if(loadScreen != null)
+        {
+            Instantiate(loadScreen, gameObject.transform);
+        }
+
         yield return new WaitForSeconds(1); // Give some time for all objects to initialize
+
         GameModeManager.Instance.startGame();
+
+        if (loadScreen != null)
+        {
+            Destroy(loadScreen);
+        }
     }
 
     public void StartGame(string SceneName)

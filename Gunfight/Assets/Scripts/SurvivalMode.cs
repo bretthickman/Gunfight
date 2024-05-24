@@ -157,7 +157,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
             if (gameModeUIController == null) { gameModeUIController = FindObjectOfType<GameModeUIController>(); }
 
-            gameModeUIController.DisplayRoundPanel(true);
+            gameModeUIController.DisplayEndOfGamePanel(true);
             if (isServer)
             {
                 RankingList();

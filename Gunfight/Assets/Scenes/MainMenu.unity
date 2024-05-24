@@ -3294,6 +3294,7 @@ MonoBehaviour:
   - {fileID: 7803202950100683691, guid: f2371103ecd4241de852eec42ec207fd, type: 3}
   timeInterpolationGui: 0
   GamePlayerPrefab: {fileID: 8544065240725089489, guid: df340c9d318be6647b903dd6dae18029, type: 3}
+  loadScreen: {fileID: 2276689062988542421, guid: 2c633340fba85fd448fa926f795d1524, type: 3}
 --- !u!4 &665717281
 Transform:
   m_ObjectHideFlags: 0

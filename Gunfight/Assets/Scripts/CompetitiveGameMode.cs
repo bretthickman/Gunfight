@@ -402,11 +402,9 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [ClientRpc]
     public void RpcResetGame()
     {
-        Debug.Log("rpc resetting");
         // Call the reset function for all players
         foreach (PlayerObjectController player in Manager.GamePlayers)
         {
-            Debug.Log(player.name + "running");
             player.GetComponent<PlayerController>().enabled = true;
             player.GetComponent<PlayerController>().Respawn();
             player.isAlive = true;

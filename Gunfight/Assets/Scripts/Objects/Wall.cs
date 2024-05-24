@@ -11,9 +11,10 @@ public class Wall : NetworkBehaviour, IDamageable
 
     // [SerializeField] private AudioClip hitSound;
 
-    public void TakeDamage(int damageAmount, Vector2 hitPoint)
+    public bool TakeDamage(int damageAmount, Vector2 hitPoint)
     {
         RpcTakeDamage(hitPoint);
+        return false;
     }
 
     [ClientRpc]
