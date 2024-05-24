@@ -183,10 +183,13 @@ public class menuButtonTween : MonoBehaviour
         rb.AddForce(negativeYForce, ForceMode.Impulse);
 
         // Apply torque
-        rb.AddTorque(Random.insideUnitSphere * forceMagnitude, ForceMode.Impulse);
+        Vector3 dir = Random.insideUnitSphere;
+        dir.x = 0;
+        dir.y = 0;
+        rb.AddTorque(dir * forceMagnitude, ForceMode.Impulse);
 
         // Set mass
-        rb.mass = 100.0f;
+        rb.mass = 120.0f;
         clicked = true;
     }
 }
