@@ -62,7 +62,7 @@ public class CustomNetworkManager : NetworkManager
 
         if (loadScreen != null)
         {
-            Destroy(loadScreen);
+            //Destroy(loadScreen);
         }
     }
 
