@@ -1153,7 +1153,7 @@ namespace Mirror
         {
             if (identity.serverOnly) return;
 
-            //Debug.Log($"Server SendSpawnMessage: name:{identity.name} sceneId:{identity.sceneId:X} netid:{identity.netId}");
+            Debug.Log($"Server SendSpawnMessage: name:{identity.name} sceneId:{identity.sceneId:X} netid:{identity.netId}");
 
             // one writer for owner, one for observers
             using (NetworkWriterPooled ownerWriter = NetworkWriterPool.Get(), observersWriter = NetworkWriterPool.Get())
