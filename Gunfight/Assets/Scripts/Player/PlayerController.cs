@@ -575,7 +575,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         isFiring = false; // prevents bug where you spawn in shooting if you were shooting at round end
     }
 
-    [Command]
+    //[Command]
     public void CmdNotifyResetComplete()
     {
         GameModeManager.Instance.currentGameMode.PlayerResetComplete();

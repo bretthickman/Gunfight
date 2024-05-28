@@ -438,6 +438,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public void PlayerResetComplete()
     {
        playersResetCount++;
+        Debug.Log("NUMBA GOING UP: " + playersResetCount);
        if (playersResetCount >= Manager.GamePlayers.Count)
        {
             Debug.Log("SPAWNING WEAPONS");
