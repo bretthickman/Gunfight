@@ -434,9 +434,9 @@ MonoBehaviour:
   syncInterval: 0.1
   LocalPlayerObject: {fileID: 0}
   mapNames:
+  - Ruins
   - Map1
   - Map2
-  - Ruins
   currentMapIndex: 0
   currentMapText: {fileID: 1777977275}
 --- !u!114 &41049955
