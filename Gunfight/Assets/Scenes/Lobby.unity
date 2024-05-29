@@ -7595,7 +7595,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 41049952}
         m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
-        m_MethodName: SwitchGameModes
+        m_MethodName: TestWaitGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -125,7 +125,7 @@ public class LobbyController : MonoBehaviour
             // might be bug here, VS says to use addcomponent and not "= new WaveMode()"
             GameModeManager.Instance.currentGameMode = gameObject.AddComponent<SurvivalMode>();
         }
-        SwitchGameModes();
+        StartCoroutine(WaitSwitchGameModes());
     }
 
     private void OnEndEdit(string newName)
@@ -416,6 +416,7 @@ public class LobbyController : MonoBehaviour
                 Debug.Log(GameModeManager.Instance.freeForAllMode);
             }
 
+
             GameModeManager.Instance.survivalMode.gameObject.SetActive(false);
             GameModeManager.Instance.gunfightMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.freeForAllMode;
@@ -443,6 +444,20 @@ public class LobbyController : MonoBehaviour
             GameModeManager.Instance.gameMode = "survival";
         }
 
+    }
+
+    public IEnumerator WaitSwitchGameModes()
+    {
+        yield return new WaitForSeconds(1);
+
+        SwitchGameModes();
+
+        yield return null;
+    }
+
+    public void TestWaitGameMode()
+    {
+        StartCoroutine(WaitSwitchGameModes());
     }
 
     public void SwitchRoundNum()
