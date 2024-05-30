@@ -191,7 +191,7 @@ public class GunfightMode : CompetitiveGameMode
     public override void SpawnWeaponsInGame()
     {
         Debug.Log("weapon spawning");
-        GameObject newWeapon = weaponSpawnOrder[currentRound];
+        GameObject newWeapon = weaponSpawnOrder[currentRound-1];
 
         // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
         foreach (PlayerObjectController player in Manager.GamePlayers)
