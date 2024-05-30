@@ -573,6 +573,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         weaponSpriteRenderer.enabled = true;
         spriteRendererBody.enabled = true;
         isFiring = false; // prevents bug where you spawn in shooting if you were shooting at round end
+        cooldownTimer = 0;
     }
 
     //[Command]
