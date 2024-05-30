@@ -442,7 +442,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
        if (playersResetCount >= Manager.GamePlayers.Count)
        {
             Debug.Log("SPAWNING WEAPONS");
-            if(isServerOnly)
+            if(isServer)
                 SpawnWeaponsInGame();
        }
     }
