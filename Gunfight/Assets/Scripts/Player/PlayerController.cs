@@ -60,6 +60,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public Material portalMat;
     public Material defaultMat;
 
+    private GameModeManager gameModeManager;
+
     //Shooting
     public Transform shootPoint;
 
@@ -106,6 +108,20 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     [SerializeField] private GameObject ammo;
     public string skinCategory;
+        // SetHairBaseColor(newColor);
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager
+    {
+        get
+        {
+            if (manager != null)
+            {
+                return manager;
+            }
+            return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+        }
+    }
 
     public void SwitchHairColor(int index)
     {
@@ -113,8 +129,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
         spriteRendererHair.color = newColor;
         spriteRendererHair.material.SetColor("_BaseColor", newColor);
         currentColorIndex = index;
-
-        // SetHairBaseColor(newColor);
     }
 
     public void SwitchBodySprite(int index)
@@ -142,16 +156,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
         poc = GetComponent<PlayerObjectController>();
         playerColliders = GetComponent<PlayerColliders>();
         audioSource = GetComponent<AudioSource>();
-
-        // // Load baseColor from PlayerPrefs if it exists
-        // if (PlayerPrefs.HasKey("HairBaseColorR") && PlayerPrefs.HasKey("HairBaseColorG") && PlayerPrefs.HasKey("HairBaseColorB"))
-        // {
-        //     float r = PlayerPrefs.GetFloat("HairBaseColorR");
-        //     float g = PlayerPrefs.GetFloat("HairBaseColorG");
-        //     float b = PlayerPrefs.GetFloat("HairBaseColorB");
-        //     baseColor = new Color(r, g, b);
-        // }
-        // SetHairBaseColor(baseColor);
+        gameModeManager = FindObjectOfType<GameModeManager>();
+        if( gameModeManager != null )
+        {
+            Debug.Log("GameModeManager found.");
+        }
     }
 
     // void ChangeColorsAndSave()
@@ -187,10 +196,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
             if (!hasSpawned)
             {
                 // Spawns player with knife, sets position, team, and sprite
-                Debug.Log("Spawning");
+                Debug.Log("Initializing player controller");
                 weaponInfo.setDefault();
                 //SetPosition();
-                Respawn();
+                //Respawn();
                 SetTeam();
                 health = 10f;
                 hasSpawned = true;
@@ -268,16 +277,80 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public void SetPosition()
     {
-        // Determine the spawn points based on the game mode
-        Transform[] spawnPoints = GameModeManager.Instance.currentGameMode is not SurvivalMode
-            ? MapManager.Instance.FFASpawnPoints
-            : MapManager.Instance.SPSpawnPoints;
+        switch (GameModeManager.Instance.currentGameMode)
+        {
+            case SurvivalMode:
+                {
+                    Transform[] spawnPoints = MapManager.Instance.SPSpawnPoints;
 
-        // Ensure that PlayerIdNumber is within a valid range
-        int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
+                    // Ensure that PlayerIdNumber is within a valid range
+                    int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
 
-        // Set the position based on the PlayerIdNumber
-        transform.position = spawnPoints[playerId - 1].position;
+                    // Set the position based on the PlayerIdNumber
+                    transform.position = spawnPoints[playerId - 1].position;
+                    Debug.Log("Spawning in pos " + (playerId - 1));
+                    break;
+                }
+            case FreeForAllMode:
+                {
+                    Transform[] spawnPoints = MapManager.Instance.FFASpawnPoints;
+
+                    // Ensure that PlayerIdNumber is within a valid range
+                    int playerId = Mathf.Clamp(poc.PlayerIdNumber, 1, spawnPoints.Length);
+
+                    // Set the position based on the PlayerIdNumber
+                    transform.position = spawnPoints[playerId - 1].position;
+                    Debug.Log("Spawning in pos " + (playerId - 1));
+                    break;
+                }
+            case GunfightMode:
+                {
+                    SetPositionGF();
+                    break;
+                }
+        }
+    }
+
+    public void SetPositionGF()
+    {
+        Transform[] spawnPoints = MapManager.Instance.GFSpawnPoints;
+
+        int teamPid = -1;
+        // get teammates pid
+        foreach(PlayerObjectController p in Manager.GamePlayers)
+        {
+            if(p.PlayerIdNumber != poc.PlayerIdNumber && p.Team == poc.Team)
+            {
+                teamPid = p.PlayerIdNumber;
+            }
+        }
+
+        if(poc.Team == 1)
+        {
+            if(poc.PlayerIdNumber < teamPid || teamPid == -1)
+            {
+                transform.position = spawnPoints[0].position;
+                Debug.Log("Spawning in pos 0");
+            }
+            else
+            {
+                transform.position = spawnPoints[1].position;
+                Debug.Log("Spawning in pos 1");
+            }
+        }
+        else
+        {
+            if (poc.PlayerIdNumber < teamPid || teamPid == -1)
+            {
+                transform.position = spawnPoints[2].position;
+                Debug.Log("Spawning in pos 2");
+            }
+            else
+            {
+                transform.position = spawnPoints[3].position;
+                Debug.Log("Spawning in pos 3");
+            }
+        }
     }
 
     public void SetTeam()
@@ -400,9 +473,19 @@ public class PlayerController : NetworkBehaviour, IDamageable
             if (hit.collider != null && !hit.collider.CompareTag("Uncolliable"))
             {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+
                 if (damageable != null)
                 {
-                    damageable.TakeDamage(weaponInfo.damage, hit.point);
+                    // returns false when attacking allies when friendly fire is enabled
+                    if (gameModeManager.currentGameMode.CheckIfFriendlyFire(hit, poc.Team))
+                    {
+                        // returns true if damageable dies and is a killable entity
+                        if (damageable.TakeDamage(weaponInfo.damage, hit.point))
+                        {
+                            poc.kills++;
+                            Debug.Log("Kills = " + poc.kills);
+                        }
+                    }                                     
                 }
             }
             else
@@ -428,9 +511,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
         GameModeManager.Instance.currentGameMode.PlayerDied(this);
     }
 
-    public void TakeDamage(int damage, Vector2 hitPoint)
+    // returns true if killed by a player in a competitive game mode
+    public bool TakeDamage(int damage, Vector2 hitPoint)
     {
-        if (!isServer) return;
+        if (!isServer) return false;
 
         health -= damage;
         Debug.Log("Player took " + damage + " Damage");
@@ -438,13 +522,15 @@ public class PlayerController : NetworkBehaviour, IDamageable
         RpcHurtCameraShake();
 
         if (health <= 0)
-        {
+        {            
             RpcDie();
             SendPlayerDeath();
+            return true;
         }
         else
         {
             RpcHitColor();
+            return false;
         }
     }
 
@@ -514,6 +600,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
         GetComponent<Collider2D>().enabled = true;
         weaponSpriteRenderer.enabled = true;
         spriteRendererBody.enabled = true;
+        isFiring = false; // prevents bug where you spawn in shooting if you were shooting at round end
+        cooldownTimer = 0;
+    }
+
+    //[Command]
+    public void CmdNotifyResetComplete()
+    {
+        GameModeManager.Instance.currentGameMode.PlayerResetComplete();
     }
 
     public IEnumerator Heal(Fountain fountain)

@@ -1,16 +1,20 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using static GameModeManager;
-using Mirror;
 
 public class GunfightMode : CompetitiveGameMode
 {
     public int[] teamAlive = { 0, 0 }; // keeps track of how many players on each team is alive
     public int[] teamWins = { 0, 0 }; // keeps track of how many wins each team has
     private int teamWinNum;
+    public GameObject[] weaponList;
+    [SerializeField] private GameObject[] weaponSpawnOrder;
+    [SerializeField] private int weaponSpawnOffest = 2;
 
-    // not sure if having this in subclass will break it
+
     private CustomNetworkManager Manager
     {
         get
@@ -30,6 +34,8 @@ public class GunfightMode : CompetitiveGameMode
         playerCount = aliveNum;
         hasGameStarted = true;
         GetTeamPlayers();
+        GenerateWeaponSpawnOrder();
+        Debug.Log("Initializing gunfight mode");
         StartRound(); // starts the first round after Awake
     }
 
@@ -80,6 +86,8 @@ public class GunfightMode : CompetitiveGameMode
                 }
             }
         }
+
+        Debug.Log("Team 1 alive = " + teamOneAlive + "; Team 2 alive = " + teamTwoALive);
 
         if (teamOneAlive == 0 || teamTwoALive == 0)
         {
@@ -156,6 +164,55 @@ public class GunfightMode : CompetitiveGameMode
         Debug.Log("Ranking wins: " + winsString);
 
         gameModeUIController.RpcShowRanking(rankingString, winsString);
+    }
+
+    public override bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum)
+    {
+        GameObject otherPlayer = hit.collider.gameObject;
+        PlayerObjectController otherPoc = otherPlayer.GetComponent<PlayerObjectController>();
+
+        bool sameTeam;
+        if (otherPoc == null)
+        {
+            sameTeam = false;
+        }
+        else
+        {
+            sameTeam = otherPoc.Team == teamNum;
+        }
+
+        if (otherPlayer.CompareTag("Player") && !friendlyFireEnabled && sameTeam) { return false; }
+
+        return true;
+    }
+
+    // Assigns each player the next weapon in the weapon spawn order
+    [Server]
+    public override void SpawnWeaponsInGame()
+    {
+        Debug.Log("weapon spawning");
+        GameObject newWeapon = weaponSpawnOrder[currentRound-1];
+
+        // go to each player object in game and assign its weapon from weaponSpawnOrder[roundNumber]
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            Vector3 spawnPosition = new Vector3(player.transform.position.x, player.transform.position.y + weaponSpawnOffest, player.transform.position.z);
+            Quaternion spawnRotation = Quaternion.Euler(0, 0, 0);
+            GameObject weaponInstance = Instantiate(newWeapon, spawnPosition, spawnRotation);
+            NetworkServer.Spawn(weaponInstance);        
+        }
+    }
+
+    // generates the weapon spawn order for the entire match at random, with repitition
+    public void GenerateWeaponSpawnOrder()
+    {
+        weaponSpawnOrder = new GameObject[totalRounds * 2 - 1];
+        for(int i = 0; i < weaponSpawnOrder.Length; i++)
+        {
+            int choice = Random.Range(0, weaponList.Length);
+            Debug.Log("Generating weapon spawn order, adding " + choice + " to the list.");
+            weaponSpawnOrder[i] = weaponList[choice];
+        }
     }
 
     public override void PlayerQuit()

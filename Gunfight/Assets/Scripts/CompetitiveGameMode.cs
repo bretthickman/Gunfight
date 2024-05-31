@@ -22,12 +22,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     [SyncVar(hook = nameof(CheckWinCondition))]
     public int aliveNum; // get this from lobby
 
-    // had to make protected so child classes can use it
     protected CustomNetworkManager manager;
 
-    // also changed to protected during refactor
     public int playerCount;
     public bool hasGameStarted = false;
+    public bool friendlyFireEnabled = false;
 
     // keeps track of the rankings
     public List<string> ranking = new List<string>();
@@ -42,6 +41,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public GameObject doors; // parent game object of doors in map
     public GameObject walls; // parent game bobject of destroyable walls in map
     public GameObject fountain;
+    private int playersResetCount = 0;
 
     public GameObject PlayerStatsItemPrefab; 
     public List<PlayerStatsItem> PlayerStatsItems = new List<PlayerStatsItem>();
@@ -57,6 +57,8 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
     public abstract void RpcInitStatsList();
     public abstract IEnumerator SetStatsList();
     public abstract void PlayerQuit();
+    public abstract bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum);
+    public abstract void SpawnWeaponsInGame();
 
     private CustomNetworkManager Manager
     {
@@ -81,10 +83,41 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             return;
         }
+
+        // Ensure all clients are ready before proceeding
+        if (!AreAllClientsReady())
+        {
+            Debug.Log("Not all clients are ready. Delaying start.");
+            StartCoroutine(WaitForClientsReady());
+            return;
+        }
+
+        playersResetCount = 0;
         // setup for round
         RpcResetGame();
         currentRound++; // increase round count
         Debug.Log("Round started: " + currentRound);
+    }
+
+    private bool AreAllClientsReady()
+    {
+        foreach (var conn in NetworkServer.connections)
+        {
+            if (!conn.Value.isReady)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private IEnumerator WaitForClientsReady()
+    {
+        while (!AreAllClientsReady())
+        {
+            yield return new WaitForSeconds(1); // Check every second
+        }
+        StartRound();
     }
 
     public void EndRound()
@@ -96,9 +129,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         if (!CheckOverallWin()) // if there is not an overall winner
         {
             DeleteWeaponsInGame();
-            if (isServer)
-                RpcResetGame();
-            SpawnWeaponsInGame();
+
 
             // reset boxes
             boxes = GameObject.Find("Objects");
@@ -303,21 +334,6 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         GameModeManager.Instance.coroutine = StartCoroutine(DelayedEndRound());
     }
 
-    public void SpawnWeaponsInGame()
-    {
-        // Find the WeaponSpawning script in the "game" scene
-        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
-
-        if (weaponSpawning != null)
-        {
-            weaponSpawning.SpawnWeapons();
-        }
-        else
-        {
-            Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
-        }
-    }
-
     public void DeleteWeaponsInGame()
     {
         // Find the WeaponSpawning script in the "game" scene
@@ -331,6 +347,11 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
         }
+    }
+
+    public void ToggleFriendlyFire()
+    {
+        this.friendlyFireEnabled = !this.friendlyFireEnabled;
     }
 
     public int GetAliveNum()
@@ -387,6 +408,7 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
             player.GetComponent<PlayerController>().enabled = true;
             player.GetComponent<PlayerController>().Respawn();
             player.isAlive = true;
+            player.GetComponent<PlayerController>().CmdNotifyResetComplete();
         }
     }
 
@@ -398,5 +420,30 @@ public abstract class CompetitiveGameMode : NetworkBehaviour, IGameMode
         {
             player.wins = 0;
         }
+    }
+
+    [ClientRpc]
+    public void RpcAssignWeapon(PlayerObjectController player, WeaponInfo weapon)
+    {
+        PlayerController controller = player.GetComponent<PlayerController>();
+
+        player.GetComponent<PlayerWeaponController>().ChangeSprite(weapon.id);
+        controller.weaponInfo.setWeaponInfo(weapon);
+        controller.cooldownTimer = 0f;
+        controller.isFiring = false;
+
+        Debug.Log("Assigned player " + player + " weapon " + weapon);
+    }
+
+    public void PlayerResetComplete()
+    {
+       playersResetCount++;
+        Debug.Log("NUMBA GOING UP: " + playersResetCount);
+       if (playersResetCount >= Manager.GamePlayers.Count)
+       {
+            Debug.Log("SPAWNING WEAPONS");
+            if(isServer)
+                SpawnWeaponsInGame();
+       }
     }
 }

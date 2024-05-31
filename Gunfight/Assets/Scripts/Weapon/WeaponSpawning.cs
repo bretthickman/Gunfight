@@ -16,7 +16,18 @@ public class WeaponSpawning : NetworkBehaviour
 
     private void Start()
     {
-        SpawnWeapons();
+        GameModeManager gameModeManager = FindObjectOfType<GameModeManager>();
+        if(gameModeManager == null)
+        {
+            Debug.Log("Weapon spawner failed to find gamemodemanager.");
+        }
+        else
+        {
+            if(gameModeManager.currentGameMode is not GunfightMode)
+            {
+                SpawnWeapons();
+            }
+        }
     }
 
     // Call this function to spawn weapons
@@ -66,5 +77,10 @@ public class WeaponSpawning : NetworkBehaviour
                 tileLoc.Add(place);
             }
         }
+    }
+
+    public GameObject[] GetWeapons()
+    {
+        return weapons;
     }
 }

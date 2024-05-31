@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public interface IGameMode
 {
@@ -19,12 +17,17 @@ public interface IGameMode
     bool CheckIfGameNeedsStart();
     void InitializeGameMode();
     void DecrementCurrentNumberOfEnemies();
+    void RankingList();
+    bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum); // returns true if friendly fire is being commited
 
 
+    void ToggleFriendlyFire();
     bool GetUseCards();
     void SetUseCards(bool usingCards);
     int GetAliveNum();
     void SetAliveNum(int num);
     void SetTotalRounds(int totalRounds);
-    // void SetQuitClicked(bool b);
+
+
+    void PlayerResetComplete();
 }

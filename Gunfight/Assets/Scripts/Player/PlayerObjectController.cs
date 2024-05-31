@@ -13,9 +13,11 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool Ready;
+    [SyncVar(hook = nameof(PlayerInGameUpdate))] public bool isInGame;
     [SyncVar(hook = nameof(PlayerTeamUpdate))] public int Team = 1;
     public bool isAlive = true;
     public int wins = 0;
+    public int kills = 0;
 
     //Cosmestics / Team
     [SyncVar(hook = nameof(SendPlayerColor))] public int ColorIndex;
@@ -47,6 +49,18 @@ public class PlayerObjectController : NetworkBehaviour
         if (isServer)
         {
             this.Ready = newValue;
+        }
+        if (isClient)
+        {
+            LobbyController.Instance.UpdatePlayerList();
+        }
+    }
+
+    private void PlayerInGameUpdate(bool oldValue, bool newValue)
+    {
+        if (isServer)
+        {
+            this.isInGame = newValue;
         }
         if (isClient)
         {

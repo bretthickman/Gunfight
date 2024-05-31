@@ -12,13 +12,15 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
     public float health;
 
     public float speed;
-    public float speedOffset = 0.1f;
-    public float speedMultipiler = 0.25f;
+    public float speedOffset = 0.23f;
+    public float speedMultipiler = 0.35f;
     public float damage;
     public float damageMultipiler = 0.5f;
+    public float attackInterval;
     public GameObject closestPlayer;
     public Animator ratAnimator;
 
+    private float attackCooldownRemaining = 0;
 
     private GameObject[] players;
 
@@ -56,16 +58,16 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
 
     }
 
-    public void updateSpeed(int currentRound)
+    public void updateSpeed(int currentLevel)
     {
-        float newSpeed = speed + (currentRound - 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
+        float newSpeed = speed + (currentLevel + 1) * speedMultipiler + Random.Range(-speedOffset, speedOffset);
         path.maxSpeed = newSpeed;
         speed = path.maxSpeed;
     }
 
-    public void updateDamage(int currentRound)
+    public void updateDamage(int currentLevel)
     {
-        damage = damage + (currentRound - 1) * damageMultipiler;
+        damage = damage + (currentLevel + 1) * damageMultipiler;
     }
 
     void updateFlip()
@@ -86,7 +88,7 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(int damage, Vector2 hitPoint)
+    public bool TakeDamage(int damage, Vector2 hitPoint)
     {
 
         health -= damage;
@@ -95,31 +97,58 @@ public class EnemyObjectController : NetworkBehaviour, IDamageable
         if (health <= 0)
         {
             RpcDie();
+            return true;
         }
         else
         {
             RpcHitColor();
+            return false;
         }
     }
 
-/*    public void OnCollisionEnter2D(Collision2D collision)
+    // damage player every attackInterval seconds
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        hitPlayer(collision);
-    }
-
-    [ClientRpc]
-    public void hitPlayer(Collision2D collision)
-    {
-        if (collision.collider.gameObject.tag == "Player")
+        if (collision.gameObject.transform.CompareTag("Player"))
         {
-            collision.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+            if(attackCooldownRemaining <= 0)
+            {
+                attackCooldownRemaining = attackInterval;
+                PlayerController p = collision.collider.gameObject.GetComponent<PlayerController>();
+                HitPlayer(p);
+            }
+            else
+            {
+                attackCooldownRemaining -= Time.deltaTime;
+            }
         }
+    }
 
-    }*/
+    // reset attack timer when collision stops
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.transform.CompareTag("Player"))
+        {
+            if (attackCooldownRemaining > 0)
+            {
+                attackCooldownRemaining = 0;
+            }
+        }
+    }
+
+    public void HitPlayer(PlayerController player)
+    {
+        // player.takeDamage doesn't use collision location, give it a dummy var
+        Vector2 collisionLocation = new Vector2(0, 0);
+        player.TakeDamage(Mathf.FloorToInt(damage), collisionLocation);
+    }
 
     void RpcDie()
     {
+        path.maxSpeed = 0;
         ratAnimator.SetTrigger("death");
+        GetComponent<Collider2D>().enabled = false;
         GameModeManager.Instance.currentGameMode.DecrementCurrentNumberOfEnemies();
         Destroy(gameObject, 0.5f);
     }

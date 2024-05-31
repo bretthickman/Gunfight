@@ -31,6 +31,7 @@ public class LobbyController : MonoBehaviour
     public Button ReadyButton;
     public Toggle publicToggle;
     public Toggle cardToggle;
+    public Toggle friendlyFireToggle;
     public TMP_Text ReadyButtonText;
     public Dropdown GameModeChooser;
     public Dropdown RoundNumChooser;
@@ -103,6 +104,8 @@ public class LobbyController : MonoBehaviour
 
             SteamLobby.Instance.UnhideLobby();
             
+            friendlyFireToggle.interactable = true;
+            
         }
         else 
         {
@@ -111,6 +114,7 @@ public class LobbyController : MonoBehaviour
             GameModeChooser.interactable = false;
             RoundNumChooser.interactable = false;
             LobbyNameInput.interactable = false;
+            friendlyFireToggle.interactable = false;
         }
 
 
@@ -121,7 +125,7 @@ public class LobbyController : MonoBehaviour
             // might be bug here, VS says to use addcomponent and not "= new WaveMode()"
             GameModeManager.Instance.currentGameMode = gameObject.AddComponent<SurvivalMode>();
         }
-        SwitchGameModes();
+        StartCoroutine(WaitSwitchGameModes());
     }
 
     private void OnEndEdit(string newName)
@@ -391,6 +395,11 @@ public class LobbyController : MonoBehaviour
         GameModeManager.Instance.currentGameMode.SetUseCards(!GameModeManager.Instance.currentGameMode.GetUseCards());
     }
 
+    public void ToggleFriendlyFire()
+    {
+        GameModeManager.Instance.currentGameMode.ToggleFriendlyFire();
+    }
+
     public void SwitchGameModes()
     {
         if(GameModeChooser.value == 0)
@@ -407,6 +416,7 @@ public class LobbyController : MonoBehaviour
                 Debug.Log(GameModeManager.Instance.freeForAllMode);
             }
 
+
             GameModeManager.Instance.survivalMode.gameObject.SetActive(false);
             GameModeManager.Instance.gunfightMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.freeForAllMode;
@@ -421,6 +431,7 @@ public class LobbyController : MonoBehaviour
             GameModeManager.Instance.freeForAllMode.gameObject.SetActive(false);
             GameModeManager.Instance.survivalMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.gunfightMode;
+            GameModeManager.Instance.gameMode = "gunfight";
         }
         else if (GameModeChooser.value == 2)
         {
@@ -430,8 +441,23 @@ public class LobbyController : MonoBehaviour
             GameModeManager.Instance.freeForAllMode.gameObject.SetActive(false);
             GameModeManager.Instance.gunfightMode.gameObject.SetActive(false);
             GameModeManager.Instance.currentGameMode = GameModeManager.Instance.survivalMode;
+            GameModeManager.Instance.gameMode = "survival";
         }
 
+    }
+
+    public IEnumerator WaitSwitchGameModes()
+    {
+        yield return new WaitForSeconds(1);
+
+        SwitchGameModes();
+
+        yield return null;
+    }
+
+    public void TestWaitGameMode()
+    {
+        StartCoroutine(WaitSwitchGameModes());
     }
 
     public void SwitchRoundNum()

@@ -1,7 +1,11 @@
-using Mirror;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using static GameModeManager;
 using UnityEngine.SceneManagement;
+using System.Linq;
+//using System;
 
 [System.Serializable]
 public class SurvivalMode : NetworkBehaviour, IGameMode
@@ -15,24 +19,29 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     private CustomNetworkManager manager;
 
     public GameObject enemyPrefab;
-    public int startingNumberOfEnemies = 4;
-    public float enemyMultiplier = 1.15f;
-    public int currentRoundNumberOfEnemies;
+    public int startingNumberOfEnemies;
+    //[SerializeField] private float enemyMultiplier = 1.0f;
+    public int levelInterval; // waves get harder on a step function. this is the size of each step
+    [SerializeField] private int difficultyLevel;
+    public int enemiesSpawnedThisRound;
 
     public int playerCount;
     public bool hasGameStarted = false;
-    public bool useCards = false;
+    public bool useCards = true;
+    public bool friendlyFireEnabled = false;
 
     [SyncVar(hook = nameof(CheckWinCondition))]
     public int currentNumberOfEnemies;
-    [SyncVar(hook = nameof(CheckWinCondition))]
+    [SyncVar(hook = nameof(CheckLossCondition))]
     public int aliveNum; // get this from lobby
 
     [SyncVar]
     public int currentRound = 0; // keeps track of the current round
-    public int totalRounds = 3; // keeps track of total amount of rounds
+    public int totalRounds = 9999; // keeps track of total amount of rounds
 
-    // public bool quitClicked = false;
+    private int playersResetCount = 0;
+
+    //public bool quitClicked = false;
 
     private CustomNetworkManager Manager
     {
@@ -55,6 +64,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             return;
         }
         currentNumberOfEnemies = startingNumberOfEnemies;
+        enemiesSpawnedThisRound = startingNumberOfEnemies;
         for (int i = 0; i < startingNumberOfEnemies; i++)
         {
             float x = (i % 2 == 0) ? mapManager.mapWidth / 2 : -mapManager.mapWidth / 2;
@@ -73,7 +83,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         {
             return;
         }
-        for (int i = 0; i < currentRoundNumberOfEnemies; i++)
+        for (int i = 0; i < enemiesSpawnedThisRound; i++)
         {
             float x, y;
 
@@ -110,7 +120,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             if (controller != null)
             {
                 // Call the updateSpeed function
-                controller.updateSpeed(currentRound);
+                controller.updateSpeed(difficultyLevel);
             }
             else
             {
@@ -130,7 +140,7 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             if (controller != null)
             {
                 // Call the updateSpeed function
-                controller.updateDamage(currentRound);
+                controller.updateDamage(difficultyLevel);
             }
             else
             {
@@ -138,6 +148,64 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
             }
         }
     }
+
+    public void CheckLossCondition(int oldAliveNum, int newAliveNum)
+    {
+        if(aliveNum <= 0)
+        {
+            Debug.Log("End of game!");
+
+            if (gameModeUIController == null) { gameModeUIController = FindObjectOfType<GameModeUIController>(); }
+
+            gameModeUIController.DisplayEndOfGamePanel(true);
+            if (isServer)
+            {
+                RankingList();
+                //reset player stats
+                RpcResetOverallGame();
+            }
+
+            StartCoroutine(QuitCountdown());
+        }
+    }
+
+
+    public void IncreaseDifficulty()
+    {
+        difficultyLevel = (currentRound + 1) / levelInterval;
+
+        int adjustment = StepFunctionHelper();
+
+        // set the baseline spawn rate for each difficulty level
+        int spawnAtLevel = difficultyLevel switch
+        {
+            0 => 4,
+            1 => 8,
+            2 => 13,
+            3 => 19,
+            4 => 26,
+            _ => 37,
+        };
+
+        // update num enemies to be spawned based on step function
+        enemiesSpawnedThisRound = spawnAtLevel + adjustment;
+        currentNumberOfEnemies = enemiesSpawnedThisRound;
+    }
+
+    // this helps simulate the exponential curve of difficulty between steps (currently assumes levelInterval is 4)
+    public int StepFunctionHelper()
+    {
+        int subLevel = currentRound % 4;
+        switch (subLevel)
+        {
+            case 0: return 0;
+            case 1: return 1;
+            case 2: return 2;
+            case 3: return 5;
+            default: return 0;
+        }
+    }
+
 
     //------------------Game Mode Interface Methods------------------------------
 
@@ -150,14 +218,25 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 
-        // for wave mode only
         totalRounds = 9999;
         initEnemy();
 
-        //for all game modes (checked isServer here, removed b/c redundant, if bugged check here)
         playerCount = aliveNum;
         hasGameStarted = true;
         StartRound();
+    }
+
+    public void ToggleFriendlyFire()
+    {
+        friendlyFireEnabled = !friendlyFireEnabled;
+    }
+
+    // returns true if friendly fire is being committed
+    public bool CheckIfFriendlyFire(RaycastHit2D hit, int teamNum)
+    {
+        if(hit.collider.gameObject.CompareTag("Player") && !friendlyFireEnabled) { return false; }
+
+        return true;
     }
 
     public void StartRound()
@@ -166,9 +245,11 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         {
             return;
         }
-        // setup for round
+        // respawns all players
         RpcResetGame();
-        currentRound++; // increase round count
+        currentRound++; 
+
+        //end these
         Debug.Log("Round started: " + currentRound);
     }
 
@@ -176,29 +257,24 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
     {
         if (!isServer) { return; }
         DeleteWeaponsInGame();
-        //checked if server here? doesn't seem needed but check here if bugged
-        RpcResetGame();
         SpawnWeaponsInGame();
-        currentRoundNumberOfEnemies = Mathf.RoundToInt(currentRoundNumberOfEnemies * enemyMultiplier);
-        currentNumberOfEnemies = currentRoundNumberOfEnemies;
-        StartRound();
+
+        IncreaseDifficulty();
         spawnEnemies();
+
+        StartRound();
+        
     }
     public void ToLobby()
     {
-        manager.StartGame("Lobby");
+        Manager.StartGame("Lobby");
     }
 
     public IEnumerator QuitCountdown()
     {
-        // 10s countdown 
-        int count = 10;
+        int count = 3;
         while (count > 0)
         {
-            // if (quitClicked)
-            // {
-            //     break;
-            // }
             yield return new WaitForSeconds(1f);
             count--;
         }
@@ -223,36 +299,29 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
 
     public IEnumerator DelayedEndRound()
     {
-        if (isServer && SceneManager.GetActiveScene().name != "Lobby" &&
-            currentNumberOfEnemies <= 0) // changed from curNumNME != startingNum 
+        
+        // gets the Card Manager game object
+        if (cardManager == null)
         {
-            // gets the Card Manager game object
+            cardManager = FindObjectOfType<CardManager>();
             if (cardManager == null)
             {
-                cardManager = FindObjectOfType<CardManager>();
-                if (cardManager == null)
-                {
-                    Debug.Log("Couldnt find game object");
-                }
+                Debug.Log("Couldnt find card manager on delayed end round");
             }
-
-            cardUIController = FindObjectOfType<CardUIController>();
-            gameModeUIController = FindObjectOfType<GameModeUIController>();
-
-            // If no enemy, end round (bug source??)
-            if (currentNumberOfEnemies <= 0)
-            {
-                cardUIController.RpcShowCardPanel(true);
-                gameModeUIController.RpcShowWinner("Round: " + currentRound);
-                yield return new WaitForSeconds(10.0f);
-                gameModeUIController.RpcStopShowWinner();
-                cardUIController.RpcShowCardPanel(false);
-
-                StartCoroutine(PreroundCountdown());
-                yield return new WaitForSeconds(5f);
-            }
-            EndRound();
         }
+
+        cardUIController = FindObjectOfType<CardUIController>();
+        gameModeUIController = FindObjectOfType<GameModeUIController>();
+
+        cardUIController.RpcShowCardPanel(true);
+        gameModeUIController.RpcShowWinner("Round: " + currentRound);
+        yield return new WaitForSeconds(10.0f);
+        gameModeUIController.RpcStopShowWinner();
+        cardUIController.RpcShowCardPanel(false);
+
+        StartCoroutine(PreroundCountdown());
+        yield return new WaitForSeconds(3f);
+        EndRound();
     }
 
     public IEnumerator PreroundCountdown()
@@ -275,9 +344,70 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         gameModeUIController.RpcStopShowCount();
     }
 
-    public void CheckWinCondition(int oldAliveNum, int newAliveNum)
+    public void CheckWinCondition(int oldCurrentNumberOfEnemies, int newCurrentNumberOfEnemies)
     {
-        StartCoroutine(DelayedEndRound());
+        if (isServer && SceneManager.GetActiveScene().name != "Lobby" && currentNumberOfEnemies <= 0)  
+        {
+            StartCoroutine(DelayedEndRound());
+        }
+    }
+
+    public void RankingList()
+    {
+        string rankingString = "";
+        string killsString = "";
+
+        List<PlayerObjectController> players = new List<PlayerObjectController>();
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            players.Add(player);
+        }
+
+        players = players.OrderByDescending(player => player.kills).ToList();
+
+        // creates strings with the values from the list
+        for (int i = 0; i < playerCount; i++)
+        {
+            rankingString += players[i].PlayerName + "\n";
+            killsString += players[i].kills + "\n";
+        }
+
+        Debug.Log("Ranking names: " + rankingString);
+        Debug.Log("Ranking kills: " + killsString);
+
+        gameModeUIController.RpcShowRanking(rankingString, killsString);
+    }
+
+    [ClientRpc]
+    public void RpcResetOverallGame()
+    {
+        RpcResetPlayerStats();
+        RpcResetGame();
+        hasGameStarted = false;
+        currentRound = 0;
+    }
+
+    [ClientRpc]
+    public void RpcResetPlayerStats()
+    {
+        // reset kills for all players
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            player.kills = 0;
+        }
+    }
+
+
+    [ClientRpc]
+    public void RpcResetGame()
+    {
+        // Call the reset function for all players
+        foreach (PlayerObjectController player in Manager.GamePlayers)
+        {
+            player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<PlayerController>().Respawn();
+            player.isAlive = true;
+        }
     }
 
     public void SpawnWeaponsInGame()
@@ -307,18 +437,6 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         else
         {
             Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
-        }
-    }
-
-    [ClientRpc]
-    public void RpcResetGame()
-    {
-        // Call the reset function for all players
-        foreach (PlayerObjectController player in Manager.GamePlayers)
-        {
-            player.GetComponent<PlayerController>().enabled = true;
-            player.GetComponent<PlayerController>().Respawn();
-            player.isAlive = true;
         }
     }
 
@@ -352,8 +470,17 @@ public class SurvivalMode : NetworkBehaviour, IGameMode
         this.currentNumberOfEnemies--;
     }
 
-    // public void SetQuitClicked(bool b)
-    // {
-    //     this.quitClicked = b;
-    // }
+    //public void SetQuitClicked(bool b)
+    //{
+    //    this.quitClicked = b;
+    //}
+
+    public void PlayerResetComplete()
+    {
+        playersResetCount++;
+        if (playersResetCount >= Manager.GamePlayers.Count)
+        {
+            SpawnWeaponsInGame();
+        }
+    }
 }

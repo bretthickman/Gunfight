@@ -27,6 +27,11 @@ public class FreeForAllMode : CompetitiveGameMode
         StartRound();
     }
 
+    public override bool CheckIfFriendlyFire(RaycastHit2D objectHit, int otherTeam)
+    {
+        return true;
+    }
+
     public override void ResetOverallGame()
     {
         RpcResetPlayerStats();
@@ -187,6 +192,20 @@ public class FreeForAllMode : CompetitiveGameMode
                 PlayerStatsItemScript.SetPlayerStats(wins);
                 break;
             }
+        }
+    }
+    public override void SpawnWeaponsInGame()
+    {
+        // Find the WeaponSpawning script in the "game" scene
+        WeaponSpawning weaponSpawning = FindObjectOfType<WeaponSpawning>();
+
+        if (weaponSpawning != null)
+        {
+            weaponSpawning.SpawnWeapons();
+        }
+        else
+        {
+            Debug.LogError("WeaponSpawning script not found in the 'game' scene.");
         }
     }
 }

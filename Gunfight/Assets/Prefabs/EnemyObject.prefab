@@ -268,10 +268,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5891011091002882805}
   health: 10
   speed: 1
-  speedOffset: 0.1
-  speedMultipiler: 0.5
+  speedOffset: 0.23
+  speedMultipiler: 0.25
   damage: 2
   damageMultipiler: 0.5
+  attackInterval: 1
   closestPlayer: {fileID: 0}
   ratAnimator: {fileID: 1487136203386737061}
 --- !u!114 &5017803194305878077
