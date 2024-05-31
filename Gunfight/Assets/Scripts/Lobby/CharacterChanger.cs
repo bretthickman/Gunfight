@@ -10,6 +10,7 @@ public class CharacterChanger : MonoBehaviour
     public int currentBodyIndex = 0;
     public int currentHairIndex = 0;
     public int currentEyesIndex = 0;
+    public int currentColorIndex = 0;
     public Color[] playerColors;
     public string[] colorNames;
     public Image displaySpriteBody;
@@ -29,13 +30,32 @@ public class CharacterChanger : MonoBehaviour
 
         currentEyesIndex = PlayerPrefs.GetInt("currentEyesIndex", 0); // allows persistent variables even on game restart
         LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerEyes(currentEyesIndex);
+
+        currentColorIndex = PlayerPrefs.GetInt("currentColorIndex", 0);
+        LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
     }
 
     private void Update()
     {
+        currentColorText.text = colorNames[currentColorIndex];
+        displaySpriteHair.color = player.spriteRendererHair.color;
         displaySpriteBody.sprite = player.spriteRendererBody.sprite;
         displaySpriteHair.sprite = player.spriteRendererHair.sprite;
         displaySpriteEyes.sprite = player.spriteRendererEyes.sprite;
+    }
+
+    public void NextColor()
+    {
+        currentColorIndex = (currentColorIndex + 1) % player.playerColors.Length;
+        PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
+        LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+    }
+
+    public void PrevColor()
+    {
+        currentColorIndex = (currentColorIndex - 1 + player.playerColors.Length) % player.playerColors.Length;
+        PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
+        LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
     }
 
     public void NextBody()

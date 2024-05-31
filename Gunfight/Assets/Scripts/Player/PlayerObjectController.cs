@@ -18,6 +18,7 @@ public class PlayerObjectController : NetworkBehaviour
     public int wins = 0;
 
     //Cosmestics / Team
+    [SyncVar(hook = nameof(SendPlayerColor))] public int ColorIndex;
     [SyncVar(hook = nameof(SendPlayerBody))] public int BodyIndex;
     [SyncVar(hook = nameof(SendPlayerHair))] public int HairIndex;
     [SyncVar(hook = nameof(SendPlayerEyes))] public int EyesIndex;
@@ -149,6 +150,12 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     [Command]
+    public void CmdUpdatePlayerColor(int newValue)
+    {
+        SendPlayerColor(ColorIndex, newValue);
+    }
+
+    [Command]
     public void CmdUpdatePlayerBody(int newValue)
     {
         SendPlayerBody(BodyIndex, newValue);
@@ -170,6 +177,18 @@ public class PlayerObjectController : NetworkBehaviour
     void RpcClientQuit()
     {
         Quit();
+    }
+
+    public void SendPlayerColor(int oldValue, int newValue)
+    {
+        if (isServer)
+        {
+            ColorIndex = newValue;
+        }
+        if (isClient && (oldValue != newValue))
+        {
+            UpdateColor(newValue);
+        }
     }
 
     public void SendPlayerBody(int oldValue, int newValue)
@@ -209,6 +228,13 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     //separte function because buggy if not
+    void UpdateColor(int message)
+    {
+        ColorIndex = message;
+        Debug.Log("message: " + ColorIndex);
+        GetComponent<PlayerController>().SwitchHairColor(ColorIndex);
+    }
+
     void UpdateBody(int message)
     { 
         BodyIndex = message;

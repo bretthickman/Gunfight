@@ -37,7 +37,8 @@ Material:
     - _DistortAmount: 2
     - _DistortTexXSpeed: 5
     - _DistortTexYSpeed: -5
-    - _GlowIntensity: 1
+    - _GlowIntensity: 4
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 0.03731489, b: 1, a: 1}
   m_BuildTextureStacks: []

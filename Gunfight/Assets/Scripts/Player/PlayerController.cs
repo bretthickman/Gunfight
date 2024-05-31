@@ -51,7 +51,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
     public SpriteLibrary hairSpriteLibrary;
     public SpriteLibrary eyesSpriteLibrary;
 
-    public Material hueMat;
+    public Color[] playerColors;
+    public int currentColorIndex;
+    [SerializeField] private Color baseColor;
+
+    // public Material hueMat;
     public Material healMat;
     public Material portalMat;
     public Material defaultMat;
@@ -103,6 +107,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [SerializeField] private GameObject ammo;
     public string skinCategory;
 
+    public void SwitchHairColor(int index)
+    {
+        Color newColor = playerColors[index];
+        spriteRendererHair.color = newColor;
+        spriteRendererHair.material.SetColor("_BaseColor", newColor);
+        currentColorIndex = index;
+
+        // SetHairBaseColor(newColor);
+    }
+
     public void SwitchBodySprite(int index)
     {
        bodySpriteLibrary.spriteLibraryAsset = bodySpriteLibraryArray[index];
@@ -128,7 +142,32 @@ public class PlayerController : NetworkBehaviour, IDamageable
         poc = GetComponent<PlayerObjectController>();
         playerColliders = GetComponent<PlayerColliders>();
         audioSource = GetComponent<AudioSource>();
+
+        // // Load baseColor from PlayerPrefs if it exists
+        // if (PlayerPrefs.HasKey("HairBaseColorR") && PlayerPrefs.HasKey("HairBaseColorG") && PlayerPrefs.HasKey("HairBaseColorB"))
+        // {
+        //     float r = PlayerPrefs.GetFloat("HairBaseColorR");
+        //     float g = PlayerPrefs.GetFloat("HairBaseColorG");
+        //     float b = PlayerPrefs.GetFloat("HairBaseColorB");
+        //     baseColor = new Color(r, g, b);
+        // }
+        // SetHairBaseColor(baseColor);
     }
+
+    // void ChangeColorsAndSave()
+    // {
+
+    //     // Save the baseColor to PlayerPrefs
+    //     PlayerPrefs.SetFloat("HairBaseColorR", baseColor.r);
+    //     PlayerPrefs.SetFloat("HairBaseColorG", baseColor.g);
+    //     PlayerPrefs.SetFloat("HairBaseColorB", baseColor.b);
+    //     PlayerPrefs.Save();
+    // }
+    // public void SetHairBaseColor(Color newBaseColor)
+    // {
+    //     baseColor = newBaseColor;
+    //     ChangeColorsAndSave();
+    // }
 
     private void FixedUpdate()
     {
@@ -469,7 +508,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         weaponInfo.setDefault();
         GetComponent<PlayerWeaponController>().ChangeSprite(WeaponID.Knife);
         spriteRendererBody.color = Color.white; // prevents sprite from having the red damage on it forever
-        spriteRendererHair.color = Color.white;
+        spriteRendererHair.color = playerColors[currentColorIndex];
         playerAnimator.SetBool("isDead", false);
         GetComponent<PlayerWeaponController>().enabled = true;
         GetComponent<Collider2D>().enabled = true;
@@ -512,12 +551,14 @@ public class PlayerController : NetworkBehaviour, IDamageable
             spriteRendererBody.material = portalMat;
             spriteRendererEyes.material = portalMat;
             spriteRendererHair.material = portalMat;
+            spriteRendererHair.material.SetColor("_BaseColor", playerColors[currentColorIndex]);
         }
         else if (num == 2)
         {
             spriteRendererBody.material = healMat;
             spriteRendererEyes.material = healMat;
             spriteRendererHair.material = healMat;
+            spriteRendererHair.material.SetColor("_BaseColor", playerColors[currentColorIndex]);
         }
     }
 

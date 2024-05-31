@@ -1,6 +1,7 @@
 Shader "Hidden/Glitch" {
     Properties {
         _MainTex ("Texture", 2D) = "white" { }
+        [MainColor] _BaseColor ("Base Color", Color) = (1,1,1,1)
         _GlitchAmount ("Glitch Amount", Range(0, 20)) = 3
         _GlitchSize ("Glitch Size", Range(0.25, 5)) = 1
 
@@ -18,6 +19,7 @@ Shader "Hidden/Glitch" {
 
             sampler2D _MainTex;
             half _GlitchAmount, _GlitchSize;
+            float4 _BaseColor;
 
             struct appdata {
                 float4 vertex : POSITION;
@@ -44,7 +46,7 @@ Shader "Hidden/Glitch" {
                 fixed4 col = tex2D(_MainTex, i.uv);
                 half lineNoise = pow(rand2(floor(i.uv * half2(24, 19) * _GlitchSize) * 4, 1), 3.0) * _GlitchAmount
                 * pow(rand2(floor(i.uv * half2(38, 14) * _GlitchSize) * 4, 1), 3.0);
-                col = tex2D(_MainTex, i.uv + half2(lineNoise * 0.02 * rand2(half2(2.0, 1), 1), 0));
+                col = tex2D(_MainTex, i.uv + half2(lineNoise * 0.02 * rand2(half2(2.0, 1), 1), 0)) * _BaseColor;
                 
                 return col;
             }
