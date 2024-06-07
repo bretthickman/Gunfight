@@ -22,7 +22,14 @@ public class Stele : NetworkBehaviour
     {
         text.SetActive(tOrF);
         if (tOrF)
-            RpcSteleSound();
+            CmdPlaySteleSound();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlaySteleSound()
+    {
+        Debug.Log("Player near stele");
+        RpcSteleSound();
     }
 
     [ClientRpc]

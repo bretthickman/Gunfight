@@ -108,7 +108,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     [SerializeField] private GameObject ammo;
     public string skinCategory;
-        // SetHairBaseColor(newColor);
+
     private CustomNetworkManager manager;
 
     private CustomNetworkManager Manager
@@ -129,6 +129,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         spriteRendererHair.color = newColor;
         spriteRendererHair.material.SetColor("_BaseColor", newColor);
         currentColorIndex = index;
+        baseColor = newColor;
     }
 
     public void SwitchBodySprite(int index)
@@ -162,21 +163,6 @@ public class PlayerController : NetworkBehaviour, IDamageable
             Debug.Log("GameModeManager found.");
         }
     }
-
-    // void ChangeColorsAndSave()
-    // {
-
-    //     // Save the baseColor to PlayerPrefs
-    //     PlayerPrefs.SetFloat("HairBaseColorR", baseColor.r);
-    //     PlayerPrefs.SetFloat("HairBaseColorG", baseColor.g);
-    //     PlayerPrefs.SetFloat("HairBaseColorB", baseColor.b);
-    //     PlayerPrefs.Save();
-    // }
-    // public void SetHairBaseColor(Color newBaseColor)
-    // {
-    //     baseColor = newBaseColor;
-    //     ChangeColorsAndSave();
-    // }
 
     private void FixedUpdate()
     {
@@ -564,7 +550,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         spriteRendererHair.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         spriteRendererBody.color = Color.white;
-        spriteRendererHair.color = Color.white;
+        spriteRendererHair.color = baseColor;
     }
 
     [ClientRpc]
@@ -594,7 +580,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
         weaponInfo.setDefault();
         GetComponent<PlayerWeaponController>().ChangeSprite(WeaponID.Knife);
         spriteRendererBody.color = Color.white; // prevents sprite from having the red damage on it forever
-        spriteRendererHair.color = playerColors[currentColorIndex];
+        spriteRendererHair.color = baseColor;
         playerAnimator.SetBool("isDead", false);
         GetComponent<PlayerWeaponController>().enabled = true;
         GetComponent<Collider2D>().enabled = true;
@@ -628,7 +614,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [Command]
     public void CmdPlayerMat(int num)
     {
-        RpcPlayerMat(num);
+        if (isLocalPlayer)
+            RpcPlayerMat(num);
     }
 
     [ClientRpc]
@@ -639,20 +626,21 @@ public class PlayerController : NetworkBehaviour, IDamageable
             spriteRendererBody.material = defaultMat;
             spriteRendererEyes.material = defaultMat;
             spriteRendererHair.material = defaultMat;
+            spriteRendererHair.color = baseColor;
         }
         else if (num == 1)
         {
             spriteRendererBody.material = portalMat;
             spriteRendererEyes.material = portalMat;
             spriteRendererHair.material = portalMat;
-            spriteRendererHair.material.SetColor("_BaseColor", playerColors[currentColorIndex]);
+            spriteRendererHair.material.SetColor("_BaseColor", baseColor);
         }
         else if (num == 2)
         {
             spriteRendererBody.material = healMat;
             spriteRendererEyes.material = healMat;
             spriteRendererHair.material = healMat;
-            spriteRendererHair.material.SetColor("_BaseColor", playerColors[currentColorIndex]);
+            spriteRendererHair.material.SetColor("_BaseColor", baseColor);
         }
     }
 

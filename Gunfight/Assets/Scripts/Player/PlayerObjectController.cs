@@ -245,7 +245,6 @@ public class PlayerObjectController : NetworkBehaviour
     void UpdateColor(int message)
     {
         ColorIndex = message;
-        Debug.Log("message: " + ColorIndex);
         GetComponent<PlayerController>().SwitchHairColor(ColorIndex);
     }
 

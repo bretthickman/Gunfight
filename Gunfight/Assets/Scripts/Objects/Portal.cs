@@ -6,11 +6,9 @@ using Mirror;
 public class Portal : NetworkBehaviour
 {
     [SerializeField] private Transform endPos;
-    [SerializeField] private GameObject text;
     [SerializeField] private bool canPortal = false;
     public bool leftPortal = false;
     [SerializeField] private Collider2D OtherCollider;
-    // player enters outer collider, text starts to get brighter as they get closer to portal
     
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,7 +21,6 @@ public class Portal : NetworkBehaviour
         }
         else // if the player didnt just teleport
         {
-            //text.SetActive(true);
             canPortal = true;
             StartCoroutine(TeleportPlayer());
         }
@@ -36,7 +33,7 @@ public class Portal : NetworkBehaviour
         {
             player.hasTeleported = false;
         }
-        //text.SetActive(false);
+        player.GetComponent<PlayerController>().CmdPlayerMat(0);
         leftPortal = true;
         canPortal = false;
     }

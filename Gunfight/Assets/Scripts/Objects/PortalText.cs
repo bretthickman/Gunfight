@@ -10,7 +10,6 @@ public class PortalText : MonoBehaviour
     [SerializeField] private bool nearPortal = false;
 
     private float dist;
-    // private float radius = 3.0f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,7 +27,6 @@ public class PortalText : MonoBehaviour
             nearPortal = false;
             text.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         }
-        
     }
 
     // Update is called once per frame
@@ -37,7 +35,6 @@ public class PortalText : MonoBehaviour
         if (nearPortal)
         {
             dist = Vector3.Distance(endPos.position, OtherCollider.gameObject.GetComponent<Transform>().position);
-            // if (dist < radius) dist = radius;
             text.color = new Color(1.0f, 1.0f, 1.0f, 3.0f/dist);
         }
     }
