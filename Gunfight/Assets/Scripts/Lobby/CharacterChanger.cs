@@ -11,8 +11,11 @@ public class CharacterChanger : MonoBehaviour
     public int currentHairIndex = 0;
     public int currentEyesIndex = 0;
     public int currentColorIndex = 0;
+
     public Color[] playerColors;
     public string[] colorNames;
+    private bool[] isColorInUse;
+
     public Image displaySpriteBody;
     public Image displaySpriteHair;
     public Image displaySpriteEyes;
@@ -33,6 +36,8 @@ public class CharacterChanger : MonoBehaviour
 
         currentColorIndex = PlayerPrefs.GetInt("currentColorIndex", 0);
         LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+
+        isColorInUse = new bool[playerColors.Length];
     }
 
     private void Update()
@@ -48,14 +53,30 @@ public class CharacterChanger : MonoBehaviour
     {
         currentColorIndex = (currentColorIndex + 1) % player.playerColors.Length;
         PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
-        LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+
+        if(GameModeManager.Instance.currentGameMode is GunfightMode)
+        {
+            LobbyController.Instance.LocalPlayerController.CmdChangeHairColorGunfight(currentColorIndex);
+        }
+        else
+        {
+            LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+        }  
     }
 
     public void PrevColor()
     {
         currentColorIndex = (currentColorIndex - 1 + player.playerColors.Length) % player.playerColors.Length;
         PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
-        LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+
+        if (GameModeManager.Instance.currentGameMode is GunfightMode)
+        {
+            LobbyController.Instance.LocalPlayerController.CmdChangeHairColorGunfight(currentColorIndex);
+        }
+        else
+        {
+            LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerColor(currentColorIndex);
+        }
     }
 
     public void NextBody()
@@ -98,5 +119,15 @@ public class CharacterChanger : MonoBehaviour
         currentEyesIndex = (currentEyesIndex - 1 + player.eyesSpriteLibraryArray.Length) % player.eyesSpriteLibraryArray.Length;
         PlayerPrefs.SetInt("currentEyesIndex", currentEyesIndex);
         LobbyController.Instance.LocalPlayerController.CmdUpdatePlayerEyes(currentEyesIndex);
+    }
+
+    public bool IsColorInUse(int colorIndex)
+    {
+        return isColorInUse[colorIndex];
+    }
+
+    public void SetColorInUse(int colorIndex, bool inUse)
+    {
+        isColorInUse[colorIndex] = inUse;
     }
 }

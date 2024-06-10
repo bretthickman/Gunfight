@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerObjectController : NetworkBehaviour
 {
@@ -238,6 +239,62 @@ public class PlayerObjectController : NetworkBehaviour
         if (isClient && (oldValue != newValue))
         {
             UpdateEyes(newValue);
+        }
+    }
+
+    private int FindNextAvailableColor(int startColorIndex)
+    {
+        CharacterChanger changer = FindObjectOfType<CharacterChanger>();
+        int colorCount = changer.playerColors.Length;
+        for (int i = 0; i < colorCount; i++)
+        {
+            int index = (startColorIndex + i) % colorCount;
+            if (!changer.IsColorInUse(index) && !TeamHasColor(index, (Team + 1) % 2))
+            {
+                return index;
+            }
+        }
+        // If no available color found, return the start index (or handle as desired)
+        return startColorIndex;
+    }
+
+    private bool TeamHasColor(int colorIndex, int teamId)
+    {
+        var teammates = FindObjectsOfType<PlayerObjectController>().Where(p => p.Team == Team);
+        return teammates.Any(p => p.ColorIndex == colorIndex);
+    }
+
+    [Command]
+    public void CmdChangeHairColorGunfight(int initialColorIndex)
+    {
+        int colorIndex = FindNextAvailableColor(initialColorIndex);
+        ChangeHairColor(colorIndex);
+    }
+
+    [Server]
+    private void ChangeHairColor(int colorIndex)
+    {
+        CharacterChanger characterChanger = FindObjectOfType<CharacterChanger>();
+        // Release previous color
+        if (characterChanger.IsColorInUse(this.ColorIndex))
+        {
+            characterChanger.SetColorInUse(this.ColorIndex, false);
+        }
+
+        // Set new color
+        ColorIndex = colorIndex;
+        characterChanger.SetColorInUse(colorIndex, true);
+
+        RpcChangeTeamHairColor(colorIndex);
+    }
+
+    [ClientRpc]
+    private void RpcChangeTeamHairColor(int newColorIndex)
+    {
+        var teammates = FindObjectsOfType<PlayerObjectController>().Where(p => p.Team == Team);
+        foreach (var teammate in teammates)
+        {
+            teammate.UpdateColor(newColorIndex);
         }
     }
 
