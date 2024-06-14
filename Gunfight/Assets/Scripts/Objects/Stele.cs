@@ -14,7 +14,7 @@ public class Stele : NetworkBehaviour
         if (OtherCollider.CompareTag("Player"))
         {
             TurnOnText(true);
-            OtherCollider.gameObject.GetComponent<PlayerController>().RpcSteleCameraShake();
+            OtherCollider.gameObject.GetComponent<PlayerController>().SteleCameraShake();
         }
     }
 

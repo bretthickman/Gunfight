@@ -33,7 +33,7 @@ public class Portal : NetworkBehaviour
         {
             player.hasTeleported = false;
         }
-        player.GetComponent<PlayerController>().CmdPlayerMat(0);
+        // player.GetComponent<PlayerController>().CmdPlayerMat(0);
         leftPortal = true;
         canPortal = false;
     }
@@ -54,7 +54,7 @@ public class Portal : NetworkBehaviour
             player.GetComponent<Transform>().position = endPos.position;
             Debug.Log("Player is teleporting");
             player.GetComponent<PlayerController>().hasTeleported = true;
-            player.GetComponent<PlayerController>().CmdPlayerMat(0);
+            player.GetComponent<PlayerController>().ChangePlayerMat(0);
         }
     }
 }

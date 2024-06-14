@@ -611,6 +611,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
         CmdPlayerMat(0);
     }
 
+    public void ChangePlayerMat(int num)
+    {
+        CmdPlayerMat(num);
+    }
+
     [Command]
     public void CmdPlayerMat(int num)
     {
@@ -642,6 +647,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
             spriteRendererHair.material = healMat;
             spriteRendererHair.material.SetColor("_BaseColor", baseColor);
         }
+    }
+
+    public void SteleCameraShake()
+    {
+        RpcSteleCameraShake();
     }
 
     [ClientRpc]
