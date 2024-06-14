@@ -651,15 +651,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public void SteleCameraShake()
     {
-        RpcSteleCameraShake();
+        // RpcSteleCameraShake();
+        CameraShaker.SteleCameraShake(5.0f);
     }
 
-    [ClientRpc]
-    public void RpcSteleCameraShake()
-    {
-        if (isLocalPlayer)
-        {
-            CameraShaker.SteleCameraShake(5.0f);
-        }
-    }
+    // [ClientRpc]
+    // public void RpcSteleCameraShake()
+    // {
+    //     if (isLocalPlayer)
+    //     {
+    //         CameraShaker.SteleCameraShake(5.0f);
+    //     }
+    // }
 }
